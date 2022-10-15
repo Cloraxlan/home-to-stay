@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Link } from 'react-router-native'
-
+import {v4} from "uuid"
 export interface Menu {
     name: string,
     link: string,
@@ -14,8 +14,8 @@ const MenuTab = (props: Props) => {
         <View>
             {props.menus.map((menu: Menu)=>{
                 return(
-                    <Link to={menu.link}>
-                        <Text key={menu.link} style={styles.menuTab}>{menu.name}</Text>
+                    <Link key={menu.link} to={menu.link}>
+                        <Text  style={styles.menuTab}>{menu.name}</Text>
                     </Link>
                 )
             })}
