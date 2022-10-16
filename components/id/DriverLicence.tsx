@@ -7376,7 +7376,7 @@ const DriversLicence = () => {
         <View>
             <HomeButton/>
             <Text>Drivers Licence</Text>
-            <Text>Address: {address}</Text>
+            <Text>Zip Code: {address}</Text>
             
             <TextInput onSubmitEditing={search} onChangeText={newText => setInput(newText)}></TextInput>
             <Button title="Get DMV address" onPress={search}  />

@@ -24,7 +24,7 @@ const SocialSecurity = () => {
         <View>
             <HomeButton/>
             <Text>SS card</Text>
-            <Text>Address: {address}</Text>
+            <Text>Zip Code: {address}</Text>
             
             <TextInput onSubmitEditing={search} onChangeText={newText => setInput(newText)}></TextInput>
             <Button title="Get social security office address" onPress={search}  />
