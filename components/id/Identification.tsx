@@ -1,18 +1,20 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import HomeButton from '../homepage/HomeButton'
+import { Route, Routes } from 'react-router-native'
+import IdHome from './IdHome'
+import SocialSecurity from './SocialSecurity'
 
 const Identification = () => {
     return (
         <View>
-            <HomeButton/>
-            <Text >SS card</Text>
+            <Routes>
+                <Route path="" element={<IdHome/>} />
+                <Route path="ss" element={<SocialSecurity/>} />
+            </Routes>
         </View>
     )
 }
 
 export default Identification
 
-const styles = StyleSheet.create({
-    
-})
+const styles = StyleSheet.create({})

@@ -81,8 +81,8 @@ const App = () => {
                 }}>
                   <Routes>
                     <Route path="/" element={<Homepage/>} />
-                    <Route path="/id" element={<Identification/>} />
-                    <Route path="/food" element={<Food/>} />
+                    <Route path="/id/*" element={<Identification/>} />
+                    <Route path="/food/*" element={<Food/>} />
                   </Routes>
               </View>
             </NativeRouter>

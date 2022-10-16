@@ -16,6 +16,7 @@
     "prop-types": "^15.8.1",
     "react": "18.1.0",
     "react-native": "0.70.3",
+    "react-native-open-maps": "^0.4.0",
     "react-router": "^6.4.2",
     "react-router-native": "^6.4.2",
     "url-search-params": "^1.1.0",
