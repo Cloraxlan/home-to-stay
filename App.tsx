@@ -8,25 +8,28 @@
  * @format
  */
 
-import React from 'react';
+import React from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+	SafeAreaView,
+	ScrollView,
+	StatusBar,
+	StyleSheet,
+	Text,
+	useColorScheme,
+	View,
+} from "react-native";
 
-import {
-  Colors,
-  Header,
-} from 'react-native/Libraries/NewAppScreen';
-import { NativeRouter, Route, Routes } from 'react-router-native';
-import Food from './components/food/Food';
-import Homepage from './components/homepage/Homepage';
-import Identification from './components/id/Identification';
+import { Colors, Header } from "react-native/Libraries/NewAppScreen";
+import { NativeRouter, Route, Routes } from "react-router-native";
+import Banking from "./components/banking/Banking";
+import Education from "./components/education/Education";
+import Food from "./components/food/Food";
+import Healthcare from "./components/healthcare/Healthcare";
+import Homepage from "./components/homepage/Homepage";
+import Housing from "./components/housing/Housing";
+import Identification from "./components/id/Identification";
+import Jobs from "./components/jobs/Jobs";
+import Services from "./components/services/Services";
 
 /*const Section: React.FC<
   PropsWithChildren<{
@@ -59,54 +62,53 @@ import Identification from './components/id/Identification';
 };*/
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark'; 
+	const isDarkMode = useColorScheme() === "dark";
 
-  
-
-  return (
-    <SafeAreaView >
-      <StatusBar
-        
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic">
-            <NativeRouter>
-                <View
-                style={{
-                  backgroundColor: isDarkMode ? Colors.black : Colors.white,
-                }}>
-                  <Routes>
-                    <Route path="/" element={<Homepage/>} />
-                    <Route path="/id/*" element={<Identification/>} />
-                    <Route path="/food/*" element={<Food/>} />
-                  </Routes>
-              </View>
-            </NativeRouter>
-
-        
-      </ScrollView> 
-    </SafeAreaView>
-  );
+	return (
+		<SafeAreaView>
+			<StatusBar />
+			<ScrollView contentInsetAdjustmentBehavior="automatic">
+				<NativeRouter>
+					<View
+						style={{
+							backgroundColor: isDarkMode ? Colors.black : Colors.white,
+						}}
+					>
+						<Routes>
+							<Route path="/" element={<Homepage />} />
+							<Route path="/banking" element={<Banking />} />
+							<Route path="/education" element={<Education />} />
+							<Route path="/food/*" element={<Food />} />
+							<Route path="/healthcare" element={<Healthcare />} />
+							<Route path="/housing" element={<Housing />} />
+							<Route path="/id/*" element={<Identification />} />
+							<Route path="/jobs" element={<Jobs />} />
+							<Route path="/services" element={<Services />} />
+						</Routes>
+					</View>
+				</NativeRouter>
+			</ScrollView>
+		</SafeAreaView>
+	);
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  }, 
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-
-  },
+	sectionContainer: {
+		marginTop: 32,
+		paddingHorizontal: 24,
+	},
+	sectionTitle: {
+		fontSize: 24,
+		fontWeight: "600",
+	},
+	sectionDescription: {
+		marginTop: 8,
+		fontSize: 18,
+		fontWeight: "400",
+	},
+	highlight: {
+		fontWeight: "700",
+	},
 });
 
 export default App;

@@ -1,17 +1,18 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import MenuTab from '../homepage/MenuTab'
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import HomeButton from "../homepage/HomeButton";
+import MenuTab from "../homepage/MenuTab";
 
 const IdHome = () => {
-    return (
-        <View>
-            <MenuTab menus={[{name: "Social Security", link: "/id/ss"}]}/>
-            <MenuTab menus={[{name: "Drivers Licence", link: "/id/license"}]}/>
+	return (
+		<View>
+			<HomeButton />
+			<MenuTab menus={[{ name: "Social Security", link: "/id/ss" }]} />
+			<MenuTab menus={[{ name: "Drivers Licence", link: "/id/license" }]} />
+		</View>
+	);
+};
 
-        </View>
-    )
-}
+export default IdHome;
 
-export default IdHome
-
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
