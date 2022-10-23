@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "rnativets.app"
-               BlueprintName = "rnativets"
-               ReferencedContainer = "container:rnativets.xcodeproj">
+               BuildableName = "CentralDoor.app"
+               BlueprintName = "CentralDoor"
+               ReferencedContainer = "container:CentralDoor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "rnativetsTests.xctest"
-               BlueprintName = "rnativetsTests"
-               ReferencedContainer = "container:rnativets.xcodeproj">
+               BuildableName = "CentralDoorTests.xctest"
+               BlueprintName = "CentralDoorTests"
+               ReferencedContainer = "container:CentralDoor.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "rnativets.app"
-            BlueprintName = "rnativets"
-            ReferencedContainer = "container:rnativets.xcodeproj">
+            BuildableName = "CentralDoor.app"
+            BlueprintName = "CentralDoor"
+            ReferencedContainer = "container:CentralDoor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "rnativets.app"
-            BlueprintName = "rnativets"
-            ReferencedContainer = "container:rnativets.xcodeproj">
+            BuildableName = "CentralDoor.app"
+            BlueprintName = "CentralDoor"
+            ReferencedContainer = "container:CentralDoor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
