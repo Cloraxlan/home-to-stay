@@ -25,4 +25,10 @@ const Housing = () => {
 
 export default Housing;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	tiles: {
+		flexDirection: "row",
+		justifyContent: "center",
+		padding: "5%",
+	},
+});
