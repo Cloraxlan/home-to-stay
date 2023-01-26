@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-native'
 import DriversLicence from './DriverLicence'
 import IdHome from './IdHome'
 import SocialSecurity from './SocialSecurity'
+import BirthCertificate from './BirthCertificate'
 
 const Identification = () => {
     return (
@@ -12,7 +13,7 @@ const Identification = () => {
                 <Route path="" element={<IdHome/>} />
                 <Route path="ss" element={<SocialSecurity/>} />
                 <Route path="license" element={<DriversLicence/>} />
-
+                <Route path="birth" element={<BirthCertificate/>} />
             </Routes>
         </View>
     )

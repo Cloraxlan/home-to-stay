@@ -9,6 +9,8 @@ const IdHome = () => {
 			<HomeButton />
 			<MenuTab menus={[{ name: "Social Security", link: "/id/ss" }]} />
 			<MenuTab menus={[{ name: "Drivers Licence", link: "/id/license" }]} />
+			<MenuTab menus={[{ name: "Birth Certificate", link: "/id/birth" }]} />
+
 		</View>
 	);
 };
