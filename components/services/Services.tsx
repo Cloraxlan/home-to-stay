@@ -1,13 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import HomeButton from "../homepage/HomeButton";
+import NavView from "../NavView";
 
 const Services = () => {
 	return (
-		<View>
+		<NavView>
 			<HomeButton />
 			<Text>Services</Text>
-		</View>
+		</NavView>
 	);
 };
 

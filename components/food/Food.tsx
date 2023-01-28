@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import HomeButton from "../homepage/HomeButton";
 import ListingBlock, { Listing } from "../listingComponents/ListingBlock";
 import ListingList from "../listingComponents/ListingList";
+import NavView from "../NavView";
 
 const Food = () => {
 	let listing: Listing = {
@@ -15,12 +16,12 @@ const Food = () => {
 	};
 	let listings: Listing[] = [listing, listing, listing, listing];
 	return (
-		<View>
+		<NavView>
 			<HomeButton />
 			<Text>Food</Text>
 
 			<ListingList listings={listings} />
-		</View>
+		</NavView>
 	);
 };
 
