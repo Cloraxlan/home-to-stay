@@ -5,7 +5,7 @@ import ListingBlock, { Listing } from "./ListingBlock";
 interface Props {
 	listings: Listing[];
 }
-
+//A list of listing that is to be rendered in a verticle row
 const ListingList = (props: Props) => {
 	return (
 		<View style={styles.listingView}>

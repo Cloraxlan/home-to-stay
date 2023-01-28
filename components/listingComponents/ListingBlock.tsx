@@ -19,6 +19,7 @@ export interface Listing {
 interface Props {
 	listing: Listing;
 }
+//A single generic listing for something like a job or housing
 const ListingBlock = (props: Props) => {
 	const openWebsite = () => {
 		if (props.listing.website) {
