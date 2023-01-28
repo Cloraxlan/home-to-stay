@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 	listingHeader: {
 		display: "flex",
 		flexDirection: "row",
-		width: "80%",
+		//width: "80%",
 		backgroundColor: "blue",
 		borderTopLeftRadius: 25,
 		borderTopRightRadius: 25,

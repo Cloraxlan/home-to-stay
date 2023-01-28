@@ -8,7 +8,7 @@ interface Props {
 
 const ListingList = (props: Props) => {
 	return (
-		<View>
+		<View style={styles.listingView}>
 			{props.listings.map((listing, i) => {
 				return <ListingBlock listing={listing} key={i} />;
 			})}
@@ -18,4 +18,10 @@ const ListingList = (props: Props) => {
 
 export default ListingList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	listingView: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+	},
+});
