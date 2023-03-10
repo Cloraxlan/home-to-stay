@@ -70,11 +70,7 @@ const App = () => {
 			<StatusBar />
 			<ScrollView contentInsetAdjustmentBehavior="automatic">
 				<NativeRouter>
-					<View
-						style={{
-							backgroundColor: isDarkMode ? Colors.black : Colors.white,
-						}}
-					>
+					<View>
 						<Routes>
 							<Route path="/" element={<Homepage />} />
 							<Route path="/calendar" element={<Calendar />} />
