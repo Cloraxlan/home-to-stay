@@ -17,13 +17,13 @@ const BirthCertificate = () => {
 			<HomeButton />
 			<WebView
 				source={{
-					uri: "https://www.vitalrecordsonline.com/faqs/birth-certificates/how-to-order-a-birth-certificate-online#:~:text=If%20you%E2%80%99re%20ready%20to%20order%20a%20certified%20copy,a%20certified%20copy%20of%20a%20birth%20certificate%E2%80%9D%20button.",
+					uri: "https://www.vitalchek.com/wistorefront/customer/wi/wiHome.xhtml?click_id=592505259768217602&ppc=0",
 				}}
 				startInLoadingState={true}
 				scalesPageToFit={true}
 				style={{
-					width: 320,
-					height: 300,
+					width: "100%",
+					height: 700,
 				}}
 			/>
 		</NavView>
