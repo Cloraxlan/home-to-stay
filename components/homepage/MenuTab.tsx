@@ -1,8 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+	ImageSourcePropType,
+	ImageURISource,
+	StyleSheet,
+	Text,
+	View,
+} from "react-native";
 import { Link } from "react-router-native";
 import { v4 } from "uuid";
+import MenuIcon from "./MenuIcon";
 export interface Menu {
+	icon: any;
 	name: string;
 	link: string;
 }
@@ -12,11 +20,11 @@ interface Props {
 //Renders links to menu on homepage
 const MenuTab = (props: Props) => {
 	return (
-		<View>
+		<View style={styles.menus}>
 			{props.menus.map((menu: Menu) => {
 				return (
-					<Link key={menu.link} to={menu.link}>
-						<Text style={styles.menuTab}>{menu.name}</Text>
+					<Link style={styles.link} key={menu.link} to={menu.link}>
+						<MenuIcon menu={menu}></MenuIcon>
 					</Link>
 				);
 			})}
@@ -27,14 +35,10 @@ const MenuTab = (props: Props) => {
 export default MenuTab;
 
 const styles = StyleSheet.create({
-	menuTab: {
-		color: "red",
-		margin: 20,
-		fontSize: 50,
-		textAlign: "center",
-		borderTopWidth: 3,
-		borderTopColor: "black",
-		borderBottomWidth: 3,
-		borderBottomColor: "black",
+	link: { width: "50%" },
+	menus: {
+		display: "flex",
+		flexWrap: "wrap",
+		flexDirection: "row",
 	},
 });

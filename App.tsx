@@ -22,6 +22,7 @@ import {
 import { Colors, Header } from "react-native/Libraries/NewAppScreen";
 import { NativeRouter, Route, Routes } from "react-router-native";
 import Banking from "./components/banking/Banking";
+import Calendar from "./components/calendar/Calendar";
 import Education from "./components/education/Education";
 import Food from "./components/food/Food";
 import Healthcare from "./components/healthcare/Healthcare";
@@ -76,6 +77,7 @@ const App = () => {
 					>
 						<Routes>
 							<Route path="/" element={<Homepage />} />
+							<Route path="/calendar" element={<Calendar />} />
 							<Route path="/banking" element={<Banking />} />
 							<Route path="/education" element={<Education />} />
 							<Route path="/food/*" element={<Food />} />
