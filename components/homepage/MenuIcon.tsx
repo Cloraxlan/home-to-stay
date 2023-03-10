@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
 	icon: {
 		border: "4px",
 		borderRadius: 30,
+		justifyContent: "center",
+		display: "flex",
+		alignItems: "center",
 	},
 	iconImage: { width: 100, height: 100 },
 });
