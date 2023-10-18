@@ -13,7 +13,7 @@ export abstract class Resource {
 		description: string,
 		address?: Address,
 		link?: URL,
-		phone?: string,
+		phone?: Phone,
 	) {
 		this._header = header;
 		this._description = description;
