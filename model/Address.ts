@@ -1,6 +1,6 @@
 import openMap from "react-native-open-maps";
 
-class Address {
+export class Address {
 	private _display: string;
 	private _fullAddress: string;
 
