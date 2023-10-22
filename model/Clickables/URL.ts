@@ -11,8 +11,6 @@ export class URL implements Clickable {
 	}
 
 	public open() {
-		console.log(this._url);
-		console.log("oi");
 		Linking.openURL(this._url);
 	}
 }
