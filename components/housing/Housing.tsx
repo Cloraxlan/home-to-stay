@@ -4,13 +4,14 @@ import HomeButton from "../homepage/HomeButton";
 
 import NavView from "../NavView";
 import { Resource } from "../../model/Resources/Resource";
-import { Address } from "../../model/Address";
-import { URL } from "../../model/URL";
-import { Phone } from "../../model/Phone";
+import { Address } from "../../model/Clickables/Address";
+import { Phone } from "../../model/Clickables/Phone";
+import { URL } from "../../model/Clickables/URL";
 import ResourceList from "../listingComponents/ResourceList";
+import { HousingResouce } from "../../model/Resources/HousingResource";
 
 const Housing = () => {
-	let resource = new Resource(
+	let resource = new HousingResouce(
 		"Test Housing",
 		"description",
 		new Address(
