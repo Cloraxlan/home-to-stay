@@ -2,12 +2,13 @@ import { ImageSourcePropType } from "react-native";
 import { Address } from "../Address";
 import { Phone } from "../Phone";
 
-export abstract class Resource {
+export class Resource {
 	private _header: string;
 	private _description: string;
 	private _address: Address | null;
 	private _link: URL | null;
 	private _phone: Phone | null;
+	protected _icon: ImageSourcePropType;
 	constructor(
 		header: string,
 		description: string,
@@ -32,6 +33,7 @@ export abstract class Resource {
 		} else {
 			this._phone = null;
 		}
+		this._icon = require("./icons/square.png");
 	}
 
 	public get header(): string {
@@ -46,5 +48,7 @@ export abstract class Resource {
 		return this._address;
 	}
 
-	public abstract getIcon(): ImageSourcePropType;
+	public getIcon(): ImageSourcePropType {
+		return this._icon;
+	}
 }
