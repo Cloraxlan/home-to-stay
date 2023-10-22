@@ -8,6 +8,7 @@ import {
 	Linking,
 } from "react-native";
 import React from "react";
+import { Resource } from "../../model/Resources/Resource";
 export interface Listing {
 	icon: ImageSourcePropType;
 	header: string;
@@ -17,36 +18,42 @@ export interface Listing {
 	website?: string;
 }
 interface Props {
-	listing: Listing;
+	resource: Resource;
 }
 //A single generic listing for something like a job or housing
-const ListingBlock = (props: Props) => {
+const ResourceBlock = (props: Props) => {
 	const openWebsite = () => {
-		if (props.listing.website) {
-			Linking.openURL(props.listing.website);
+		if (props.resource.link) {
+			props.resource.link.open();
 		}
 	};
 	return (
 		<View style={styles.listing}>
 			<View style={styles.listingHeader}>
-				<Image style={styles.iconStyle} source={props.listing.icon} />
+				<Image style={styles.iconStyle} source={props.resource.icon} />
 				<Text numberOfLines={1} adjustsFontSizeToFit style={styles.headerText}>
-					{props.listing.header}
+					{props.resource.header}
 				</Text>
 			</View>
 			<View style={styles.listingBody}>
-				<Text style={styles.bodyText}>{props.listing.body}</Text>
-				<Text style={styles.infoText}>{props.listing.address}</Text>
-				<Text style={styles.infoText}>{props.listing.phone}</Text>
-				{props.listing.website != undefined && (
-					<Button onPress={openWebsite} title="Website" />
+				<Text style={styles.bodyText}>{props.resource.description}</Text>
+				{props.resource.address && (
+					<Text style={styles.infoText}>{props.resource.address.display}</Text>
+				)}
+				{props.resource.phone && (
+					<Text style={styles.infoText}>
+						{props.resource.phone.phoneNumber}
+					</Text>
+				)}
+				{props.resource.link && (
+					<Text style={styles.infoText}>{props.resource.link.url}</Text>
 				)}
 			</View>
 		</View>
 	);
 };
 
-export default ListingBlock;
+export default ResourceBlock;
 
 const styles = StyleSheet.create({
 	listing: {

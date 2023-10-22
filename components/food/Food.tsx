@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import HomeButton from "../homepage/HomeButton";
-import ListingBlock, { Listing } from "../listingComponents/ListingBlock";
+import ResourceBlock, { Listing } from "../listingComponents/ListingBlock";
 import ListingList from "../listingComponents/ListingList";
 import NavView from "../NavView";
 

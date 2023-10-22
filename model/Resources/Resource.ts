@@ -1,6 +1,7 @@
 import { ImageSourcePropType } from "react-native";
 import { Address } from "../Address";
 import { Phone } from "../Phone";
+import { URL } from "../URL";
 
 export class Resource {
 	private _header: string;
@@ -43,12 +44,18 @@ export class Resource {
 	public get description(): string {
 		return this._description;
 	}
+	public get link(): URL | null {
+		return this._link;
+	}
+	public get phone(): Phone | null {
+		return this._phone;
+	}
 
 	public get address(): Address | null {
 		return this._address;
 	}
 
-	public getIcon(): ImageSourcePropType {
+	public get icon(): ImageSourcePropType {
 		return this._icon;
 	}
 }
