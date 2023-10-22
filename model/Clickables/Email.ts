@@ -7,6 +7,7 @@ export class Email implements Clickable {
 		this._email = email;
 		this._contact = contact;
 	}
+	type: string = "Email";
 
 	public display(): string {
 		return this._email;

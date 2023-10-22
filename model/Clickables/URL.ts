@@ -5,6 +5,7 @@ export class URL implements Clickable {
 	constructor(url: string) {
 		this._url = url;
 	}
+	type: string = "Website";
 
 	public display(): string {
 		return this._url;

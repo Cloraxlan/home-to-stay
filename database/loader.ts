@@ -24,10 +24,22 @@ export const csvLoader = () => {
 		let type = data[i][0];
 		let header = data[i][1];
 		let description = data[i][2];
-		let address = new Address(data[i][3], data[i][3]);
-		let link = new URL(data[i][4]);
-		let phone = new Phone(data[i][5]);
-		let email = new Email(data[i][6]);
+		let address;
+		let link;
+		let phone;
+		let email;
+		if (data[i][3] != "") {
+			address = new Address(data[i][3], data[i][3]);
+		}
+		if (data[i][4] != "") {
+			link = new URL(data[i][4]);
+		}
+		if (data[i][5] != "") {
+			phone = new Phone(data[i][5]);
+		}
+		if (data[i][6] != "") {
+			email = new Email(data[i][6]);
+		}
 		switch (type) {
 			case "HOUSING":
 				resources.housing.push(

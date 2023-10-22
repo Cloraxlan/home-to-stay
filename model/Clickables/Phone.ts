@@ -6,14 +6,12 @@ export class Phone implements Clickable {
 	constructor(phoneNumber: string) {
 		this._phoneNumber = phoneNumber;
 	}
+	type: string = "Phone Number";
 
 	public display(): string {
-		if (this._phoneNumber) {
-			return new phoneNumberFormatter(this._phoneNumber)
-				.format({ type: "domestic", separator: "-" })
-				.toString();
-		}
-		return "";
+		return new phoneNumberFormatter(this._phoneNumber)
+			.format({ type: "domestic", separator: "-" })
+			.toString();
 	}
 
 	public open() {

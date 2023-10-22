@@ -9,6 +9,7 @@ export class Address implements Clickable {
 		this._address = displayAddress;
 		this._fullAddress = fullAddress;
 	}
+	type: string = "Address";
 
 	public display(): string {
 		return this._address;
