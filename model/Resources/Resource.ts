@@ -2,38 +2,31 @@ import { ImageSourcePropType } from "react-native";
 import { Address } from "../Address";
 import { Phone } from "../Phone";
 import { URL } from "../URL";
+import { Email } from "../Email";
 
 export class Resource {
 	private _header: string;
 	private _description: string;
-	private _address: Address | null;
-	private _link: URL | null;
-	private _phone: Phone | null;
+	private _address: Address | undefined;
+	private _link: URL | undefined;
+	private _phone: Phone | undefined;
 	protected _icon: ImageSourcePropType;
+	private _email: Email | undefined;
 	constructor(
 		header: string,
 		description: string,
 		address?: Address,
 		link?: URL,
 		phone?: Phone,
+		email?: Email,
 	) {
 		this._header = header;
 		this._description = description;
-		if (address) {
-			this._address = address;
-		} else {
-			this._address = null;
-		}
-		if (link) {
-			this._link = link;
-		} else {
-			this._link = null;
-		}
-		if (phone) {
-			this._phone = phone;
-		} else {
-			this._phone = null;
-		}
+		this._address = address;
+		this._link = link;
+		this._phone = phone;
+		this._email = email;
+
 		this._icon = require("./icons/square.png");
 	}
 
@@ -44,18 +37,21 @@ export class Resource {
 	public get description(): string {
 		return this._description;
 	}
-	public get link(): URL | null {
+	public get link(): URL | undefined {
 		return this._link;
 	}
-	public get phone(): Phone | null {
+	public get phone(): Phone | undefined {
 		return this._phone;
 	}
 
-	public get address(): Address | null {
+	public get address(): Address | undefined {
 		return this._address;
 	}
 
 	public get icon(): ImageSourcePropType {
 		return this._icon;
+	}
+	public get email(): Email | undefined {
+		return this._email;
 	}
 }
