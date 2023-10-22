@@ -3,13 +3,14 @@ import { StyleSheet, Text, View } from "react-native";
 import HomeButton from "../homepage/HomeButton";
 import NavView from "../NavView";
 import { Resource } from "../../model/Resources/Resource";
-import { Phone } from "../../model/Phone";
-import { URL } from "../../model/URL";
-import { Address } from "../../model/Address";
+import { Phone } from "../../model/Clickables/Phone";
+import { URL } from "../../model/Clickables/URL";
+import { Address } from "../../model/Clickables/Address";
 import ResourceList from "../listingComponents/ResourceList";
+import { FoodResouce } from "../../model/Resources/FoodResouce";
 
 const Food = () => {
-	let resource = new Resource(
+	let resource = new FoodResouce(
 		"Test Housing",
 		"description",
 		new Address(

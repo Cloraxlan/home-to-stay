@@ -1,7 +1,7 @@
 import { Resource } from "./Resource";
-import { Phone } from "../Phone";
-import { Address } from "../Address";
-import { URL } from "../URL";
+import { Phone } from "../Clickables/Phone";
+import { Address } from "../Clickables/Address";
+import { URL } from "../Clickables/URL";
 
 export class JobResource extends Resource {
 	constructor(

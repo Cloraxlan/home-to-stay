@@ -9,14 +9,8 @@ import {
 } from "react-native";
 import React from "react";
 import { Resource } from "../../model/Resources/Resource";
-export interface Listing {
-	icon: ImageSourcePropType;
-	header: string;
-	body: string;
-	address?: string;
-	phone?: string;
-	website?: string;
-}
+import ClickableInfo from "./ClickableInfo";
+
 interface Props {
 	resource: Resource;
 }
@@ -37,17 +31,22 @@ const ResourceBlock = (props: Props) => {
 			</View>
 			<View style={styles.listingBody}>
 				<Text style={styles.bodyText}>{props.resource.description}</Text>
-				{props.resource.address && (
-					<Text style={styles.infoText}>{props.resource.address.display}</Text>
-				)}
-				{props.resource.phone && (
-					<Text style={styles.infoText}>
-						{props.resource.phone.phoneNumber}
-					</Text>
-				)}
-				{props.resource.link && (
-					<Text style={styles.infoText}>{props.resource.link.url}</Text>
-				)}
+				<ClickableInfo
+					style={styles.infoText}
+					clickable={props.resource.address}
+				/>
+				<ClickableInfo
+					style={styles.infoText}
+					clickable={props.resource.phone}
+				/>
+				<ClickableInfo
+					style={styles.infoText}
+					clickable={props.resource.link}
+				/>
+				<ClickableInfo
+					style={styles.infoText}
+					clickable={props.resource.email}
+				/>
 			</View>
 		</View>
 	);

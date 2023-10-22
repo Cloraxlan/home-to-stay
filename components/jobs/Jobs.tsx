@@ -5,12 +5,13 @@ import HomeButton from "../homepage/HomeButton";
 import NavView from "../NavView";
 import ResourceList from "../listingComponents/ResourceList";
 import { Resource } from "../../model/Resources/Resource";
-import { Address } from "../../model/Address";
-import { Phone } from "../../model/Phone";
-import { URL } from "../../model/URL";
+import { Address } from "../../model/Clickables/Address";
+import { Phone } from "../../model/Clickables/Phone";
+import { URL } from "../../model/Clickables/URL";
+import { JobResource } from "../../model/Resources/JobResouce";
 
 const Jobs = () => {
-	let resource = new Resource(
+	let resource = new JobResource(
 		"Test Housing",
 		"description",
 		new Address(

@@ -3,20 +3,21 @@ import { StyleSheet, Text, View } from "react-native";
 import HomeButton from "../homepage/HomeButton";
 import NavView from "../NavView";
 import { Resource } from "../../model/Resources/Resource";
-import { Address } from "../../model/Address";
-import { Phone } from "../../model/Phone";
-import { URL } from "../../model/URL";
+import { Address } from "../../model/Clickables/Address";
+import { Phone } from "../../model/Clickables/Phone";
+import { URL } from "../../model/Clickables/URL";
 import ResourceList from "../listingComponents/ResourceList";
+import { EducationResouce } from "../../model/Resources/EducationResouce";
 
 const Education = () => {
-	let resource = new Resource(
+	let resource = new EducationResouce(
 		"Test Housing",
 		"description",
 		new Address(
 			"1121 N Milwaukee St, Milwaukee",
 			"1121 N Milwaukee St, Milwaukee, WI 53202",
 		),
-		new URL("http://google.com"),
+		new URL("https://google.com"),
 		new Phone("8153458575"),
 	);
 

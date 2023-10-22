@@ -1,5 +1,6 @@
 import { Linking } from "react-native";
-export class Email {
+import { Clickable } from "./Clickable";
+export class Email implements Clickable {
 	private _email: string;
 	private _contact: string | undefined;
 	constructor(email: string, contact?: string) {
@@ -7,7 +8,7 @@ export class Email {
 		this._contact = contact;
 	}
 
-	public get email(): string | undefined {
+	public display(): string {
 		return this._email;
 	}
 

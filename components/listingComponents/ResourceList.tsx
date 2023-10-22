@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import ResourceBlock, { Listing } from "./ResourceBlock";
+import ResourceBlock from "./ResourceBlock";
 import { Resource } from "../../model/Resources/Resource";
 
 interface Props {

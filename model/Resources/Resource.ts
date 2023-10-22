@@ -1,8 +1,8 @@
 import { ImageSourcePropType } from "react-native";
-import { Address } from "../Address";
-import { Phone } from "../Phone";
-import { URL } from "../URL";
-import { Email } from "../Email";
+import { Address } from "../Clickables/Address";
+import { Phone } from "../../model/Clickables/Phone";
+import { URL } from "../../model/Clickables/URL";
+import { Email } from "../Clickables/Email";
 
 export class Resource {
 	private _header: string;
