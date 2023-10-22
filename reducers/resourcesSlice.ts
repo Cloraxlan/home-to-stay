@@ -8,6 +8,7 @@ import { Address } from "../model/Clickables/Address";
 import { Phone } from "../model/Clickables/Phone";
 import { URL } from "../model/Clickables/URL";
 import { RootState } from "../store";
+import { csvLoader } from "../database/loader";
 
 export interface ResouceState {
 	education: EducationResouce[];
@@ -20,24 +21,15 @@ export interface ResourceInsert {
 	type: ResourceType;
 	resouce: Resource;
 }
+/*
 const initialState: ResouceState = {
-	education: [
-		new EducationResouce(
-			"Test Housing",
-			"description",
-			new Address(
-				"1121 N Milwaukee St, Milwaukee",
-				"1121 N Milwaukee St, Milwaukee, WI 53202",
-			),
-			new URL("https://google.com"),
-			new Phone("8153458575"),
-		),
-	],
+	education: [],
 	food: [],
 	housing: [],
 	jobs: [],
 };
-
+*/
+const initialState: ResouceState = csvLoader();
 export const resourceSlice: Slice = createSlice({
 	name: "resources",
 	initialState,
@@ -67,4 +59,6 @@ export const resourceSlice: Slice = createSlice({
 export const { addResource } = resourceSlice.actions;
 export const selectEducation = (state: RootState) =>
 	(state.resources as ResouceState).education;
+export const selectHousing = (state: RootState) =>
+	(state.resources as ResouceState).housing;
 export default resourceSlice.reducer;

@@ -33,6 +33,7 @@ import Jobs from "./components/jobs/Jobs";
 import Services from "./components/services/Services";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { csvLoader } from "./database/loader";
 
 /*const Section: React.FC<
   PropsWithChildren<{
@@ -66,7 +67,6 @@ import { store } from "./store";
 
 const App = () => {
 	const isDarkMode = useColorScheme() === "dark";
-
 	return (
 		<Provider store={store}>
 			<SafeAreaView>

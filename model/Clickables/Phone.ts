@@ -8,9 +8,12 @@ export class Phone implements Clickable {
 	}
 
 	public display(): string {
-		return new phoneNumberFormatter(this._phoneNumber)
-			.format({ type: "domestic", separator: "-" })
-			.toString();
+		if (this._phoneNumber) {
+			return new phoneNumberFormatter(this._phoneNumber)
+				.format({ type: "domestic", separator: "-" })
+				.toString();
+		}
+		return "";
 	}
 
 	public open() {
