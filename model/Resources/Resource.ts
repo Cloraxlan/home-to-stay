@@ -4,6 +4,13 @@ import { Phone } from "../../model/Clickables/Phone";
 import { URL } from "../../model/Clickables/URL";
 import { Email } from "../Clickables/Email";
 
+export enum ResourceType {
+	EDUCATION,
+	FOOD,
+	HOUSING,
+	JOB,
+}
+
 export class Resource {
 	private _header: string;
 	private _description: string;

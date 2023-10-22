@@ -31,6 +31,8 @@ import Housing from "./components/housing/Housing";
 import Identification from "./components/id/Identification";
 import Jobs from "./components/jobs/Jobs";
 import Services from "./components/services/Services";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 /*const Section: React.FC<
   PropsWithChildren<{
@@ -66,27 +68,29 @@ const App = () => {
 	const isDarkMode = useColorScheme() === "dark";
 
 	return (
-		<SafeAreaView>
-			<StatusBar />
-			<ScrollView contentInsetAdjustmentBehavior="automatic">
-				<NativeRouter>
-					<View>
-						<Routes>
-							<Route path="/" element={<Homepage />} />
-							<Route path="/calendar" element={<Calendar />} />
-							<Route path="/banking" element={<Banking />} />
-							<Route path="/education" element={<Education />} />
-							<Route path="/food/*" element={<Food />} />
-							<Route path="/healthcare" element={<Healthcare />} />
-							<Route path="/housing" element={<Housing />} />
-							<Route path="/id/*" element={<Identification />} />
-							<Route path="/jobs" element={<Jobs />} />
-							<Route path="/services" element={<Services />} />
-						</Routes>
-					</View>
-				</NativeRouter>
-			</ScrollView>
-		</SafeAreaView>
+		<Provider store={store}>
+			<SafeAreaView>
+				<StatusBar />
+				<ScrollView contentInsetAdjustmentBehavior="automatic">
+					<NativeRouter>
+						<View>
+							<Routes>
+								<Route path="/" element={<Homepage />} />
+								<Route path="/calendar" element={<Calendar />} />
+								<Route path="/banking" element={<Banking />} />
+								<Route path="/education" element={<Education />} />
+								<Route path="/food/*" element={<Food />} />
+								<Route path="/healthcare" element={<Healthcare />} />
+								<Route path="/housing" element={<Housing />} />
+								<Route path="/id/*" element={<Identification />} />
+								<Route path="/jobs" element={<Jobs />} />
+								<Route path="/services" element={<Services />} />
+							</Routes>
+						</View>
+					</NativeRouter>
+				</ScrollView>
+			</SafeAreaView>
+		</Provider>
 	);
 };
 
