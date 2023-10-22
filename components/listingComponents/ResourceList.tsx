@@ -1,23 +1,23 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import ResourceBlock, { Listing } from "./ListingBlock";
+import ResourceBlock, { Listing } from "./ResourceBlock";
 import { Resource } from "../../model/Resources/Resource";
 
 interface Props {
-	listings: Resource[];
+	resources: Resource[];
 }
 //A list of listing that is to be rendered in a verticle row
-const ListingList = (props: Props) => {
+const ResourceList = (props: Props) => {
 	return (
 		<View style={styles.listingView}>
-			{props.listings.map((listing, i) => {
-				return <ResourceBlock resource={listing} key={i} />;
+			{props.resources.map((resource, i) => {
+				return <ResourceBlock resource={resource} key={i} />;
 			})}
 		</View>
 	);
 };
 
-export default ListingList;
+export default ResourceList;
 
 const styles = StyleSheet.create({
 	listingView: {
