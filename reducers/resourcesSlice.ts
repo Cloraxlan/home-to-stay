@@ -10,6 +10,7 @@ import { URL } from "../model/Clickables/URL";
 import { RootState } from "../store";
 import { csvLoader } from "../database/loader";
 import { HealthcareResource } from "../model/Resources/HealthcareResource";
+import { ServiceResource } from "../model/Resources/ServiceResource";
 
 export interface ResouceState {
 	education: EducationResouce[];
@@ -17,6 +18,7 @@ export interface ResouceState {
 	housing: HousingResouce[];
 	jobs: JobResource[];
 	healthcare: HealthcareResource[];
+	services: ServiceResource[];
 }
 
 /*
@@ -49,6 +51,9 @@ export const resourceSlice: Slice = createSlice({
 				case typeof JobResource:
 					state.jobs.push(action.payload);
 					break;
+				case typeof ServiceResource:
+					state.services.push(action.payload);
+					break;
 			}
 		},
 	},
@@ -63,5 +68,9 @@ export const selectHousing = (state: RootState) =>
 	(state.resources as ResouceState).housing;
 export const selectJobs = (state: RootState) =>
 	(state.resources as ResouceState).jobs;
+export const selectServices = (state: RootState) =>
+	(state.resources as ResouceState).services;
+export const selectFood = (state: RootState) =>
+	(state.resources as ResouceState).food;
 
 export default resourceSlice.reducer;
