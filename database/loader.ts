@@ -9,7 +9,7 @@ import { ResouceState } from "../reducers/resourcesSlice";
 
 var Papa = require("papaparse");
 const test = `Category,Header,Description,Address,Link,Phone,Email
-HOUSING,Intouch Outreach,A wide-range of services including substance abuse and housing,Beloit,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
+HOUSING,AIntouch Outreach,A wide-range of services including substance abuse and housing,Beloit,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
 HEALTHCARE,We Adapt,Healing from trauma using outdoor activites,https://www.ccweadapt.com/,,(715)456-0252,weadaptpeers@gmail.com`;
 export const csvLoader = () => {
 	let csv = Papa.parse(test);
@@ -19,6 +19,8 @@ export const csvLoader = () => {
 		food: [],
 		housing: [],
 		jobs: [],
+		healthcare: [],
+		services: [],
 	};
 	for (let i = 1; i < data.length; i++) {
 		let type = data[i][0];
