@@ -10,7 +10,7 @@ export class Location {
 	private static defaultLatitude: number = 43.0389;
 	private static defaultLongitude: number = -87.9065;
 
-	constructor(address = Location.defaultAddress, coordinates: Coordinates) {
+	constructor(coordinates: Coordinates, address = Location.defaultAddress) {
 		this._address = address;
 		this._latitude = coordinates.latitude;
 		this._longitude = coordinates.longitude;
@@ -51,7 +51,13 @@ export class Location {
 	private toRad(distance: number) {
 		return (distance * Math.PI) / 180;
 	}
-	public static async requestCoords(address: string): Promise<Coordinates> {
+	public static async requestCoords(address?: string): Promise<Coordinates> {
+		if (!address) {
+			return {
+				latitude: Location.defaultLatitude,
+				longitude: Location.defaultLongitude,
+			};
+		}
 		try {
 			let req = await fetch("https://geocode.maps.co/search?q=" + address);
 			let json = await req.json();
