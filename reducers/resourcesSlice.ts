@@ -9,12 +9,14 @@ import { Phone } from "../model/Clickables/Phone";
 import { URL } from "../model/Clickables/URL";
 import { RootState } from "../store";
 import { csvLoader } from "../database/loader";
+import { HealthcareResource } from "../model/Resources/HealthcareResource";
 
 export interface ResouceState {
 	education: EducationResouce[];
 	food: FoodResouce[];
 	housing: HousingResouce[];
 	jobs: JobResource[];
+	healthcare: HealthcareResource[];
 }
 
 export interface ResourceInsert {
@@ -59,6 +61,11 @@ export const resourceSlice: Slice = createSlice({
 export const { addResource } = resourceSlice.actions;
 export const selectEducation = (state: RootState) =>
 	(state.resources as ResouceState).education;
+export const selectHealthcare = (state: RootState) =>
+	(state.resources as ResouceState).healthcare;
 export const selectHousing = (state: RootState) =>
 	(state.resources as ResouceState).housing;
+export const selectJobs = (state: RootState) =>
+	(state.resources as ResouceState).jobs;
+
 export default resourceSlice.reducer;
