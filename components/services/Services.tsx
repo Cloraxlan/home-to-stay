@@ -11,7 +11,7 @@ const Services = () => {
 	return (
 		<NavView>
 			<HomeButton />
-			<Text>Healthcare</Text>
+			<Text>Services</Text>
 
 			<ResourceList resources={resourceSelector} />
 		</NavView>

@@ -4,9 +4,10 @@ import HomeButton from "../homepage/HomeButton";
 import NavView from "../NavView";
 import ResourceList from "../listingComponents/ResourceList";
 import { useSelector } from "react-redux";
+import { selectHealthcare } from "../../reducers/resourcesSlice";
 
 const Healthcare = () => {
-	const resourceSelector = useSelector(selectHousing);
+	const resourceSelector = useSelector(selectHealthcare);
 	return (
 		<NavView>
 			<HomeButton />
