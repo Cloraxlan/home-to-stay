@@ -19,10 +19,6 @@ export interface ResouceState {
 	healthcare: HealthcareResource[];
 }
 
-export interface ResourceInsert {
-	type: ResourceType;
-	resouce: Resource;
-}
 /*
 const initialState: ResouceState = {
 	education: [],
@@ -38,20 +34,20 @@ export const resourceSlice: Slice = createSlice({
 	reducers: {
 		addResource: (
 			state: Draft<ResouceState>,
-			action: PayloadAction<ResourceInsert>,
+			action: PayloadAction<Resource>,
 		) => {
-			switch (action.payload.type) {
-				case ResourceType.EDUCATION:
-					state.education.push(action.payload.resouce);
+			switch (typeof action.payload) {
+				case typeof EducationResouce:
+					state.education.push(action.payload);
 					break;
-				case ResourceType.FOOD:
-					state.food.push(action.payload.resouce);
+				case typeof FoodResouce:
+					state.food.push(action.payload);
 					break;
-				case ResourceType.HOUSING:
-					state.housing.push(action.payload.resouce);
+				case typeof HousingResouce:
+					state.housing.push(action.payload);
 					break;
-				case ResourceType.JOB:
-					state.jobs.push(action.payload.resouce);
+				case typeof JobResource:
+					state.jobs.push(action.payload);
 					break;
 			}
 		},
