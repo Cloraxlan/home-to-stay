@@ -1,4 +1,10 @@
-import { Draft, PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
+import {
+	Draft,
+	PayloadAction,
+	Slice,
+	createSelector,
+	createSlice,
+} from "@reduxjs/toolkit";
 import { EducationResouce } from "../model/Resources/EducationResouce";
 import { FoodResouce } from "../model/Resources/FoodResouce";
 import { HousingResouce } from "../model/Resources/HousingResource";
@@ -65,7 +71,9 @@ export const resourceSlice: Slice = createSlice({
 		},
 	},
 });
-const unserialize = (serializedRes: SerializedResource[]): Resource[] => {
+const unserializeResources = (
+	serializedRes: SerializedResource[],
+): Resource[] => {
 	let resources: Resource[] = [];
 	serializedRes.map((serialized) => {
 		resources.push(Resource.of(serialized));
@@ -74,17 +82,48 @@ const unserialize = (serializedRes: SerializedResource[]): Resource[] => {
 };
 
 export const { addResource } = resourceSlice.actions;
-export const selectEducation = (state: RootState) =>
-	unserialize((state.resources as ResouceState).education);
-export const selectHealthcare = (state: RootState) =>
-	unserialize((state.resources as ResouceState).healthcare);
-export const selectHousing = (state: RootState) =>
-	unserialize((state.resources as ResouceState).housing);
-export const selectJobs = (state: RootState) =>
-	unserialize((state.resources as ResouceState).jobs);
-export const selectServices = (state: RootState) =>
-	unserialize((state.resources as ResouceState).services);
-export const selectFood = (state: RootState) =>
-	unserialize((state.resources as ResouceState).food);
+const selectEducationSerial = (state: RootState) =>
+	(state.resources as ResouceState).education;
+const selectHealthcareSerial = (state: RootState) =>
+	(state.resources as ResouceState).healthcare;
+const selectHousingSerial = (state: RootState) =>
+	(state.resources as ResouceState).housing;
+const selectJobsSerial = (state: RootState) =>
+	(state.resources as ResouceState).jobs;
+const selectServicesSerial = (state: RootState) =>
+	(state.resources as ResouceState).services;
+const selectFoodSerial = (state: RootState) =>
+	(state.resources as ResouceState).food;
+
+export const selectEducation = createSelector(
+	selectEducationSerial,
+	(resources) => {
+		return unserializeResources(resources);
+	},
+);
+export const selectHealthcare = createSelector(
+	selectHealthcareSerial,
+	(resources) => {
+		return unserializeResources(resources);
+	},
+);
+export const selectHousing = createSelector(
+	selectHousingSerial,
+	(resources) => {
+		return unserializeResources(resources);
+	},
+);
+export const selectJobs = createSelector(selectJobsSerial, (resources) => {
+	return unserializeResources(resources);
+});
+export const selectServices = createSelector(
+	selectServicesSerial,
+	(resources) => {
+		return unserializeResources(resources);
+	},
+);
+export const selectFood = createSelector(selectFoodSerial, (resources) => {
+	return unserializeResources(resources);
+});
 
 export default resourceSlice.reducer;

@@ -11,6 +11,7 @@ import ResourceList from "../listingComponents/ResourceList";
 import { HousingResouce } from "../../model/Resources/HousingResource";
 import { useSelector } from "react-redux";
 import { selectHousing } from "../../reducers/resourcesSlice";
+import { createSelector } from "@reduxjs/toolkit";
 
 const Housing = () => {
 	const resourceSelector = useSelector(selectHousing);
