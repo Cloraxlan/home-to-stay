@@ -1,6 +1,10 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import MenuTab from "./MenuTab";
+import { csvLoader } from "../../database/loader";
+import { Resource } from "../../model/Resources/Resource";
+import { useDispatch } from "react-redux";
+import { addResource } from "../../reducers/resourcesSlice";
 const icons = {
 	calendar: require("./homePageIcons/calendar.png"),
 	banking: require("./homePageIcons/bank2.png"),
@@ -13,6 +17,17 @@ const icons = {
 	services: require("./homePageIcons/box.png"),
 };
 const Homepage = () => {
+	//Testing
+	const dispatch = useDispatch();
+	let test = async () => {
+		let r = await csvLoader();
+		console.log(r);
+
+		r.housing.map((h) => {
+			dispatch(addResource(h));
+		});
+	};
+	test();
 	return (
 		<View>
 			<Image

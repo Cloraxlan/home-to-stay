@@ -2,16 +2,16 @@ import { Address } from "../model/Clickables/Address";
 import { Email } from "../model/Clickables/Email";
 import { Phone } from "../model/Clickables/Phone";
 import { URL } from "../model/Clickables/URL";
-import { EducationResouce } from "../model/Resources/EducationResouce";
+import { Location } from "../model/Location";
 import { HousingResouce } from "../model/Resources/HousingResource";
-import { ResourceType } from "../model/Resources/Resource";
 import { ResouceState } from "../reducers/resourcesSlice";
 
 var Papa = require("papaparse");
 const test = `Category,Header,Description,Address,Link,Phone,Email
-HOUSING,AIntouch Outreach,A wide-range of services including substance abuse and housing,Beloit,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
-HEALTHCARE,We Adapt,Healing from trauma using outdoor activites,https://www.ccweadapt.com/,,(715)456-0252,weadaptpeers@gmail.com`;
-export const csvLoader = () => {
+HOUSING,(Mid)Intouch Outreach,A wide-range of services including substance abuse and housing,Beloit,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
+HOUSING,(Cloesest)Intouch Outreach,A wide-range of services including substance abuse and housing,Milwaukee,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
+HOUSING,(far)Intouch Outreach,A wide-range of services including substance abuse and housing,Green Bay,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com`;
+export const csvLoader = async () => {
 	let csv = Papa.parse(test);
 	let data = csv.data;
 	const resources: ResouceState = {
@@ -31,7 +31,9 @@ export const csvLoader = () => {
 		let phone;
 		let email;
 		if (data[i][3] != "") {
-			address = new Address(data[i][3], data[i][3]);
+			let coords = await Location.requestCoords(data[i][3]);
+			address = new Address(data[i][3], new Location(data[i][3]));
+			console.log("oi", coords);
 		}
 		if (data[i][4] != "") {
 			link = new URL(data[i][4]);
@@ -45,7 +47,14 @@ export const csvLoader = () => {
 		switch (type) {
 			case "HOUSING":
 				resources.housing.push(
-					new HousingResouce(header, description, address, link, phone, email),
+					new HousingResouce(
+						header,
+						description,
+						address,
+						link,
+						phone,
+						email,
+					).serialize(),
 				);
 				break;
 

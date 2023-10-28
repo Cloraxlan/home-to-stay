@@ -1,5 +1,10 @@
 import { Linking } from "react-native";
 import { Clickable } from "./Clickable";
+
+export interface SerializedEmail {
+	email: string;
+	contact: string | undefined;
+}
 export class Email implements Clickable {
 	private _email: string;
 	private _contact: string | undefined;
@@ -19,5 +24,15 @@ export class Email implements Clickable {
 
 	public open() {
 		Linking.openURL(`mailto:${this._email}`);
+	}
+
+	public serialize(): SerializedEmail {
+		return { contact: this._contact, email: this._email };
+	}
+	public static of(serialized: SerializedEmail | undefined) {
+		if (!serialized) {
+			return undefined;
+		}
+		return new Email(serialized.email, serialized.contact);
 	}
 }

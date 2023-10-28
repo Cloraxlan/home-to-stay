@@ -1,4 +1,4 @@
-import { Resource } from "./Resource";
+import { Resource, ResourceType } from "./Resource";
 import { Phone } from "../Clickables/Phone";
 import { Address } from "../Clickables/Address";
 import { URL } from "../Clickables/URL";
@@ -13,7 +13,7 @@ export class JobResource extends Resource {
 		phone?: Phone,
 		email?: Email,
 	) {
-		super(header, description, address, link, phone, email);
+		super(header, description, ResourceType.JOB, address, link, phone, email);
 		this._icon = require("./icons/jobs.png");
 	}
 }

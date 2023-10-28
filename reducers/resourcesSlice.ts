@@ -3,7 +3,11 @@ import { EducationResouce } from "../model/Resources/EducationResouce";
 import { FoodResouce } from "../model/Resources/FoodResouce";
 import { HousingResouce } from "../model/Resources/HousingResource";
 import { JobResource } from "../model/Resources/JobResouce";
-import { Resource, ResourceType } from "../model/Resources/Resource";
+import {
+	Resource,
+	ResourceType,
+	SerializedResource,
+} from "../model/Resources/Resource";
 import { Address } from "../model/Clickables/Address";
 import { Phone } from "../model/Clickables/Phone";
 import { URL } from "../model/Clickables/URL";
@@ -13,64 +17,74 @@ import { HealthcareResource } from "../model/Resources/HealthcareResource";
 import { ServiceResource } from "../model/Resources/ServiceResource";
 
 export interface ResouceState {
-	education: EducationResouce[];
-	food: FoodResouce[];
-	housing: HousingResouce[];
-	jobs: JobResource[];
-	healthcare: HealthcareResource[];
-	services: ServiceResource[];
+	education: SerializedResource[];
+	food: SerializedResource[];
+	housing: SerializedResource[];
+	jobs: SerializedResource[];
+	healthcare: SerializedResource[];
+	services: SerializedResource[];
 }
 
-/*
 const initialState: ResouceState = {
 	education: [],
 	food: [],
 	housing: [],
 	jobs: [],
+	healthcare: [],
+	services: [],
 };
-*/
-const initialState: ResouceState = csvLoader();
+
 export const resourceSlice: Slice = createSlice({
 	name: "resources",
 	initialState,
 	reducers: {
 		addResource: (
 			state: Draft<ResouceState>,
-			action: PayloadAction<Resource>,
+			action: PayloadAction<SerializedResource>,
 		) => {
-			switch (typeof action.payload) {
-				case typeof EducationResouce:
+			switch (action.payload.type) {
+				case ResourceType.EDUCATION:
 					state.education.push(action.payload);
 					break;
-				case typeof FoodResouce:
+				case ResourceType.FOOD:
 					state.food.push(action.payload);
 					break;
-				case typeof HousingResouce:
+				case ResourceType.HOUSING:
 					state.housing.push(action.payload);
 					break;
-				case typeof JobResource:
+				case ResourceType.JOB:
 					state.jobs.push(action.payload);
 					break;
-				case typeof ServiceResource:
+				case ResourceType.SERVICE:
 					state.services.push(action.payload);
+					break;
+				case ResourceType.HEALTHCARE:
+					state.healthcare.push(action.payload);
 					break;
 			}
 		},
 	},
 });
+const unserialize = (serializedRes: SerializedResource[]): Resource[] => {
+	let resources: Resource[] = [];
+	serializedRes.map((serialized) => {
+		resources.push(Resource.of(serialized));
+	});
+	return resources;
+};
 
 export const { addResource } = resourceSlice.actions;
 export const selectEducation = (state: RootState) =>
-	(state.resources as ResouceState).education;
+	unserialize((state.resources as ResouceState).education);
 export const selectHealthcare = (state: RootState) =>
-	(state.resources as ResouceState).healthcare;
+	unserialize((state.resources as ResouceState).healthcare);
 export const selectHousing = (state: RootState) =>
-	(state.resources as ResouceState).housing;
+	unserialize((state.resources as ResouceState).housing);
 export const selectJobs = (state: RootState) =>
-	(state.resources as ResouceState).jobs;
+	unserialize((state.resources as ResouceState).jobs);
 export const selectServices = (state: RootState) =>
-	(state.resources as ResouceState).services;
+	unserialize((state.resources as ResouceState).services);
 export const selectFood = (state: RootState) =>
-	(state.resources as ResouceState).food;
+	unserialize((state.resources as ResouceState).food);
 
 export default resourceSlice.reducer;

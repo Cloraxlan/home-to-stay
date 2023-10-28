@@ -2,6 +2,17 @@ export interface Coordinates {
 	latitude: number;
 	longitude: number;
 }
+export interface SerializedLocation {
+	latitude: number;
+	longitude: number;
+	address: string;
+}
+let sleep = (ms: number) => {
+	return new Promise((resolve: any) => {
+		setTimeout(resolve, ms);
+	});
+};
+
 export class Location {
 	private _latitude: number;
 	private _longitude: number;
@@ -10,7 +21,13 @@ export class Location {
 	private static defaultLatitude: number = 43.0389;
 	private static defaultLongitude: number = -87.9065;
 
-	constructor(coordinates: Coordinates, address = Location.defaultAddress) {
+	constructor(
+		coordinates: Coordinates = {
+			latitude: Location.defaultLatitude,
+			longitude: Location.defaultLongitude,
+		},
+		address = Location.defaultAddress,
+	) {
 		this._address = address;
 		this._latitude = coordinates.latitude;
 		this._longitude = coordinates.longitude;
@@ -60,6 +77,8 @@ export class Location {
 		}
 		try {
 			let req = await fetch("https://geocode.maps.co/search?q=" + address);
+			//Due to rate throttling on api
+			sleep(500);
 			let json = await req.json();
 			return {
 				latitude: json[0].lat,
@@ -71,5 +90,18 @@ export class Location {
 				longitude: Location.defaultLongitude,
 			};
 		}
+	}
+	public serialize(): SerializedLocation {
+		return {
+			address: this.address,
+			latitude: this.latitude,
+			longitude: this.longitude,
+		};
+	}
+	public static of(serialized: SerializedLocation): Location {
+		return new Location(
+			{ latitude: serialized.latitude, longitude: serialized.longitude },
+			serialized.address,
+		);
 	}
 }
