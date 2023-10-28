@@ -1,13 +1,14 @@
 import openMap from "react-native-open-maps";
 import { Clickable } from "./Clickable";
+import { Location } from "../Location";
 
 export class Address implements Clickable {
 	private _address: string;
-	private _fullAddress: string;
+	private _location: Location;
 
-	constructor(displayAddress: string, fullAddress: string) {
+	constructor(displayAddress: string, location: Location) {
 		this._address = displayAddress;
-		this._fullAddress = fullAddress;
+		this._location = location;
 	}
 	type: string = "Address";
 
@@ -16,6 +17,6 @@ export class Address implements Clickable {
 	}
 
 	public open() {
-		openMap({ query: this._fullAddress });
+		openMap({ query: this._location.address });
 	}
 }
