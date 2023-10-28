@@ -32,8 +32,7 @@ export const csvLoader = async () => {
 		let email;
 		if (data[i][3] != "") {
 			let coords = await Location.requestCoords(data[i][3]);
-			address = new Address(data[i][3], new Location(data[i][3]));
-			console.log("oi", coords);
+			address = new Address(data[i][3], new Location(coords, data[i][3]));
 		}
 		if (data[i][4] != "") {
 			link = new URL(data[i][4]);
@@ -62,6 +61,5 @@ export const csvLoader = async () => {
 				break;
 		}
 	}
-	console.log(resources);
 	return resources;
 };
