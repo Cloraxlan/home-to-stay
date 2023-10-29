@@ -10,6 +10,7 @@ import {
 import HomeButton from "../homepage/HomeButton";
 import openMap from "react-native-open-maps";
 import NavView from "../NavView";
+import AppHeader from "../AppHeader";
 
 async function findAddress(zipCode: string) {
 	let x = await fetch(
@@ -35,7 +36,8 @@ const SocialSecurity = () => {
 	};
 	return (
 		<NavView>
-			<HomeButton />
+			<AppHeader title="Social Security" />
+
 			<Text>SS card</Text>
 			<Text>Zip Code: {address}</Text>
 

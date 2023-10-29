@@ -8,6 +8,7 @@ import {
 } from "react-native-calendars";
 import HomeButton from "../homepage/HomeButton";
 import NavView from "../NavView";
+import AppHeader from "../AppHeader";
 
 const Calendar = () => {
 	const getCurrentDay = () => {
@@ -29,7 +30,7 @@ const Calendar = () => {
 	};
 	return (
 		<NavView>
-			<HomeButton />
+			<AppHeader title="Calendar" />
 			<Agenda
 				items={{
 					"2023-03-09": [

@@ -10,12 +10,13 @@ import ResourceList from "../listingComponents/ResourceList";
 import { FoodResouce } from "../../model/Resources/FoodResouce";
 import { selectFood } from "../../reducers/resourcesSlice";
 import { useSelector } from "react-redux";
+import AppHeader from "../AppHeader";
 
 const Food = () => {
 	const resourceSelector = useSelector(selectFood);
 	return (
 		<NavView>
-			<HomeButton />
+			<AppHeader title="Food" />
 			<Text>Food</Text>
 
 			<ResourceList resources={resourceSelector} />

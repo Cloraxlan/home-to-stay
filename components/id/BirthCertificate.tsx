@@ -10,11 +10,12 @@ import {
 import HomeButton from "../homepage/HomeButton";
 import WebView from "react-native-webview";
 import NavView from "../NavView";
+import AppHeader from "../AppHeader";
 
 const BirthCertificate = () => {
 	return (
 		<NavView>
-			<HomeButton />
+			<AppHeader title="Birth Certificate" />
 			<WebView
 				source={{
 					uri: "https://www.vitalchek.com/wistorefront/customer/wi/wiHome.xhtml?click_id=592505259768217602&ppc=0",

@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import HomeButton from "../homepage/HomeButton";
 import openMap from "react-native-open-maps";
 import NavView from "../NavView";
+import AppHeader from "../AppHeader";
 let zips = [
 	{
 		zip_code: 53001,
@@ -7377,7 +7378,8 @@ const DriversLicence = () => {
 	};
 	return (
 		<NavView>
-			<HomeButton />
+			<AppHeader title="Drivers Licence" />
+
 			<Text>Drivers Licence</Text>
 			<Text>Zip Code: {address}</Text>
 

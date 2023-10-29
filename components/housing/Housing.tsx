@@ -12,13 +12,14 @@ import { HousingResouce } from "../../model/Resources/HousingResource";
 import { useSelector } from "react-redux";
 import { selectHousing } from "../../reducers/resourcesSlice";
 import { createSelector } from "@reduxjs/toolkit";
+import AppHeader from "../AppHeader";
 
 const Housing = () => {
 	const resourceSelector = useSelector(selectHousing);
 
 	return (
 		<NavView>
-			<HomeButton />
+			<AppHeader title="Housing" />
 			<Text>Housing</Text>
 			<ResourceList resources={resourceSelector} />
 		</NavView>

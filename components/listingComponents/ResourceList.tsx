@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import ResourceBlock from "./ResourceBlock";
 import { Resource } from "../../model/Resources/Resource";
 import GetLocation from "react-native-get-location/dist";
 import { Location } from "../../model/Location";
-import { ButtonGroup } from "@rneui/themed";
+import { ButtonGroup, Text } from "@rneui/themed";
 
 interface Props {
 	resources: Resource[];
@@ -91,9 +91,16 @@ const ResourceList = (props: Props) => {
 			<View style={styles.listingView}>
 				{isLoading && (
 					<React.Fragment>
-						{resources.map((resource, i) => {
-							return <ResourceBlock resource={resource} key={i} />;
-						})}
+						<React.Fragment>
+							{resources.map((resource, i) => {
+								return <ResourceBlock resource={resource} key={i} />;
+							})}
+						</React.Fragment>
+						<React.Fragment>
+							{resources.length == 0 && (
+								<Text h3={true}>No Resources Avaliable</Text>
+							)}
+						</React.Fragment>
 					</React.Fragment>
 				)}
 			</View>
