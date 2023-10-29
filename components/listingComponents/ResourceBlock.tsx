@@ -1,12 +1,4 @@
-import {
-	Button,
-	Image,
-	ImageSourcePropType,
-	StyleSheet,
-	Text,
-	View,
-	Linking,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Resource } from "../../model/Resources/Resource";
 import ClickableInfo from "./ClickableInfo";

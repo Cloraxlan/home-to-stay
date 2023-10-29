@@ -34,6 +34,7 @@ import Services from "./components/services/Services";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { csvLoader } from "./database/loader";
+import LoaderComponent from "./database/LoaderComponent";
 
 /*const Section: React.FC<
   PropsWithChildren<{
@@ -71,6 +72,7 @@ const App = () => {
 		<Provider store={store}>
 			<SafeAreaView>
 				<StatusBar />
+				<LoaderComponent />
 				<ScrollView contentInsetAdjustmentBehavior="automatic">
 					<NativeRouter>
 						<View>

@@ -4,30 +4,46 @@ import ResourceBlock from "./ResourceBlock";
 import { Resource } from "../../model/Resources/Resource";
 import GetLocation from "react-native-get-location/dist";
 import { Location } from "../../model/Location";
+import { ButtonGroup } from "@rneui/themed";
 
 interface Props {
 	resources: Resource[];
 }
+enum SortTypes {
+	DISTANCE,
+	ALPHA,
+}
+const sorts = [SortTypes.DISTANCE, SortTypes.ALPHA];
 //A list of listing that is to be rendered in a verticle row
 const ResourceList = (props: Props) => {
+	const [sort, setSort] = useState<SortTypes>(SortTypes.DISTANCE);
 	const [location, setLocation] = useState<any>(null);
 	const [resources, setResources] = useState<Resource[]>(props.resources);
+	useEffect(() => {
+		switch (sort) {
+			case SortTypes.DISTANCE:
+				GetLocation.getCurrentPosition({
+					enableHighAccuracy: true,
+					timeout: 2000,
+				}).then((loc) => {
+					setLocation(
+						new Location({ latitude: loc.latitude, longitude: loc.longitude }),
+					);
+				});
+				break;
+			case SortTypes.ALPHA:
+				let r = [...resources].sort((a, b) =>
+					a.header.toLowerCase().localeCompare(b.header.toLowerCase()),
+				);
+
+				setResources(r);
+				break;
+		}
+	}, [sort]);
 
 	useEffect(() => {
-		GetLocation.getCurrentPosition({
-			enableHighAccuracy: true,
-			timeout: 2000,
-		}).then((loc) => {
-			console.log({ latitude: loc.latitude, longitude: loc.longitude });
-			setLocation(
-				new Location({ latitude: loc.latitude, longitude: loc.longitude }),
-			);
-		});
-	}, []);
-
-	useEffect(() => {
-		if (location != null) {
-			let r = props.resources.sort((a, b) => {
+		if (location != null && sort == SortTypes.DISTANCE) {
+			let r = [...resources].sort((a, b) => {
 				if (a.address == undefined && b.address == undefined) {
 					return 0;
 				}
@@ -39,33 +55,48 @@ const ResourceList = (props: Props) => {
 				}
 				let aDist = Location.of(a.address.location).distance(location);
 				let bDist = Location.of(b.address.location).distance(location);
-				console.log(
-					a.address.display(),
-					" ",
-					aDist,
-					" ",
-					b.address.display(),
-					" ",
-					bDist,
-				);
+
 				if (aDist == bDist) {
 					return 0;
 				}
 				if (aDist < bDist) {
-					console.log("close");
 					return -1;
 				}
 				return 1;
 			});
 			setResources(r);
 		}
-	}, [location]);
+	}, [location, sort]);
+
+	useEffect(() => {
+		resources.map((m) => {
+			console.log(m.header);
+		});
+	}, [resources]);
+
+	let isLoading =
+		(sort == SortTypes.DISTANCE && location) || sort != SortTypes.DISTANCE;
 
 	return (
-		<View style={styles.listingView}>
-			{resources.map((resource, i) => {
-				return <ResourceBlock resource={resource} key={i} />;
-			})}
+		<View>
+			<ButtonGroup
+				buttons={["Distance", "Alphabetical"]}
+				selectedIndex={sorts.indexOf(sort)}
+				onPress={(index) => {
+					console.log(index);
+					setSort(sorts[index]);
+				}}
+				containerStyle={{ marginBottom: 20 }}
+			/>
+			<View style={styles.listingView}>
+				{isLoading && (
+					<React.Fragment>
+						{resources.map((resource, i) => {
+							return <ResourceBlock resource={resource} key={i} />;
+						})}
+					</React.Fragment>
+				)}
+			</View>
 		</View>
 	);
 };

@@ -8,9 +8,9 @@ import { ResouceState } from "../reducers/resourcesSlice";
 
 var Papa = require("papaparse");
 const test = `Category,Header,Description,Address,Link,Phone,Email
-HOUSING,(Mid)Intouch Outreach,A wide-range of services including substance abuse and housing,Beloit,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
-HOUSING,(Cloesest)Intouch Outreach,A wide-range of services including substance abuse and housing,Milwaukee,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
-HOUSING,(far)Intouch Outreach,A wide-range of services including substance abuse and housing,Green Bay,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com`;
+HOUSING,AIntouch Outreach,A wide-range of services including substance abuse and housing,Beloit,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
+HOUSING,BIntouch Outreach,A wide-range of services including substance abuse and housing,Milwaukee,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
+HOUSING,CIntouch Outreach,A wide-range of services including substance abuse and housing,Green Bay,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com`;
 export const csvLoader = async () => {
 	let csv = Papa.parse(test);
 	let data = csv.data;
