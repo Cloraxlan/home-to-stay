@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import MenuTab from "./MenuTab";
 
 const icons = {
@@ -15,7 +15,7 @@ const icons = {
 };
 const Homepage = () => {
 	return (
-		<View>
+		<ScrollView>
 			<Image
 				style={styles.banner}
 				source={require("./homePageIcons/htsbanner.png")}
@@ -36,7 +36,7 @@ const Homepage = () => {
 					]}
 				/>
 			</View>
-		</View>
+		</ScrollView>
 	);
 };
 

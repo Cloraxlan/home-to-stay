@@ -34,7 +34,6 @@ import Services from "./components/services/Services";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { csvLoader } from "./database/loader";
-import LoaderComponent from "./database/LoaderComponent";
 
 /*const Section: React.FC<
   PropsWithChildren<{
@@ -72,25 +71,22 @@ const App = () => {
 		<Provider store={store}>
 			<SafeAreaView>
 				<StatusBar />
-				<LoaderComponent />
-				<ScrollView contentInsetAdjustmentBehavior="automatic">
-					<NativeRouter>
-						<View>
-							<Routes>
-								<Route path="/" element={<Homepage />} />
-								<Route path="/calendar" element={<Calendar />} />
-								<Route path="/banking" element={<Banking />} />
-								<Route path="/education" element={<Education />} />
-								<Route path="/food/*" element={<Food />} />
-								<Route path="/healthcare" element={<Healthcare />} />
-								<Route path="/housing" element={<Housing />} />
-								<Route path="/id/*" element={<Identification />} />
-								<Route path="/jobs" element={<Jobs />} />
-								<Route path="/services" element={<Services />} />
-							</Routes>
-						</View>
-					</NativeRouter>
-				</ScrollView>
+				<NativeRouter>
+					<View>
+						<Routes>
+							<Route path="/" element={<Homepage />} />
+							<Route path="/calendar" element={<Calendar />} />
+							<Route path="/banking" element={<Banking />} />
+							<Route path="/education" element={<Education />} />
+							<Route path="/food/*" element={<Food />} />
+							<Route path="/healthcare" element={<Healthcare />} />
+							<Route path="/housing" element={<Housing />} />
+							<Route path="/id/*" element={<Identification />} />
+							<Route path="/jobs" element={<Jobs />} />
+							<Route path="/services" element={<Services />} />
+						</Routes>
+					</View>
+				</NativeRouter>
 			</SafeAreaView>
 		</Provider>
 	);

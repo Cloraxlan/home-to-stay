@@ -44,3 +44,8 @@ const AppHeader = (props: Props) => {
 	);
 };
 export default AppHeader;
+const styles = StyleSheet.create({
+	header: {
+		position: "absolute",
+	},
+});

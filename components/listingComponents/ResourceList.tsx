@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import ResourceBlock from "./ResourceBlock";
 import { Resource } from "../../model/Resources/Resource";
@@ -78,7 +78,7 @@ const ResourceList = (props: Props) => {
 		(sort == SortTypes.DISTANCE && location) || sort != SortTypes.DISTANCE;
 
 	return (
-		<View>
+		<ScrollView>
 			<ButtonGroup
 				buttons={["Distance", "Alphabetical"]}
 				selectedIndex={sorts.indexOf(sort)}
@@ -104,7 +104,7 @@ const ResourceList = (props: Props) => {
 					</React.Fragment>
 				)}
 			</View>
-		</View>
+		</ScrollView>
 	);
 };
 
