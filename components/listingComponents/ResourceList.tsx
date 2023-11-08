@@ -101,6 +101,7 @@ const ResourceList = (props: Props) => {
 								<Text h3={true}>No Resources Avaliable</Text>
 							)}
 						</React.Fragment>
+						<Text style={{ padding: "50%" }}></Text>
 					</React.Fragment>
 				)}
 			</View>

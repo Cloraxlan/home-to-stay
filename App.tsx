@@ -34,6 +34,7 @@ import Services from "./components/services/Services";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { csvLoader } from "./database/loader";
+import LoaderComponent from "./database/LoaderComponent";
 
 /*const Section: React.FC<
   PropsWithChildren<{
@@ -73,6 +74,7 @@ const App = () => {
 				<StatusBar />
 				<NativeRouter>
 					<View>
+						<LoaderComponent />
 						<Routes>
 							<Route path="/" element={<Homepage />} />
 							<Route path="/calendar" element={<Calendar />} />
