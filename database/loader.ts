@@ -4,7 +4,57 @@ import { Phone } from "../model/Clickables/Phone";
 import { URL } from "../model/Clickables/URL";
 import { Location } from "../model/Location";
 import { HousingResouce } from "../model/Resources/HousingResource";
+import { SerializedResource } from "../model/Resources/Resource";
 import { ResouceState } from "../reducers/resourcesSlice";
+import {
+	SQLiteDatabase,
+	enablePromise,
+	openDatabase,
+} from "react-native-sqlite-storage";
+
+enablePromise(true);
+
+export const tableName = "Resources";
+export const getDBConnection = async () => {
+	return openDatabase({ name: "database.db", location: "default" });
+};
+export const createTable = async (db: SQLiteDatabase) => {
+	// create table if not exists
+	const query = `CREATE TABLE IF NOT EXISTS ${tableName}(
+		  value TEXT NOT NULL
+	  );`;
+	console.log("oi");
+	await db.executeSql(query);
+};
+
+export const getResource = async (
+	db: SQLiteDatabase,
+): Promise<SerializedResource[]> => {
+	try {
+		const resources: SerializedResource[] = [];
+		const results = await db.executeSql(`SELECT * FROM ${tableName}`);
+		results.forEach((result) => {
+			for (let index = 0; index < result.rows.length; index++) {
+				resources.push(result.rows.item(index));
+			}
+		});
+		return resources;
+	} catch (error) {
+		console.error(error);
+		throw Error("Failed to get resources !!!");
+	}
+};
+
+export const saveResources = async (
+	db: SQLiteDatabase,
+	resources: SerializedResource[],
+) => {
+	const insertQuery =
+		`INSERT INTO ${tableName}(value) values` +
+		resources.map((i) => `('${i.description}')`).join(",");
+
+	return db.executeSql(insertQuery);
+};
 
 var Papa = require("papaparse");
 const test = `Category,Header,Description,Address,Link,Phone,Email
