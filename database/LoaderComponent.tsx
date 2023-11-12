@@ -22,7 +22,7 @@ function LoaderComponent() {
 		await saveResources(db, r.housing);
 		let resources = await getResource(db);
 		resources.map((resource) => {
-			console.log(resource);
+			dispatch(addResource(resource));
 		});
 	};
 	useEffect(() => {

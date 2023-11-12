@@ -56,18 +56,16 @@ export const getResource = async (
 				let url = parseEntry(row.url);
 				let phone = parseEntry(row.phone);
 				let email = parseEntry(row.email);
-				resources.push(
-					Resource.of({
-						header: header,
-						description: description,
-						type: type,
-						address: address,
-						link: url,
-						phone: phone,
-						email: email,
-						icon: undefined,
-					}),
-				);
+				resources.push({
+					header: header,
+					description: description,
+					type: type,
+					address: address,
+					link: url,
+					phone: phone,
+					email: email,
+					icon: undefined,
+				});
 			}
 		});
 		return resources;
