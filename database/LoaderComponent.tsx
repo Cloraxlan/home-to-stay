@@ -9,21 +9,21 @@ import {
 	saveResources,
 } from "./loader";
 import { HousingResouce } from "../model/Resources/HousingResource";
+import { Resource } from "../model/Resources/Resource";
 
 function LoaderComponent() {
 	//Testing
 	const dispatch = useDispatch();
 	let test = async () => {
-		/*let r = await csvLoader();
-		console.log(r);
+		let r = await csvLoader();
 
-		r.housing.map((h) => {
-			dispatch(addResource(h));
-		});*/
 		let db = await getDBConnection();
-		createTable(db);
-		await saveResources(db, [new HousingResouce("test", "test1").serialize()]);
-		console.log(await getResource(db));
+		await createTable(db);
+		await saveResources(db, r.housing);
+		let resources = await getResource(db);
+		resources.map((resource) => {
+			console.log(resource);
+		});
 	};
 	useEffect(() => {
 		test();

@@ -4,7 +4,7 @@ import { Phone } from "../model/Clickables/Phone";
 import { URL } from "../model/Clickables/URL";
 import { Location } from "../model/Location";
 import { HousingResouce } from "../model/Resources/HousingResource";
-import { SerializedResource } from "../model/Resources/Resource";
+import { Resource, SerializedResource } from "../model/Resources/Resource";
 import { ResouceState } from "../reducers/resourcesSlice";
 import {
 	SQLiteDatabase,
@@ -20,22 +20,54 @@ export const getDBConnection = async () => {
 };
 export const createTable = async (db: SQLiteDatabase) => {
 	// create table if not exists
-	const query = `CREATE TABLE IF NOT EXISTS ${tableName}(
-		  value TEXT NOT NULL
+	const query = `
+	CREATE TABLE IF NOT EXISTS ${tableName}(
+		  header TEXT primary key,
+		  description TEXT,
+		  type int NOT NULL,
+		  address TEXT,
+		  url TEXT,
+		  phone TEXT,
+		  email TEXT
 	  );`;
-	console.log("oi");
 	await db.executeSql(query);
 };
 
+const parseEntry: any = (entry: string) => {
+	try {
+		return JSON.parse(entry);
+	} catch {
+		return undefined;
+	}
+};
 export const getResource = async (
 	db: SQLiteDatabase,
 ): Promise<SerializedResource[]> => {
 	try {
-		const resources: SerializedResource[] = [];
+		const resources: any[] = [];
 		const results = await db.executeSql(`SELECT * FROM ${tableName}`);
-		results.forEach((result) => {
+		results.forEach((result: any) => {
 			for (let index = 0; index < result.rows.length; index++) {
-				resources.push(result.rows.item(index));
+				let row = result.rows.item(index);
+				let header = row.header;
+				let description = row.description;
+				let type = row.type;
+				let address = parseEntry(row.address);
+				let url = parseEntry(row.url);
+				let phone = parseEntry(row.phone);
+				let email = parseEntry(row.email);
+				resources.push(
+					Resource.of({
+						header: header,
+						description: description,
+						type: type,
+						address: address,
+						link: url,
+						phone: phone,
+						email: email,
+						icon: undefined,
+					}),
+				);
 			}
 		});
 		return resources;
@@ -50,8 +82,17 @@ export const saveResources = async (
 	resources: SerializedResource[],
 ) => {
 	const insertQuery =
-		`INSERT INTO ${tableName}(value) values` +
-		resources.map((i) => `('${i.description}')`).join(",");
+		`INSERT OR REPLACE INTO ${tableName}(header, description, type, address, url, phone, email) values` +
+		resources
+			.map(
+				(i) =>
+					`('${i.header}', '${i.description}', ${i.type},  '${JSON.stringify(
+						i.address,
+					)}',  '${JSON.stringify(i.link)}', '${JSON.stringify(
+						i.phone,
+					)}' ,  '${JSON.stringify(i.email)}')`,
+			)
+			.join(",");
 
 	return db.executeSql(insertQuery);
 };
@@ -59,7 +100,7 @@ export const saveResources = async (
 var Papa = require("papaparse");
 const test = `Category,Header,Description,Address,Link,Phone,Email
 HOUSING,AIntouch Outreach,A wide-range of services including substance abuse and housing,Beloit,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
-HOUSING,BIntouch Outreach,A wide-range of services including substance abuse and housing,Milwaukee,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
+HOUSING,BIntouch Outreach,A TESTwide-range of services including substance abuse and housing,Milwaukee,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com
 HOUSING,CIntouch Outreach,A wide-range of services including substance abuse and housing,Green Bay,https://intouchprogrambelo.wixsite.com/intouchbeloit,,intouchprogrambeloit@gmail.com`;
 export const csvLoader = async () => {
 	let csv = Papa.parse(test);
