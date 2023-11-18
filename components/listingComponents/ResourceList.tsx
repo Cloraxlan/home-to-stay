@@ -29,6 +29,7 @@ const ResourceList = (props: Props) => {
 					setLocation(
 						new Location({ latitude: loc.latitude, longitude: loc.longitude }),
 					);
+					console.log(loc);
 				});
 				break;
 			case SortTypes.ALPHA:
@@ -71,6 +72,7 @@ const ResourceList = (props: Props) => {
 	useEffect(() => {
 		resources.map((m) => {
 			console.log(m.header);
+			console.log(m.address?.location.coordinates);
 		});
 	}, [resources]);
 

@@ -5,22 +5,14 @@ import {
 	createSelector,
 	createSlice,
 } from "@reduxjs/toolkit";
-import { EducationResouce } from "../model/Resources/EducationResouce";
-import { FoodResouce } from "../model/Resources/FoodResouce";
-import { HousingResouce } from "../model/Resources/HousingResource";
-import { JobResource } from "../model/Resources/JobResouce";
+
 import {
 	Resource,
 	ResourceType,
 	SerializedResource,
 } from "../model/Resources/Resource";
-import { Address } from "../model/Clickables/Address";
-import { Phone } from "../model/Clickables/Phone";
-import { URL } from "../model/Clickables/URL";
+
 import { RootState } from "../store";
-import { csvLoader } from "../database/loader";
-import { HealthcareResource } from "../model/Resources/HealthcareResource";
-import { ServiceResource } from "../model/Resources/ServiceResource";
 
 export interface ResouceState {
 	education: SerializedResource[];
