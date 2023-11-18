@@ -79,7 +79,7 @@ export class Location {
 			let req = await fetch("https://geocode.maps.co/search?q=" + address);
 			console.log("sleep start");
 			//Due to rate throttling on api
-			await sleep(500);
+			await sleep(600);
 			console.log("sleep end");
 			let json = await req.json();
 			return {
