@@ -18,7 +18,7 @@ const ResourceBlock = (props: Props) => {
 				></Card.Image>
 				<Card.Title>{props.resource.header}</Card.Title>
 				<Card.Divider />
-				<Text>{props.resource.description}</Text>
+				<Text style={styles.bodyText}>{props.resource.description}</Text>
 				<Card.Divider />
 				<ClickableInfo
 					style={styles.infoText}
@@ -60,10 +60,11 @@ const styles = StyleSheet.create({
 		height: 40,
 	},
 	bodyText: {
-		color: "white",
+		color: "black",
 	},
 	infoText: {
 		fontWeight: "bold",
 		fontSize: 10,
+		color: "black",
 	},
 });
