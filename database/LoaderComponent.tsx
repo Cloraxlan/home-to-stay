@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addResource } from "../reducers/resourcesSlice";
+import {
+	addResource,
+	changeLoadStateForResource,
+} from "../reducers/resourcesSlice";
 
 import {
 	createTable,
@@ -15,6 +18,7 @@ function LoaderComponent() {
 	//Testing
 	const dispatch = useDispatch();
 	let test = async () => {
+		dispatch(changeLoadStateForResource(true));
 		let r = await fetch(
 			"https://e5d5d0c5-eab0-473b-b8a3-d237b9a70c60.mock.pstmn.io",
 		);
@@ -26,6 +30,7 @@ function LoaderComponent() {
 		resources.map((resource) => {
 			dispatch(addResource(resource));
 		});
+		dispatch(changeLoadStateForResource(false));
 	};
 	useEffect(() => {
 		test();

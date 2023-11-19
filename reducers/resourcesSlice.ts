@@ -21,6 +21,7 @@ export interface ResouceState {
 	jobs: SerializedResource[];
 	healthcare: SerializedResource[];
 	services: SerializedResource[];
+	loading: boolean;
 }
 
 const initialState: ResouceState = {
@@ -30,6 +31,7 @@ const initialState: ResouceState = {
 	jobs: [],
 	healthcare: [],
 	services: [],
+	loading: false,
 };
 
 export const resourceSlice: Slice = createSlice({
@@ -61,8 +63,18 @@ export const resourceSlice: Slice = createSlice({
 					break;
 			}
 		},
+		changeLoadStateForResource: (
+			state: Draft<ResouceState>,
+			action: PayloadAction<boolean>,
+		) => {
+			state.loading = action.payload;
+		},
 	},
 });
+
+export const { addResource } = resourceSlice.actions;
+export const { changeLoadStateForResource } = resourceSlice.actions;
+
 const unserializeResources = (
 	serializedRes: SerializedResource[],
 ): Resource[] => {
@@ -72,8 +84,9 @@ const unserializeResources = (
 	});
 	return resources;
 };
+export const selectResourceLoading = (state: RootState) =>
+	state.resources.loading;
 
-export const { addResource } = resourceSlice.actions;
 const selectEducationSerial = (state: RootState) =>
 	(state.resources as ResouceState).education;
 const selectHealthcareSerial = (state: RootState) =>

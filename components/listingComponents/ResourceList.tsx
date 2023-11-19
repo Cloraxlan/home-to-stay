@@ -1,10 +1,12 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import ResourceBlock from "./ResourceBlock";
 import { Resource } from "../../model/Resources/Resource";
 import GetLocation from "react-native-get-location/dist";
 import { Location } from "../../model/Location";
 import { ButtonGroup, Text } from "@rneui/themed";
+import { useSelector } from "react-redux";
+import { selectResourceLoading } from "../../reducers/resourcesSlice";
 
 interface Props {
 	resources: Resource[];
@@ -19,9 +21,13 @@ const ResourceList = (props: Props) => {
 	const [sort, setSort] = useState<SortTypes>(SortTypes.DISTANCE);
 	const [location, setLocation] = useState<any>(null);
 	const [resources, setResources] = useState<Resource[]>(props.resources);
+	const loadingResources = useSelector(selectResourceLoading);
+	const [loadingLocation, setLoadingLocation] = useState<boolean>(false);
+
 	useEffect(() => {
 		switch (sort) {
 			case SortTypes.DISTANCE:
+				setLoadingLocation(true);
 				GetLocation.getCurrentPosition({
 					enableHighAccuracy: true,
 					timeout: 2000,
@@ -30,6 +36,7 @@ const ResourceList = (props: Props) => {
 						new Location({ latitude: loc.latitude, longitude: loc.longitude }),
 					);
 					console.log(loc);
+					setLoadingLocation(false);
 				});
 				break;
 			case SortTypes.ALPHA:
@@ -78,7 +85,7 @@ const ResourceList = (props: Props) => {
 
 	let isLoading =
 		(sort == SortTypes.DISTANCE && location) || sort != SortTypes.DISTANCE;
-
+	let displayLoadingCircle = loadingResources || loadingLocation;
 	return (
 		<ScrollView>
 			<ButtonGroup
@@ -90,23 +97,30 @@ const ResourceList = (props: Props) => {
 				}}
 				containerStyle={{ marginBottom: 20 }}
 			/>
-			<View style={styles.listingView}>
-				{isLoading && (
-					<React.Fragment>
+			{!displayLoadingCircle && (
+				<View style={styles.listingView}>
+					{isLoading && (
 						<React.Fragment>
-							{resources.map((resource, i) => {
-								return <ResourceBlock resource={resource} key={i} />;
-							})}
+							<React.Fragment>
+								{resources.map((resource, i) => {
+									return <ResourceBlock resource={resource} key={i} />;
+								})}
+							</React.Fragment>
+							<React.Fragment>
+								{resources.length == 0 && (
+									<Text h3={true}>No Resources Avaliable</Text>
+								)}
+							</React.Fragment>
+							<Text style={{ padding: "50%" }}></Text>
 						</React.Fragment>
-						<React.Fragment>
-							{resources.length == 0 && (
-								<Text h3={true}>No Resources Avaliable</Text>
-							)}
-						</React.Fragment>
-						<Text style={{ padding: "50%" }}></Text>
-					</React.Fragment>
-				)}
-			</View>
+					)}
+				</View>
+			)}
+			{displayLoadingCircle && (
+				<View>
+					<ActivityIndicator size="large" />
+				</View>
+			)}
 		</ScrollView>
 	);
 };
