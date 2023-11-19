@@ -23,18 +23,21 @@ import { Colors, Header } from "react-native/Libraries/NewAppScreen";
 import { NativeRouter, Route, Routes } from "react-router-native";
 import Banking from "./components/banking/Banking";
 import Calendar from "./components/calendar/Calendar";
-import Education from "./components/education/Education";
-import Food from "./components/food/Food";
-import Healthcare from "./components/healthcare/Healthcare";
 import Homepage from "./components/homepage/Homepage";
-import Housing from "./components/housing/Housing";
 import Identification from "./components/id/Identification";
-import Jobs from "./components/jobs/Jobs";
-import Services from "./components/services/Services";
+
 import { Provider } from "react-redux";
 import { store } from "./store";
-import { csvLoader } from "./database/loader";
 import LoaderComponent from "./database/LoaderComponent";
+import ResourcePage from "./components/listingComponents/ResourcePage";
+import {
+	selectEducation,
+	selectFood,
+	selectHealthcare,
+	selectHousing,
+	selectJobs,
+	selectServices,
+} from "./reducers/resourcesSlice";
 
 /*const Section: React.FC<
   PropsWithChildren<{
@@ -79,13 +82,41 @@ const App = () => {
 							<Route path="/" element={<Homepage />} />
 							<Route path="/calendar" element={<Calendar />} />
 							<Route path="/banking" element={<Banking />} />
-							<Route path="/education" element={<Education />} />
-							<Route path="/food/*" element={<Food />} />
-							<Route path="/healthcare" element={<Healthcare />} />
-							<Route path="/housing" element={<Housing />} />
+							<Route
+								path="/education"
+								element={
+									<ResourcePage name="Education" selector={selectEducation} />
+								}
+							/>
+							<Route
+								path="/food/*"
+								element={<ResourcePage name="Food" selector={selectFood} />}
+							/>
+							<Route
+								path="/healthcare"
+								element={
+									<ResourcePage name="Healthcare" selector={selectHealthcare} />
+								}
+							/>
+							<Route
+								path="/housing"
+								element={
+									<ResourcePage name="Housing" selector={selectHousing} />
+								}
+							/>
 							<Route path="/id/*" element={<Identification />} />
-							<Route path="/jobs" element={<Jobs />} />
-							<Route path="/services" element={<Services />} />
+							<Route
+								path="/jobs"
+								element={
+									<ResourcePage name="Healthcare" selector={selectJobs} />
+								}
+							/>
+							<Route
+								path="/services"
+								element={
+									<ResourcePage name="Services" selector={selectServices} />
+								}
+							/>
 						</Routes>
 					</View>
 				</NativeRouter>

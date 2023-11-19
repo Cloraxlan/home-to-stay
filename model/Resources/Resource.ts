@@ -3,12 +3,6 @@ import { Address, SerialiedAddress } from "../Clickables/Address";
 import { Phone, SerializedPhone } from "../../model/Clickables/Phone";
 import { SerializedURL, URL } from "../../model/Clickables/URL";
 import { Email, SerializedEmail } from "../Clickables/Email";
-import { EducationResouce } from "./EducationResouce";
-import { FoodResouce } from "./FoodResouce";
-import { HousingResouce } from "./HousingResource";
-import { JobResource } from "./JobResouce";
-import { ServiceResource } from "./ServiceResource";
-import { HealthcareResource } from "./HealthcareResource";
 
 export enum ResourceType {
 	EDUCATION,
@@ -30,7 +24,7 @@ export interface SerializedResource {
 	type: ResourceType;
 }
 
-export abstract class Resource {
+export class Resource {
 	private _header: string;
 	private _description: string;
 	private _address: Address | undefined;
@@ -43,7 +37,7 @@ export abstract class Resource {
 		header: string,
 		description: string,
 		type: ResourceType,
-
+		icon: ImageSourcePropType,
 		address?: Address,
 		link?: URL,
 		phone?: Phone,
@@ -51,12 +45,12 @@ export abstract class Resource {
 	) {
 		this._header = header;
 		this._description = description;
+		this._icon = icon;
 		this._address = address;
 		this._link = link;
 		this._phone = phone;
 		this._email = email;
 		this._type = type;
-		this._icon = require("./icons/square.png");
 	}
 
 	public get header(): string {
@@ -87,62 +81,42 @@ export abstract class Resource {
 		return this._type;
 	}
 	public static of(serialize: SerializedResource): Resource {
+		let defaultIcon = require("./icons/square.png");
 		switch (serialize.type) {
 			case ResourceType.EDUCATION:
-				return new EducationResouce(
-					serialize.header,
-					serialize.description,
-					Address.of(serialize.address),
-					URL.of(serialize.link),
-					Phone.of(serialize.phone),
-					Email.of(serialize.email),
-				);
+				defaultIcon = require("./icons/education.png");
+				break;
+
 			case ResourceType.FOOD:
-				return new FoodResouce(
-					serialize.header,
-					serialize.description,
-					Address.of(serialize.address),
-					URL.of(serialize.link),
-					Phone.of(serialize.phone),
-					Email.of(serialize.email),
-				);
+				defaultIcon = require("./icons/foodIcon.png");
+				break;
+
 			case ResourceType.HOUSING:
-				return new HousingResouce(
-					serialize.header,
-					serialize.description,
-					Address.of(serialize.address),
-					URL.of(serialize.link),
-					Phone.of(serialize.phone),
-					Email.of(serialize.email),
-				);
+				defaultIcon = require("./icons/housing.png");
+				break;
+
 			case ResourceType.JOB:
-				return new JobResource(
-					serialize.header,
-					serialize.description,
-					Address.of(serialize.address),
-					URL.of(serialize.link),
-					Phone.of(serialize.phone),
-					Email.of(serialize.email),
-				);
+				defaultIcon = require("./icons/jobs.png");
+				break;
+
 			case ResourceType.SERVICE:
-				return new ServiceResource(
-					serialize.header,
-					serialize.description,
-					Address.of(serialize.address),
-					URL.of(serialize.link),
-					Phone.of(serialize.phone),
-					Email.of(serialize.email),
-				);
+				defaultIcon = require("./icons/service.png");
+				break;
+
 			case ResourceType.HEALTHCARE:
-				return new HealthcareResource(
-					serialize.header,
-					serialize.description,
-					Address.of(serialize.address),
-					URL.of(serialize.link),
-					Phone.of(serialize.phone),
-					Email.of(serialize.email),
-				);
+				defaultIcon = require("./icons/healthcare.png");
+				break;
 		}
+		return new Resource(
+			serialize.header,
+			serialize.description,
+			serialize.type,
+			defaultIcon,
+			Address.of(serialize.address),
+			URL.of(serialize.link),
+			Phone.of(serialize.phone),
+			Email.of(serialize.email),
+		);
 	}
 
 	public serialize(): SerializedResource {

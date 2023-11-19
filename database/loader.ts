@@ -3,14 +3,9 @@ import { Email } from "../model/Clickables/Email";
 import { Phone } from "../model/Clickables/Phone";
 import { URL } from "../model/Clickables/URL";
 import { Location } from "../model/Location";
-import { EducationResouce } from "../model/Resources/EducationResouce";
-import { FoodResouce } from "../model/Resources/FoodResouce";
-import { HealthcareResource } from "../model/Resources/HealthcareResource";
-import { HousingResouce } from "../model/Resources/HousingResource";
-import { JobResource } from "../model/Resources/JobResouce";
+
 import { Resource, SerializedResource } from "../model/Resources/Resource";
-import { ServiceResource } from "../model/Resources/ServiceResource";
-import { ResouceState } from "../reducers/resourcesSlice";
+
 import {
 	SQLiteDatabase,
 	enablePromise,

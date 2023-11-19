@@ -11,7 +11,6 @@ import {
 	getResource,
 	saveResources,
 } from "./loader";
-import { HousingResouce } from "../model/Resources/HousingResource";
 import { Resource } from "../model/Resources/Resource";
 
 function LoaderComponent() {
