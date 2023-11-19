@@ -30,7 +30,7 @@ const ResourceList = (props: Props) => {
 				setLoadingLocation(true);
 				GetLocation.getCurrentPosition({
 					enableHighAccuracy: true,
-					timeout: 2000,
+					timeout: 5000,
 				}).then((loc) => {
 					setLocation(
 						new Location({ latitude: loc.latitude, longitude: loc.longitude }),
