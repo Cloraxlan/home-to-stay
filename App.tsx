@@ -32,6 +32,7 @@ import LoaderComponent from "./database/LoaderComponent";
 import ResourcePage from "./components/listingComponents/ResourcePage";
 import { selectResources } from "./reducers/resourcesSlice";
 import { ResourceType } from "./model/Resources/Resource";
+import ResourceScreen from "./components/listingComponents/ResourceScreen";
 
 /*const Section: React.FC<
   PropsWithChildren<{
@@ -74,6 +75,7 @@ const App = () => {
 						<LoaderComponent />
 						<Routes>
 							<Route path="/" element={<Homepage />} />
+							<Route path="/resourceScreen" element={<ResourceScreen />} />
 							<Route path="/calendar" element={<Calendar />} />
 							<Route path="/banking" element={<Banking />} />
 							<Route

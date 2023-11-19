@@ -17,6 +17,7 @@ import { RootState } from "../store";
 export interface ResouceState {
 	resources: SerializedResource[];
 	loading: boolean;
+	currentResource?: Resource;
 }
 
 const initialState: ResouceState = {
@@ -40,11 +41,18 @@ export const resourceSlice: Slice = createSlice({
 		) => {
 			state.loading = action.payload;
 		},
+		setCurrentResource: (
+			state: Draft<ResouceState>,
+			action: PayloadAction<Resource>,
+		) => {
+			state.currentResource = action.payload;
+		},
 	},
 });
 
 export const { addResource } = resourceSlice.actions;
 export const { changeLoadStateForResource } = resourceSlice.actions;
+export const { setCurrentResource } = resourceSlice.actions;
 
 const unserializeResources = (
 	serializedRes: SerializedResource[],
@@ -62,11 +70,20 @@ export const selectResourceLoading = (state: RootState) =>
 	state.resources.loading;
 
 const selectResourcesSerial = (state: RootState) => state.resources.resources;
+const selectCurrentResourceSerial = (state: RootState) =>
+	state.resources.currentResource;
 
 export const selectResources = (type: ResourceType) => {
 	return createSelector(selectResourcesSerial, (resources) => {
 		return unserializeResources(resources, type);
 	});
 };
+
+export const selectCurrentResource = createSelector(
+	selectCurrentResourceSerial,
+	(resource) => {
+		return Resource.of(resource);
+	},
+);
 
 export default resourceSlice.reducer;

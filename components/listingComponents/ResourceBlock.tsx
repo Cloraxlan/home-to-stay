@@ -2,7 +2,10 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Resource } from "../../model/Resources/Resource";
 import ClickableInfo from "./ClickableInfo";
-import { Card } from "@rneui/base";
+import { Button, Card } from "@rneui/base";
+import { useDispatch } from "react-redux";
+import { setCurrentResource } from "../../reducers/resourcesSlice";
+import { useNavigate } from "react-router";
 
 interface Props {
 	resource: Resource;
@@ -10,6 +13,9 @@ interface Props {
 }
 //A single generic listing for something like a job or housing
 const ResourceBlock = (props: Props) => {
+	const dispatch = useDispatch();
+	let navigate = useNavigate();
+
 	return (
 		<View style={styles.listing}>
 			<Card>
@@ -20,6 +26,12 @@ const ResourceBlock = (props: Props) => {
 				<Card.Title>{props.resource.header}</Card.Title>
 				<Card.Divider />
 				<Text>{props.resource.description}</Text>
+				<Button
+					onPress={() => {
+						dispatch(setCurrentResource(props.resource.serialize()));
+						navigate("/resourceScreen");
+					}}
+				></Button>
 				{props.displayContact && (
 					<React.Fragment>
 						<Card.Divider />
