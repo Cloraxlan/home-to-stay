@@ -2,11 +2,12 @@ import React from "react";
 import {
 	ImageSourcePropType,
 	ImageURISource,
+	Pressable,
 	StyleSheet,
 	Text,
 	View,
 } from "react-native";
-import { Link } from "react-router-native";
+import { Link, useNavigate } from "react-router-native";
 import { v4 } from "uuid";
 import MenuIcon from "./MenuIcon";
 export interface Menu {
@@ -19,13 +20,21 @@ interface Props {
 }
 //Renders links to menu on homepage
 const MenuTab = (props: Props) => {
+	const navigate = useNavigate();
+
 	return (
 		<View style={styles.menus}>
 			{props.menus.map((menu: Menu) => {
 				return (
-					<Link style={styles.link} key={menu.link} to={menu.link}>
+					<Pressable
+						onPress={() => {
+							navigate(menu.link);
+						}}
+						style={styles.link}
+						key={menu.link}
+					>
 						<MenuIcon menu={menu}></MenuIcon>
-					</Link>
+					</Pressable>
 				);
 			})}
 		</View>

@@ -4,14 +4,15 @@ import { Resource } from "../../model/Resources/Resource";
 import AppHeader from "../AppHeader";
 import { selectCurrentResource } from "../../reducers/resourcesSlice";
 import { useSelector } from "react-redux";
+import NavView from "../NavView";
 
 const ResourceScreen = () => {
 	const resource = useSelector(selectCurrentResource);
 
 	return (
-		<View>
+		<NavView>
 			<AppHeader title={resource.header} />
-		</View>
+		</NavView>
 	);
 };
 

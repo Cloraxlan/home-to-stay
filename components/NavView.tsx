@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useNavigate } from "react-router-native";
 
 interface Props {
-	children: any[];
+	children: any[] | any;
 }
 //View that adds relevant controlls such as back button
 const NavView = (props: Props) => {
@@ -13,9 +13,13 @@ const NavView = (props: Props) => {
 		navigate(-1);
 		return true;
 	});
-	return <View>{props.children}</View>;
+	return <View style={styles.view}>{props.children}</View>;
 };
 
 export default NavView;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	view: {
+		height: "100%",
+	},
+});

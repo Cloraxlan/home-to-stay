@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import MenuTab from "./MenuTab";
+import MenuTab from "../MenuTab";
 import { Button } from "@rneui/base";
 import { reset } from "../../database/loader";
 
