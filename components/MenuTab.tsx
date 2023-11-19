@@ -5,6 +5,8 @@ import {
 	Pressable,
 	StyleSheet,
 	Text,
+	TouchableHighlight,
+	Vibration,
 	View,
 } from "react-native";
 import { Link, useNavigate } from "react-router-native";
@@ -26,15 +28,16 @@ const MenuTab = (props: Props) => {
 		<View style={styles.menus}>
 			{props.menus.map((menu: Menu) => {
 				return (
-					<Pressable
+					<TouchableHighlight
 						onPress={() => {
+							Vibration.vibrate();
 							navigate(menu.link);
 						}}
 						style={styles.link}
 						key={menu.link}
 					>
 						<MenuIcon menu={menu}></MenuIcon>
-					</Pressable>
+					</TouchableHighlight>
 				);
 			})}
 		</View>
