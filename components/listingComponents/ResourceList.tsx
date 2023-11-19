@@ -94,7 +94,7 @@ const ResourceList = (props: Props) => {
 		(sort == SortTypes.DISTANCE && location) || sort != SortTypes.DISTANCE;
 	let displayLoadingCircle = loadingResources || loadingLocation;
 	return (
-		<ScrollView>
+		<ScrollView style={styles.background}>
 			<ButtonGroup
 				buttons={["Distance", "Alphabetical"]}
 				selectedIndex={sorts.indexOf(sort)}
@@ -139,5 +139,8 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
+	},
+	background: {
+		backgroundColor: "white",
 	},
 });

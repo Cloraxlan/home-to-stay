@@ -70,7 +70,7 @@ const App = () => {
 			<SafeAreaView>
 				<StatusBar />
 				<NativeRouter>
-					<View>
+					<View style={styles.background}>
 						<LoaderComponent />
 						<Routes>
 							<Route path="/" element={<Homepage />} />
@@ -155,6 +155,9 @@ const styles = StyleSheet.create({
 	},
 	highlight: {
 		fontWeight: "700",
+	},
+	background: {
+		backgroundColor: "white",
 	},
 });
 
