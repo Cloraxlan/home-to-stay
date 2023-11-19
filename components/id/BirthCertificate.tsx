@@ -18,7 +18,7 @@ const BirthCertificate = () => {
 			<AppHeader title="Birth Certificate" />
 			<WebView
 				source={{
-					uri: "https://www.vitalchek.com/wistorefront/customer/wi/wiProductSelect.xhtml",
+					uri: "https://www.vitalchek.com/wistorefront/customer/wi/wiHome.xhtml?click_id=592505259768217602&ppc=0",
 				}}
 				startInLoadingState={true}
 				scalesPageToFit={true}

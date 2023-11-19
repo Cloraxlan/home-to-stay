@@ -30,7 +30,6 @@ const MenuTab = (props: Props) => {
 				return (
 					<TouchableHighlight
 						onPress={() => {
-							Vibration.vibrate();
 							navigate(menu.link);
 						}}
 						style={styles.link}
