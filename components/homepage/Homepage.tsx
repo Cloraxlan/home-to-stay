@@ -1,6 +1,8 @@
 import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import MenuTab from "./MenuTab";
+import { Button } from "@rneui/base";
+import { reset } from "../../database/loader";
 
 const icons = {
 	calendar: require("./homePageIcons/calendar.png"),
@@ -22,6 +24,7 @@ const Homepage = () => {
 				resizeMode={"contain"}
 			></Image>
 			<View style={styles.menuIcons}>
+				<Button onPress={reset}>Reset</Button>
 				<MenuTab
 					menus={[
 						{ name: "Calendar", link: "/calendar", icon: icons.calendar },

@@ -82,14 +82,15 @@ export const saveResources = async (
 	for (let index = 0; index < resources.length; index++) {
 		const resource = resources[index];
 
-		let newEntry =
-			(
-				await db.executeSql(
-					`SELECT header FROM ${tableName} WHERE header = '${resource.header}'`,
-				)
-			).pop()?.rows.length == (undefined || 0);
+		let address = (
+			await db.executeSql(
+				`SELECT address FROM ${tableName} WHERE header = '${resource.header}'`,
+			)
+		)
+			.pop()
+			?.rows.item(0);
 
-		if (resource.address && newEntry) {
+		if (resource.address && !address) {
 			resources[index].address = new Address(
 				resource.address.address,
 				new Location(
@@ -98,6 +99,9 @@ export const saveResources = async (
 				),
 			).serialize();
 			console.log("new location entry");
+		} else if (resource.address && address) {
+			console.log(address);
+			resources[index].address = JSON.parse(address.address);
 		}
 	}
 	const insertQuery =
@@ -114,4 +118,11 @@ export const saveResources = async (
 			.join(",");
 
 	return db.executeSql(insertQuery);
+};
+
+export const reset = async () => {
+	let db = await getDBConnection();
+	let drop = `DROP TABLE ${tableName}`;
+	db.executeSql(drop);
+	createTable(db);
 };
