@@ -30,14 +30,8 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import LoaderComponent from "./database/LoaderComponent";
 import ResourcePage from "./components/listingComponents/ResourcePage";
-import {
-	selectEducation,
-	selectFood,
-	selectHealthcare,
-	selectHousing,
-	selectJobs,
-	selectServices,
-} from "./reducers/resourcesSlice";
+import { selectResources } from "./reducers/resourcesSlice";
+import { ResourceType } from "./model/Resources/Resource";
 
 /*const Section: React.FC<
   PropsWithChildren<{
@@ -85,36 +79,56 @@ const App = () => {
 							<Route
 								path="/education"
 								element={
-									<ResourcePage name="Education" selector={selectEducation} />
+									<ResourcePage
+										name="Education"
+										selector={selectResources(ResourceType.EDUCATION)}
+									/>
 								}
 							/>
 							<Route
 								path="/food/*"
-								element={<ResourcePage name="Food" selector={selectFood} />}
+								element={
+									<ResourcePage
+										name="Food"
+										selector={selectResources(ResourceType.FOOD)}
+									/>
+								}
 							/>
 							<Route
 								path="/healthcare"
 								element={
-									<ResourcePage name="Healthcare" selector={selectHealthcare} />
+									<ResourcePage
+										name="Healthcare"
+										selector={selectResources(ResourceType.HEALTHCARE)}
+									/>
 								}
 							/>
 							<Route
 								path="/housing"
 								element={
-									<ResourcePage name="Housing" selector={selectHousing} />
+									<ResourcePage
+										name="Housing"
+										selector={selectResources(ResourceType.HOUSING)}
+									/>
 								}
 							/>
 							<Route path="/id/*" element={<Identification />} />
 							<Route
 								path="/jobs"
 								element={
-									<ResourcePage name="Healthcare" selector={selectJobs} />
+									<ResourcePage
+										name="Jobs"
+										selector={selectResources(ResourceType.JOB)}
+									/>
 								}
 							/>
 							<Route
 								path="/services"
 								element={
-									<ResourcePage name="Services" selector={selectServices} />
+									<ResourcePage
+										name="Services"
+										selector={selectResources(ResourceType.SERVICE)}
+									/>
 								}
 							/>
 						</Routes>
