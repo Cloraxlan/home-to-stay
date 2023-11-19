@@ -6,6 +6,7 @@ import { Card } from "@rneui/base";
 
 interface Props {
 	resource: Resource;
+	displayContact?: boolean;
 }
 //A single generic listing for something like a job or housing
 const ResourceBlock = (props: Props) => {
@@ -19,25 +20,29 @@ const ResourceBlock = (props: Props) => {
 				<Card.Title>{props.resource.header}</Card.Title>
 				<Card.Divider />
 				<Text>{props.resource.description}</Text>
-				<Card.Divider />
-				<ClickableInfo
-					style={styles.infoText}
-					clickable={props.resource.address}
-				/>
-				<ClickableInfo
-					style={styles.infoText}
-					clickable={props.resource.phone}
-				/>
+				{props.displayContact && (
+					<React.Fragment>
+						<Card.Divider />
+						<ClickableInfo
+							style={styles.infoText}
+							clickable={props.resource.address}
+						/>
+						<ClickableInfo
+							style={styles.infoText}
+							clickable={props.resource.phone}
+						/>
 
-				<ClickableInfo
-					style={styles.infoText}
-					clickable={props.resource.link}
-				/>
+						<ClickableInfo
+							style={styles.infoText}
+							clickable={props.resource.link}
+						/>
 
-				<ClickableInfo
-					style={styles.infoText}
-					clickable={props.resource.email}
-				/>
+						<ClickableInfo
+							style={styles.infoText}
+							clickable={props.resource.email}
+						/>
+					</React.Fragment>
+				)}
 			</Card>
 		</View>
 	);
