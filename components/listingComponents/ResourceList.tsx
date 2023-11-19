@@ -34,10 +34,10 @@ const ResourceList = (props: Props) => {
 					new Location({ latitude: loc.latitude, longitude: loc.longitude }),
 				);
 				console.log(loc);
+				setLoadingLocation(false);
 			});
 		} catch {
 			setSort(SortTypes.ALPHA);
-		} finally {
 			setLoadingLocation(false);
 		}
 	};
@@ -92,7 +92,8 @@ const ResourceList = (props: Props) => {
 
 	let isLoading =
 		(sort == SortTypes.DISTANCE && location) || sort != SortTypes.DISTANCE;
-	let displayLoadingCircle = loadingResources || loadingLocation;
+	let displayLoadingCircle =
+		loadingResources || (loadingLocation && sort == SortTypes.DISTANCE);
 	return (
 		<ScrollView style={styles.background}>
 			<ButtonGroup
