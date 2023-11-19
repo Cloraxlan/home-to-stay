@@ -23,18 +23,26 @@ const ResourceList = (props: Props) => {
 	const [resources, setResources] = useState<Resource[]>(props.resources);
 	const loadingResources = useSelector(selectResourceLoading);
 	const [loadingLocation, setLoadingLocation] = useState<boolean>(false);
-	useMemo(() => {
+	const getLocation = () => {
 		setLoadingLocation(true);
-		GetLocation.getCurrentPosition({
-			enableHighAccuracy: true,
-			timeout: 5000,
-		}).then((loc) => {
-			setLocation(
-				new Location({ latitude: loc.latitude, longitude: loc.longitude }),
-			);
-			console.log(loc);
+		try {
+			GetLocation.getCurrentPosition({
+				enableHighAccuracy: true,
+				timeout: 5000,
+			}).then((loc) => {
+				setLocation(
+					new Location({ latitude: loc.latitude, longitude: loc.longitude }),
+				);
+				console.log(loc);
+			});
+		} catch {
+			setSort(SortTypes.ALPHA);
+		} finally {
 			setLoadingLocation(false);
-		});
+		}
+	};
+	useMemo(() => {
+		getLocation();
 	}, []);
 	useEffect(() => {
 		switch (sort) {
@@ -73,7 +81,7 @@ const ResourceList = (props: Props) => {
 			});
 			setResources(r);
 		}
-	}, [loadingLocation, sort, props.resources]);
+	}, [location, sort, props.resources]);
 
 	useEffect(() => {
 		resources.map((m) => {
