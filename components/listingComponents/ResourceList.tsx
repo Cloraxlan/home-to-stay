@@ -1,5 +1,5 @@
 import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ResourceBlock from "./ResourceBlock";
 import { Resource } from "../../model/Resources/Resource";
 import GetLocation from "react-native-get-location/dist";
@@ -23,35 +23,42 @@ const ResourceList = (props: Props) => {
 	const [resources, setResources] = useState<Resource[]>(props.resources);
 	const loadingResources = useSelector(selectResourceLoading);
 	const [loadingLocation, setLoadingLocation] = useState<boolean>(false);
-
+	const getLocation = () => {
+		setLoadingLocation(true);
+		try {
+			GetLocation.getCurrentPosition({
+				enableHighAccuracy: true,
+				timeout: 5000,
+			}).then((loc) => {
+				setLocation(
+					new Location({ latitude: loc.latitude, longitude: loc.longitude }),
+				);
+				console.log(loc);
+				setLoadingLocation(false);
+			});
+		} catch {
+			setSort(SortTypes.ALPHA);
+			setLoadingLocation(false);
+		}
+	};
+	useMemo(() => {
+		getLocation();
+	}, []);
 	useEffect(() => {
 		switch (sort) {
-			case SortTypes.DISTANCE:
-				setLoadingLocation(true);
-				GetLocation.getCurrentPosition({
-					enableHighAccuracy: true,
-					timeout: 2000,
-				}).then((loc) => {
-					setLocation(
-						new Location({ latitude: loc.latitude, longitude: loc.longitude }),
-					);
-					console.log(loc);
-					setLoadingLocation(false);
-				});
-				break;
 			case SortTypes.ALPHA:
-				let r = [...resources].sort((a, b) =>
+				let r = [...props.resources].sort((a, b) =>
 					a.header.toLowerCase().localeCompare(b.header.toLowerCase()),
 				);
 
 				setResources(r);
 				break;
 		}
-	}, [sort]);
+	}, [sort, props.resources]);
 
 	useEffect(() => {
 		if (location != null && sort == SortTypes.DISTANCE) {
-			let r = [...resources].sort((a, b) => {
+			let r = [...props.resources].sort((a, b) => {
 				if (a.address == undefined && b.address == undefined) {
 					return 0;
 				}
@@ -74,7 +81,7 @@ const ResourceList = (props: Props) => {
 			});
 			setResources(r);
 		}
-	}, [location, sort]);
+	}, [location, sort, props.resources]);
 
 	useEffect(() => {
 		resources.map((m) => {
@@ -85,9 +92,10 @@ const ResourceList = (props: Props) => {
 
 	let isLoading =
 		(sort == SortTypes.DISTANCE && location) || sort != SortTypes.DISTANCE;
-	let displayLoadingCircle = loadingResources || loadingLocation;
+	let displayLoadingCircle =
+		loadingResources || (loadingLocation && sort == SortTypes.DISTANCE);
 	return (
-		<ScrollView>
+		<ScrollView style={styles.background}>
 			<ButtonGroup
 				buttons={["Distance", "Alphabetical"]}
 				selectedIndex={sorts.indexOf(sort)}
@@ -132,5 +140,8 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
+	},
+	background: {
+		backgroundColor: "white",
 	},
 });

@@ -65,10 +65,11 @@ const styles = StyleSheet.create({
 		height: 40,
 	},
 	bodyText: {
-		color: "white",
+		color: "black",
 	},
 	infoText: {
 		fontWeight: "bold",
 		fontSize: 10,
+		color: "black",
 	},
 });
