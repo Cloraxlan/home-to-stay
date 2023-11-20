@@ -22,7 +22,7 @@ function LoaderComponent() {
 
 		try {
 			let r = await fetch(
-				"https://e5d5d0c5-eab0-473b-b8a3-d237b9a70c60.mock.pstmn.io",
+				"https://3ea5f85e-7c2e-4464-a42d-bea038fe11af.mock.pstmn.io",
 			);
 			let data = await r.json();
 			await createTable(db);

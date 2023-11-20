@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import React from "react";
 import { Resource } from "../../model/Resources/Resource";
 import ClickableInfo from "./ClickableInfo";
-import { Button, Card } from "@rneui/base";
+import { Button, Card, Icon } from "@rneui/base";
 import { useDispatch } from "react-redux";
 import { setCurrentResource } from "../../reducers/resourcesSlice";
 import { useNavigate } from "react-router";
@@ -24,14 +24,27 @@ const ResourceBlock = (props: Props) => {
 					source={props.resource.icon}
 				></Card.Image>
 				<Card.Title>{props.resource.header}</Card.Title>
-				<Card.Divider />
-				<Text>{props.resource.description}</Text>
-				<Button
+
+				<Text numberOfLines={5}>{props.resource.description}</Text>
+
+				<Card.Divider style={{ paddingTop: 20 }} />
+				<TouchableHighlight
 					onPress={() => {
 						dispatch(setCurrentResource(props.resource.serialize()));
 						navigate("/resourceScreen");
 					}}
-				></Button>
+				>
+					<View>
+						<Icon type="material" name="expand-more"></Icon>
+						<Text
+							style={styles.expandText}
+							numberOfLines={1}
+							adjustsFontSizeToFit
+						>
+							See More Information
+						</Text>
+					</View>
+				</TouchableHighlight>
 				{props.displayContact && (
 					<React.Fragment>
 						<Card.Divider />
@@ -84,4 +97,5 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		color: "black",
 	},
+	expandText: { textAlign: "center", fontSize: 12, fontWeight: "bold" },
 });
