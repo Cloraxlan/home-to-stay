@@ -66,6 +66,15 @@ const unserializeResources = (
 	});
 	return resources;
 };
+const unserializeAnyResources = (
+	serializedRes: SerializedResource[],
+): Resource[] => {
+	let resources: Resource[] = [];
+	serializedRes.map((serialized) => {
+		resources.push(Resource.of(serialized));
+	});
+	return resources;
+};
 export const selectResourceLoading = (state: RootState) =>
 	state.resources.loading;
 
@@ -79,6 +88,12 @@ export const selectResources = (type: ResourceType) => {
 	});
 };
 
+export const selectAllResources = createSelector(
+	selectResourcesSerial,
+	(resources) => {
+		return unserializeAnyResources(resources);
+	},
+);
 export const selectCurrentResource = createSelector(
 	selectCurrentResourceSerial,
 	(resource) => {

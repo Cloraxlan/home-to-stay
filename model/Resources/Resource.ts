@@ -3,6 +3,7 @@ import { Address, SerialiedAddress } from "../Clickables/Address";
 import { Phone, SerializedPhone } from "../../model/Clickables/Phone";
 import { SerializedURL, URL } from "../../model/Clickables/URL";
 import { Email, SerializedEmail } from "../Clickables/Email";
+import { SearchResult } from "../Searchable";
 
 export enum ResourceType {
 	EDUCATION,
@@ -79,6 +80,12 @@ export class Resource {
 	}
 	public get type(): ResourceType {
 		return this._type;
+	}
+	public get searchResult(): SearchResult {
+		return {
+			header: this._header,
+			description: this._description,
+		};
 	}
 	public static of(serialize: SerializedResource): Resource {
 		let defaultIcon = require("./icons/square.png");

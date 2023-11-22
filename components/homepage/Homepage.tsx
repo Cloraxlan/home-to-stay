@@ -14,6 +14,7 @@ const icons = {
 	identification: require("./homePageIcons/card.png"),
 	jobs: require("./homePageIcons/tools.png"),
 	services: require("./homePageIcons/box.png"),
+	search: require("./homePageIcons/search.png"),
 };
 const Homepage = () => {
 	return (
@@ -27,6 +28,7 @@ const Homepage = () => {
 				<Button onPress={reset}>Reset</Button>
 				<MenuTab
 					menus={[
+						{ name: "Search", link: "/search", icon: icons.search },
 						{ name: "Calendar", link: "/calendar", icon: icons.calendar },
 						{ name: "Banking", link: "/banking", icon: icons.banking },
 						{ name: "Education", link: "/education", icon: icons.education },
