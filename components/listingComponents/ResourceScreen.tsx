@@ -5,7 +5,7 @@ import {
 	TouchableHighlight,
 	View,
 } from "react-native";
-import React from "react";
+import React, { useMemo } from "react";
 import { Resource } from "../../model/Resources/Resource";
 import AppHeader from "../AppHeader";
 import { selectCurrentResource } from "../../reducers/resourcesSlice";
@@ -13,9 +13,28 @@ import { useSelector } from "react-redux";
 import NavView from "../NavView";
 import MenuIcon from "../MenuIcon";
 import { Divider, Icon } from "@rneui/base";
+import ScreenIcon from "./ScreenIcon";
 
 const ResourceScreen = () => {
 	const resource = useSelector(selectCurrentResource);
+
+	const spacing = useMemo(() => {
+		let count = 0;
+		if (resource.link) {
+			count++;
+		}
+		if (resource.address) {
+			count++;
+		}
+		if (resource.phone) {
+			count++;
+		}
+		if (resource.email) {
+			count++;
+		}
+		return (0.8 / count) * 100;
+	}, [resource]);
+
 	return (
 		<NavView>
 			<AppHeader title={resource.header} />
@@ -32,75 +51,31 @@ const ResourceScreen = () => {
 					</ScrollView>
 				</View>
 				<View style={styles.menus}>
-					<TouchableHighlight
-						style={styles.icon}
-						onPress={() => {
-							resource.link?.open();
-						}}
-					>
-						<React.Fragment>
-							<Icon color={"white"} type="material" name="web" />
-							<Text
-								style={styles.iconText}
-								adjustsFontSizeToFit
-								numberOfLines={1}
-							>
-								Open Website
-							</Text>
-						</React.Fragment>
-					</TouchableHighlight>
-					<TouchableHighlight
-						style={styles.icon}
-						onPress={() => {
-							resource.address?.open();
-						}}
-					>
-						<React.Fragment>
-							<Icon color={"white"} type="material" name="map" />
-							<Text
-								style={styles.iconText}
-								adjustsFontSizeToFit
-								numberOfLines={1}
-							>
-								Open in Maps
-							</Text>
-						</React.Fragment>
-					</TouchableHighlight>
-
-					<TouchableHighlight
-						style={styles.icon}
-						onPress={() => {
-							resource.phone?.open();
-						}}
-					>
-						<React.Fragment>
-							<Icon color={"white"} type="material" name="call" />
-							<Text
-								style={styles.iconText}
-								adjustsFontSizeToFit
-								numberOfLines={1}
-							>
-								Call
-							</Text>
-						</React.Fragment>
-					</TouchableHighlight>
-					<TouchableHighlight
-						style={styles.icon}
-						onPress={() => {
-							resource.email?.open();
-						}}
-					>
-						<React.Fragment>
-							<Icon color={"white"} type="material" name="mail" />
-							<Text
-								style={styles.iconText}
-								adjustsFontSizeToFit
-								numberOfLines={1}
-							>
-								Send Email
-							</Text>
-						</React.Fragment>
-					</TouchableHighlight>
+					<ScreenIcon
+						iconName="web"
+						iconText="Open Website"
+						clickable={resource.link}
+						spacing={spacing}
+						isUrl
+					/>
+					<ScreenIcon
+						iconName="map"
+						iconText="Open in Maps"
+						clickable={resource.address}
+						spacing={spacing}
+					/>
+					<ScreenIcon
+						iconName="call"
+						iconText="Call"
+						clickable={resource.phone}
+						spacing={spacing}
+					/>
+					<ScreenIcon
+						iconName="mail"
+						iconText="Send Email"
+						clickable={resource.email}
+						spacing={spacing}
+					/>
 				</View>
 			</View>
 		</NavView>
@@ -125,18 +100,7 @@ const styles = StyleSheet.create({
 		alignContent: "center",
 		paddingTop: "5%",
 	},
-	icon: {
-		width: "20%",
-		justifyContent: "center",
-		alignItems: "center",
-		marginLeft: "2.5%",
-		marginRight: "2.5%",
-	},
-	iconText: {
-		textAlign: "center",
-		fontSize: 12,
-		color: "white",
-	},
+
 	view: {
 		flex: 1,
 	},

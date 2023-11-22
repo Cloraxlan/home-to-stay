@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
 	Button,
+	Dimensions,
 	Linking,
 	StyleSheet,
 	Text,
@@ -13,6 +14,8 @@ import NavView from "../NavView";
 import AppHeader from "../AppHeader";
 
 const BirthCertificate = () => {
+	const { height } = Dimensions.get("window");
+
 	return (
 		<NavView>
 			<AppHeader title="Birth Certificate" />
@@ -24,7 +27,7 @@ const BirthCertificate = () => {
 				scalesPageToFit={true}
 				style={{
 					width: "100%",
-					height: 700,
+					height: height,
 				}}
 			/>
 		</NavView>
