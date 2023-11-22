@@ -85,6 +85,7 @@ export class Resource {
 		return {
 			header: this._header,
 			description: this._description,
+			icon: this._icon,
 		};
 	}
 	public static of(serialize: SerializedResource): Resource {

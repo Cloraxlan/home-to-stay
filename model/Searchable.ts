@@ -1,6 +1,9 @@
+import { ImageSourcePropType } from "react-native";
+
 export interface SearchResult {
 	header: string;
 	description: string;
+	icon: ImageSourcePropType;
 }
 export class Searchable {
 	private _result: SearchResult;

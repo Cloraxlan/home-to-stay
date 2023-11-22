@@ -20,6 +20,7 @@ const Search = () => {
 		const driversLicenceResult: SearchResult = {
 			header: "Drivers Licence",
 			description: "Find the nearest DMV to get your drivers licence",
+			icon: require("../id/card.png"),
 		};
 		defaultSearchables.push(
 			new Searchable(
@@ -34,6 +35,7 @@ const Search = () => {
 			header: "Social Security Card",
 			description:
 				"Find the nearest Social Security office to get your Social Security Card",
+			icon: require("../id/ssn.png"),
 		};
 		defaultSearchables.push(
 			new Searchable(
@@ -47,6 +49,7 @@ const Search = () => {
 		const birthCertResult: SearchResult = {
 			header: "Birth Certificate",
 			description: "Order your birth certificate online",
+			icon: require("../id/birth.png"),
 		};
 		defaultSearchables.push(
 			new Searchable(
@@ -69,7 +72,7 @@ const Search = () => {
 				new Searchable(
 					resource.searchResult,
 					(depend) => {
-						depend.dispatch(setCurrentResource(resource));
+						depend.dispatch(setCurrentResource(resource.serialize()));
 						depend.navigate("/resourceScreen");
 					},
 					{ dispatch: dispatch, navigate: navigate },
