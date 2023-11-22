@@ -39,7 +39,7 @@ const ResourceScreen = () => {
 						}}
 					>
 						<React.Fragment>
-							<Icon type="material" name="web" />
+							<Icon color={"white"} type="material" name="web" />
 							<Text
 								style={styles.iconText}
 								adjustsFontSizeToFit
@@ -56,7 +56,7 @@ const ResourceScreen = () => {
 						}}
 					>
 						<React.Fragment>
-							<Icon type="material" name="map" />
+							<Icon color={"white"} type="material" name="map" />
 							<Text
 								style={styles.iconText}
 								adjustsFontSizeToFit
@@ -74,7 +74,7 @@ const ResourceScreen = () => {
 						}}
 					>
 						<React.Fragment>
-							<Icon type="material" name="call" />
+							<Icon color={"white"} type="material" name="call" />
 							<Text
 								style={styles.iconText}
 								adjustsFontSizeToFit
@@ -91,7 +91,7 @@ const ResourceScreen = () => {
 						}}
 					>
 						<React.Fragment>
-							<Icon type="material" name="mail" />
+							<Icon color={"white"} type="material" name="mail" />
 							<Text
 								style={styles.iconText}
 								adjustsFontSizeToFit
@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
 	iconText: {
 		textAlign: "center",
 		fontSize: 12,
+		color: "white",
 	},
 	view: {
 		flex: 1,
