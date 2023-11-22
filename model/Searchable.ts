@@ -4,6 +4,7 @@ export interface SearchResult {
 	header: string;
 	description: string;
 	icon: ImageSourcePropType;
+	id?: number;
 }
 export class Searchable {
 	private _result: SearchResult;

@@ -10,11 +10,15 @@ import {
 	selectAllResources,
 	setCurrentResource,
 } from "../../reducers/resourcesSlice";
-import { Resource } from "../../model/Resources/Resource";
+import { Input } from "@rneui/base";
+import MiniSearch from "minisearch";
+
 const Search = () => {
 	const navigate = useNavigate();
 	const resources = useSelector(selectAllResources);
 	const dispatch = useDispatch();
+	const [searchBarInput, setSearchBarInput] = useState("");
+	const [validSearchables, setValidSearchables] = useState<Searchable[]>([]);
 	const DEFAULT_SEARCHABLES: Searchable[] = useMemo(() => {
 		let defaultSearchables = [];
 		const driversLicenceResult: SearchResult = {
@@ -81,12 +85,48 @@ const Search = () => {
 		});
 		setSearchables([...DEFAULT_SEARCHABLES, ...allResources]);
 	}, [resources]);
+	const getSearchDoc = () => {
+		let results: SearchResult[] = [];
+		searchables.map((searchable, i) => {
+			let result = searchable.result;
+			result.id = i;
+			results.push(result);
+		});
+		return results;
+	};
+	useEffect(() => {
+		if (searchBarInput != "") {
+			let miniSearch = new MiniSearch({
+				fields: ["header", "description"],
+				storeFields: ["header", "description"],
+			});
+
+			miniSearch.addAll(getSearchDoc());
+			let results = miniSearch.search(searchBarInput);
+			let validHeaders = results.map((result) => {
+				return result.header;
+			});
+			console.log(results);
+			let validResults = searchables.filter((searchable) => {
+				return validHeaders.includes(searchable.result.header);
+			});
+			setValidSearchables(validResults);
+		} else {
+			setValidSearchables(searchables);
+		}
+	}, [searchBarInput]);
 
 	return (
 		<NavView>
 			<AppHeader title="Search" />
+			<Input
+				onChange={(value) => {
+					setSearchBarInput(value.nativeEvent.text);
+				}}
+				leftIcon={{ type: "material", name: "search" }}
+			/>
 			<ScrollView>
-				{searchables.map((searchable: Searchable) => {
+				{validSearchables.map((searchable: Searchable) => {
 					return (
 						<SearchResultView
 							key={searchable.result.header}
