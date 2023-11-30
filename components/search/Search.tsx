@@ -107,7 +107,6 @@ const Search = () => {
 			let validHeaders = results.map((result) => {
 				return result.header;
 			});
-			console.log(results);
 			let validResults = searchables.filter((searchable) => {
 				return validHeaders.includes(searchable.result.header);
 			});
@@ -120,26 +119,33 @@ const Search = () => {
 	return (
 		<NavView>
 			<AppHeader title="Search" />
-			<Input
-				onChange={(value) => {
-					setSearchBarInput(value.nativeEvent.text);
-				}}
-				leftIcon={{ type: "material", name: "search" }}
-			/>
-			<ScrollView>
-				{validSearchables.map((searchable: Searchable) => {
-					return (
-						<SearchResultView
-							key={searchable.result.header}
-							searchable={searchable}
-						/>
-					);
-				})}
-			</ScrollView>
+			<View style={styles.view}>
+				<Input
+					onChange={(value) => {
+						setSearchBarInput(value.nativeEvent.text);
+					}}
+					leftIcon={{ type: "material", name: "search" }}
+				/>
+				<ScrollView>
+					{validSearchables.map((searchable: Searchable) => {
+						return (
+							<SearchResultView
+								key={searchable.result.header}
+								searchable={searchable}
+							/>
+						);
+					})}
+					<Text style={{ padding: "50%" }}></Text>
+				</ScrollView>
+			</View>
 		</NavView>
 	);
 };
 
 export default Search;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	view: {
+		backgroundColor: "#4463ff4d",
+	},
+});
