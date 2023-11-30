@@ -31,7 +31,7 @@ const SearchResultView = (props: Props) => {
 							numberOfLines={1}
 							adjustsFontSizeToFit
 						>
-							See More Information
+							Expand
 						</Text>
 					</View>
 				</TouchableHighlight>
