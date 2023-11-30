@@ -58,6 +58,10 @@ const ResourceScreen = () => {
 							</View>
 
 							<Card containerStyle={styles.card}>
+								<Card.Image
+									style={styles.iconStyle}
+									source={resource.icon}
+								></Card.Image>
 								<Card.Title>
 									<Text
 										style={styles.header}
@@ -173,5 +177,9 @@ const styles = StyleSheet.create({
 		color: "blue",
 		backgroundColor: "gray",
 		textAlign: "center",
+	},
+	iconStyle: {
+		width: 40,
+		height: 40,
 	},
 });
