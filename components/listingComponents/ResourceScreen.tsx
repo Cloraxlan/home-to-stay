@@ -12,7 +12,7 @@ import { selectCurrentResource } from "../../reducers/resourcesSlice";
 import { useSelector } from "react-redux";
 import NavView from "../NavView";
 import MenuIcon from "../MenuIcon";
-import { Divider, Icon } from "@rneui/base";
+import { Button, Card, Divider, Icon, Image } from "@rneui/base";
 import ScreenIcon from "./ScreenIcon";
 
 const ResourceScreen = () => {
@@ -34,7 +34,6 @@ const ResourceScreen = () => {
 		}
 		return (0.8 / count) * 100;
 	}, [resource]);
-
 	return (
 		<NavView>
 			<AppHeader title={resource.header} />
@@ -42,12 +41,33 @@ const ResourceScreen = () => {
 			<View style={styles.view}>
 				<View style={{ flex: 0.8 }}>
 					<ScrollView contentContainerStyle={styles.mainBody}>
-						<Text style={styles.header} adjustsFontSizeToFit numberOfLines={1}>
-							{resource.header}
-						</Text>
-						<View style={styles.description}>
-							<Text>{resource.description}</Text>
+						<View style={styles.headerView}>
+							<Image style={{ resizeMode: "contain" }} source={resource.icon} />
+							<View></View>
 						</View>
+
+						<Card containerStyle={styles.card}>
+							<Card.Title>
+								<Text
+									style={styles.header}
+									adjustsFontSizeToFit
+									numberOfLines={1}
+								>
+									{resource.header}
+								</Text>
+							</Card.Title>
+
+							<Card.Divider />
+							<View style={styles.description}>
+								<Text style={styles.desciptionText}>
+									{resource.description}
+								</Text>
+							</View>
+							<Card.Divider />
+							<Card.FeaturedSubtitle style={{ textAlign: "center" }}>
+								<Button>Press for Contact Info</Button>
+							</Card.FeaturedSubtitle>
+						</Card>
 					</ScrollView>
 				</View>
 				<View style={styles.menus}>
@@ -91,21 +111,38 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		backgroundColor: "#4463ff",
 	},
+	headerView: {
+		backgroundColor: "black",
+		flexDirection: "row",
+	},
 	header: {
 		fontSize: 30,
+		fontWeight: "bold",
+		color: "black",
 	},
 	mainBody: {
 		display: "flex",
 		alignItems: "center",
 		alignContent: "center",
-		paddingTop: "5%",
 	},
-
+	card: {
+		width: "100%",
+		height: "100%",
+	},
 	view: {
 		flex: 1,
 	},
 	description: {
-		paddingTop: "10%",
 		margin: 10,
+		backgroundColor: "white",
+		paddingBottom: "25%",
+	},
+	desciptionText: {
+		color: "black",
+	},
+	contactText: {
+		color: "blue",
+		backgroundColor: "gray",
+		textAlign: "center",
 	},
 });
