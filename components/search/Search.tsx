@@ -84,6 +84,7 @@ const Search = () => {
 			);
 		});
 		setSearchables([...DEFAULT_SEARCHABLES, ...allResources]);
+		console.log(allResources);
 	}, [resources]);
 	const getSearchDoc = () => {
 		let results: SearchResult[] = [];
@@ -114,7 +115,7 @@ const Search = () => {
 		} else {
 			setValidSearchables(searchables);
 		}
-	}, [searchBarInput]);
+	}, [searchBarInput, searchables]);
 
 	return (
 		<NavView>
