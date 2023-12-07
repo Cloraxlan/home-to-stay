@@ -11,7 +11,7 @@ import {
 	getResource,
 	saveResources,
 } from "./loader";
-import { Resource } from "../model/Resources/Resource";
+import { Resource, SerializedResource } from "../model/Resources/Resource";
 
 function LoaderComponent() {
 	//Testing
@@ -22,13 +22,18 @@ function LoaderComponent() {
 
 		try {
 			let r = await fetch(
-				"https://3ea5f85e-7c2e-4464-a42d-bea038fe11af.mock.pstmn.io",
+				"https://4ec61d19-4ecc-45e0-8c85-6960b7d82cef.mock.pstmn.io",
 			);
-			let data = await r.json();
+			let data: SerializedResource[] = await r.json();
+			data.map((resource, i) => {
+				data[i].header = Resource.clean(data[i].header);
+				data[i].description = Resource.clean(data[i].description);
+			});
 			await createTable(db);
 			await saveResources(db, data);
 		} catch {}
 		let resources = await getResource(db);
+		console.log(resources);
 		resources.map((resource) => {
 			dispatch(addResource(resource));
 		});

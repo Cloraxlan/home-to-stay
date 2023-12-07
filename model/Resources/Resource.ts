@@ -53,7 +53,11 @@ export class Resource {
 		this._email = email;
 		this._type = type;
 	}
-
+	public static clean(text: string) {
+		text.replace('"', '\\"');
+		text.replace("'", "\\'");
+		return text;
+	}
 	public get header(): string {
 		return this._header;
 	}

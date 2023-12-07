@@ -81,10 +81,9 @@ export const saveResources = async (
 ) => {
 	for (let index = 0; index < resources.length; index++) {
 		const resource = resources[index];
-
 		let address = (
 			await db.executeSql(
-				`SELECT address FROM ${tableName} WHERE header = '${resource.header}'`,
+				`SELECT address FROM ${tableName} WHERE header = \"${resource.header}\"`,
 			)
 		)
 			.pop()
@@ -104,6 +103,7 @@ export const saveResources = async (
 			resources[index].address = JSON.parse(address.address);
 		}
 	}
+
 	const insertQuery =
 		`INSERT OR REPLACE INTO ${tableName}(header, description, type, address, url, phone, email) values` +
 		resources
@@ -116,7 +116,7 @@ export const saveResources = async (
 					)}' ,  '${JSON.stringify(i.email)}')`,
 			)
 			.join(",");
-
+	console.log(insertQuery);
 	return db.executeSql(insertQuery);
 };
 
