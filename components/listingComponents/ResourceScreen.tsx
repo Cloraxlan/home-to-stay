@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flex: 0.2,
 		flexDirection: "row",
-		backgroundColor: "#4463ff",
+		backgroundColor: "#fe994e",
 	},
 	headerView: {
 		backgroundColor: "black",

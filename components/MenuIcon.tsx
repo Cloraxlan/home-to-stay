@@ -21,7 +21,10 @@ const MenuIcon = (props: Props) => {
 				featured
 				activeOpacity={1}
 				imageContainerStyle={{ width: "100%", height: "100%" }}
-				containerStyle={{ width: "100%", height: 100 }}
+				containerStyle={{
+					width: "100%",
+					height: 100,
+				}}
 				imageProps={{ resizeMode: "contain" }}
 				onPress={() => {
 					navigate(props.menu.link);
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
 	},
 	iconImage: { width: 100, height: 100 },
 	subHeader: {
-		backgroundColor: "#2089dc",
+		backgroundColor: "#605b63",
 		color: "white",
 		textAlign: "center",
 		paddingVertical: 5,

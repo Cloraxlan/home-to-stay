@@ -142,6 +142,6 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	background: {
-		backgroundColor: "#4463ff4d",
+		backgroundColor: "#fe994e4d",
 	},
 });

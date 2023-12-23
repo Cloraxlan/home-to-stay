@@ -16,7 +16,9 @@ const SearchResultView = (props: Props) => {
 				></Card.Image>
 				<Card.Title>{props.searchable.result.header}</Card.Title>
 
-				<Text numberOfLines={5}>{props.searchable.result.description}</Text>
+				<Text style={styles.bodyText} numberOfLines={5}>
+					{props.searchable.result.description}
+				</Text>
 
 				<Card.Divider style={{ paddingTop: 20 }} />
 				<TouchableHighlight
@@ -64,5 +66,10 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		color: "black",
 	},
-	expandText: { textAlign: "center", fontSize: 12, fontWeight: "bold" },
+	expandText: {
+		textAlign: "center",
+		fontSize: 12,
+		fontWeight: "bold",
+		color: "black",
+	},
 });

@@ -13,7 +13,7 @@ const AppHeader = (props: Props) => {
 
 	return (
 		<Header
-			backgroundColor="#4463ff"
+			backgroundColor="#fe994e"
 			backgroundImageStyle={{}}
 			barStyle="default"
 			centerComponent={{

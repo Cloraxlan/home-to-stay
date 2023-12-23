@@ -25,7 +25,9 @@ const ResourceBlock = (props: Props) => {
 				></Card.Image>
 				<Card.Title>{props.resource.header}</Card.Title>
 
-				<Text numberOfLines={5}>{props.resource.description}</Text>
+				<Text style={styles.bodyText} numberOfLines={5}>
+					{props.resource.description}
+				</Text>
 
 				<Card.Divider style={{ paddingTop: 20 }} />
 				<TouchableHighlight
@@ -97,5 +99,10 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		color: "black",
 	},
-	expandText: { textAlign: "center", fontSize: 12, fontWeight: "bold" },
+	expandText: {
+		textAlign: "center",
+		fontSize: 12,
+		fontWeight: "bold",
+		color: "black",
+	},
 });

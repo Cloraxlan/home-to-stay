@@ -146,6 +146,6 @@ export default Search;
 
 const styles = StyleSheet.create({
 	view: {
-		backgroundColor: "#4463ff4d",
+		backgroundColor: "#fe994e4d",
 	},
 });
