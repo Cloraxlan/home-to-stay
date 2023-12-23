@@ -4,7 +4,7 @@ import LinearGradient from "react-native-linear-gradient";
 
 const OrangeWhiteGradient = ({ children }: any) => {
 	return (
-		<LinearGradient colors={["#fe994e", "#605b63"]} start={{ x: 0.5, y: 0.5 }}>
+		<LinearGradient colors={["#fe994e", "#605b63"]} start={{ x: 0.5, y: 0.6 }}>
 			{children}
 		</LinearGradient>
 	);

@@ -20,12 +20,15 @@ const icons = {
 const Homepage = () => {
 	return (
 		<ScrollView>
-			<Image
-				style={styles.banner}
-				source={require("./homePageIcons/htsbanner.png")}
-				resizeMode={"contain"}
-			></Image>
 			<OrangeWhiteGradient>
+				<View style={styles.bannerPadding} />
+
+				<Image
+					style={styles.banner}
+					source={require("./homePageIcons/htsbanner2.png")}
+					resizeMode={"contain"}
+				></Image>
+				<View style={styles.bannerPadding} />
 				<View style={styles.menuIcons}>
 					{/*				<Button onPress={reset}>Reset</Button>*/}
 					<MenuTab
@@ -51,6 +54,7 @@ const Homepage = () => {
 						]}
 					/>
 				</View>
+				<Text style={{ padding: "5%" }}></Text>
 			</OrangeWhiteGradient>
 		</ScrollView>
 	);
@@ -60,6 +64,7 @@ export default Homepage;
 
 const styles = StyleSheet.create({
 	banner: { width: "100%" },
+	bannerPadding: { backgroundColor: "white", height: "2%" },
 	menuIcons: {
 		//backgroundColor: "#fe994e",
 		paddingTop: 10,

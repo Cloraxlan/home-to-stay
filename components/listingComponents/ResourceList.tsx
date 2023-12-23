@@ -103,6 +103,8 @@ const ResourceList = (props: Props) => {
 					console.log(index);
 					setSort(sorts[index]);
 				}}
+				disabledSelectedStyle={{ backgroundColor: "black" }}
+				selectedButtonStyle={{ backgroundColor: "#605b63" }}
 				containerStyle={{ marginBottom: 20 }}
 			/>
 			{!displayLoadingCircle && (
