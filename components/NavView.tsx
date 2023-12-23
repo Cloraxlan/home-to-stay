@@ -21,5 +21,6 @@ export default NavView;
 const styles = StyleSheet.create({
 	view: {
 		height: "100%",
+		backgroundColor: "#fe994e4d",
 	},
 });
