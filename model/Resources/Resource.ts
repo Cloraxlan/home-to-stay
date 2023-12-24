@@ -54,8 +54,8 @@ export class Resource {
 		this._type = type;
 	}
 	public static clean(text: string) {
-		text.replace('"', '\\"');
-		text.replace("'", "\\'");
+		text = text.replace('"', "");
+		text = text.replace("'", "");
 		return text;
 	}
 	public get header(): string {

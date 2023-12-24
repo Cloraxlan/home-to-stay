@@ -23,17 +23,18 @@ function LoaderComponent() {
 
 		try {
 			let r = await fetch(
-				"https://62deef47-803b-4f10-9bdb-e8c92a00799c.mock.pstmn.io/",
+				"https://5f1462ac-2d31-403a-aee6-7e180fcccc98.mock.pstmn.io",
 			);
 			let data: SerializedResource[] = readCSV(await r.text());
-			console.log(data);
 			data.map((resource, i) => {
 				data[i].header = Resource.clean(data[i].header);
 				data[i].description = Resource.clean(data[i].description);
 			});
 			await createTable(db);
 			await saveResources(db, data);
-		} catch {}
+		} catch (e) {
+			console.log(e);
+		}
 		let resources = await getResource(db);
 		console.log(resources);
 		resources.map((resource) => {

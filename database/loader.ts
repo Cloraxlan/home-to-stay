@@ -159,7 +159,7 @@ export const readCSV: (csv: string) => SerializedResource[] = (csv: string) => {
 			unformattedResource.Link == "" ? undefined : unformattedResource.Link;
 		let phone =
 			unformattedResource.Phone == "" ? undefined : unformattedResource.Phone;
-		return Resource.of({
+		return {
 			header: header,
 			description: description,
 			type: type,
@@ -167,6 +167,6 @@ export const readCSV: (csv: string) => SerializedResource[] = (csv: string) => {
 			email: email,
 			link: link,
 			phone: phone,
-		}).serialize();
+		};
 	});
 };
