@@ -20,7 +20,7 @@ export interface SerializedResource {
 	address: SerialiedAddress | undefined;
 	link: SerializedURL | undefined;
 	phone: SerializedPhone | undefined;
-	icon: ImageSourcePropType | undefined;
+	icon?: ImageSourcePropType | undefined;
 	email: SerializedEmail | undefined;
 	type: ResourceType;
 }

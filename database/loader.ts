@@ -3,8 +3,12 @@ import { Email } from "../model/Clickables/Email";
 import { Phone } from "../model/Clickables/Phone";
 import { URL } from "../model/Clickables/URL";
 import { Location } from "../model/Location";
-
-import { Resource, SerializedResource } from "../model/Resources/Resource";
+const papa = require("papaparse");
+import {
+	Resource,
+	ResourceType,
+	SerializedResource,
+} from "../model/Resources/Resource";
 
 import {
 	SQLiteDatabase,
@@ -97,7 +101,7 @@ export const saveResources = async (
 					resource.address.address,
 				),
 			).serialize();
-			console.log("new location entry");
+			console.log("new location entry", resource);
 		} else if (resource.address && address) {
 			console.log(address);
 			resources[index].address = JSON.parse(address.address);
@@ -125,4 +129,44 @@ export const reset = async () => {
 	let drop = `DROP TABLE ${tableName}`;
 	db.executeSql(drop);
 	createTable(db);
+};
+
+export const readCSV: (csv: string) => SerializedResource[] = (csv: string) => {
+	let unformattedResources: any[] = papa.parse(csv, {
+		header: true,
+	}).data;
+	return unformattedResources.map((unformattedResource) => {
+		let type: ResourceType;
+		switch (unformattedResource.Category) {
+			case "HOUSING":
+				type = ResourceType.HOUSING;
+				break;
+			case "HEALTHCARE":
+				type = ResourceType.HEALTHCARE;
+				break;
+			default:
+				type = ResourceType.SERVICE;
+		}
+		let header = unformattedResource.Header;
+		let description = unformattedResource.Description;
+		let address =
+			unformattedResource.Address == ""
+				? undefined
+				: unformattedResource.Address;
+		let email =
+			unformattedResource.Email == "" ? undefined : unformattedResource.Email;
+		let link =
+			unformattedResource.Link == "" ? undefined : unformattedResource.Link;
+		let phone =
+			unformattedResource.Phone == "" ? undefined : unformattedResource.Phone;
+		return Resource.of({
+			header: header,
+			description: description,
+			type: type,
+			address: address,
+			email: email,
+			link: link,
+			phone: phone,
+		}).serialize();
+	});
 };

@@ -9,6 +9,7 @@ import {
 	createTable,
 	getDBConnection,
 	getResource,
+	readCSV,
 	saveResources,
 } from "./loader";
 import { Resource, SerializedResource } from "../model/Resources/Resource";
@@ -22,9 +23,10 @@ function LoaderComponent() {
 
 		try {
 			let r = await fetch(
-				"https://4ec61d19-4ecc-45e0-8c85-6960b7d82cef.mock.pstmn.io",
+				"https://62deef47-803b-4f10-9bdb-e8c92a00799c.mock.pstmn.io/",
 			);
-			let data: SerializedResource[] = await r.json();
+			let data: SerializedResource[] = readCSV(await r.text());
+			console.log(data);
 			data.map((resource, i) => {
 				data[i].header = Resource.clean(data[i].header);
 				data[i].description = Resource.clean(data[i].description);
