@@ -25,7 +25,7 @@ function LoaderComponent() {
 			let r = await fetch(
 				"https://5f1462ac-2d31-403a-aee6-7e180fcccc98.mock.pstmn.io",
 			);
-			let data: SerializedResource[] = readCSV(await r.text());
+			let data: SerializedResource[] = await readCSV(await r.text());
 			data.map((resource, i) => {
 				data[i].header = Resource.clean(data[i].header);
 				data[i].description = Resource.clean(data[i].description);

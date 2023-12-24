@@ -131,8 +131,10 @@ export const reset = async () => {
 	createTable(db);
 };
 
-export const readCSV: (csv: string) => SerializedResource[] = (csv: string) => {
-	let unformattedResources: any[] = papa.parse(csv, {
+export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
+	csvString: string,
+) => {
+	/*let unformattedResources: any[] = papa.parse(csv, {
 		header: true,
 	}).data;
 	return unformattedResources.map((unformattedResource) => {
@@ -168,5 +170,55 @@ export const readCSV: (csv: string) => SerializedResource[] = (csv: string) => {
 			link: link,
 			phone: phone,
 		};
-	});
+	});*/
+
+	let csv = papa.parse(csvString);
+	let data = csv.data;
+	let resources: SerializedResource[] = [];
+	for (let i = 1; i < data.length; i++) {
+		let typeText = data[i][0];
+		let header = data[i][1];
+		let description = data[i][2];
+		let address;
+		let link;
+		let phone;
+		let email;
+		let type: ResourceType;
+		switch (typeText) {
+			case "HOUSING":
+				type = ResourceType.HOUSING;
+				break;
+			case "HEALTHCARE":
+				type = ResourceType.HEALTHCARE;
+				break;
+			default:
+				type = ResourceType.SERVICE;
+		}
+		if (data[i][3] != "") {
+			let coords = await Location.requestCoords(data[i][3]);
+			address = new Address(
+				data[i][3],
+				new Location(coords, data[i][3]),
+			).serialize();
+		}
+		if (data[i][4] != "") {
+			link = new URL(data[i][4]).serialize();
+		}
+		if (data[i][5] != "") {
+			phone = new Phone(data[i][5]).serialize();
+		}
+		if (data[i][6] != "") {
+			email = new Email(data[i][6]).serialize();
+		}
+		resources.push({
+			header: header,
+			address: address,
+			description: description,
+			email: email,
+			link: link,
+			phone: phone,
+			type: type,
+		});
+	}
+	return resources;
 };
