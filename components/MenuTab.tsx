@@ -28,14 +28,8 @@ const MenuTab = (props: Props) => {
 		<View style={styles.menus}>
 			{props.menus.map((menu: Menu) => {
 				return (
-					<TouchableHighlight
-						onPress={() => {
-							navigate(menu.link);
-						}}
-						style={styles.link}
-						key={menu.link}
-					>
-						<MenuIcon menu={menu}></MenuIcon>
+					<TouchableHighlight style={styles.link} key={menu.link}>
+						<MenuIcon link={menu.link} menu={menu}></MenuIcon>
 					</TouchableHighlight>
 				);
 			})}

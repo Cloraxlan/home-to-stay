@@ -3,9 +3,11 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { Menu } from "./MenuTab";
 import { Tile } from "@rneui/base";
 import { useNavigate } from "react-router";
+import { ThemedButton } from "react-native-really-awesome-button";
 
 interface Props {
 	menu: Menu;
+	link: string;
 }
 
 const MenuIcon = (props: Props) => {
@@ -30,7 +32,17 @@ const MenuIcon = (props: Props) => {
 					navigate(props.menu.link);
 				}}
 			/>
-			<Text style={styles.subHeader}>{props.menu.name}</Text>
+			<ThemedButton
+				style={{ margin: 3 }}
+				backgroundColor="#605b63"
+				name="bruce"
+				type="primary"
+				onPress={() => {
+					navigate(props.link);
+				}}
+			>
+				{props.menu.name}
+			</ThemedButton>
 		</React.Fragment>
 	);
 };
