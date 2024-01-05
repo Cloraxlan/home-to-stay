@@ -4,6 +4,7 @@ import MenuTab from "../MenuTab";
 import { Button } from "@rneui/base";
 import { reset } from "../../database/loader";
 import OrangeWhiteGradient from "../OrangeWhiteGradient";
+import MilwaukeeBackground1 from "../MilwaukeeBackground1";
 
 const icons = {
 	calendar: require("./homePageIcons/calendar.png"),
@@ -20,7 +21,7 @@ const icons = {
 const Homepage = () => {
 	return (
 		<ScrollView>
-			<OrangeWhiteGradient>
+			<MilwaukeeBackground1>
 				<View style={styles.bannerPadding} />
 
 				<Image
@@ -55,7 +56,7 @@ const Homepage = () => {
 					/>
 				</View>
 				<Text style={{ padding: "5%" }}></Text>
-			</OrangeWhiteGradient>
+			</MilwaukeeBackground1>
 		</ScrollView>
 	);
 };

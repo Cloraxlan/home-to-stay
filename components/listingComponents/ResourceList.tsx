@@ -7,6 +7,7 @@ import { Location } from "../../model/Location";
 import { ButtonGroup, Text } from "@rneui/themed";
 import { useSelector } from "react-redux";
 import { selectResourceLoading } from "../../reducers/resourcesSlice";
+import MilwaukeeBackground1 from "../MilwaukeeBackground1";
 
 interface Props {
 	resources: Resource[];
@@ -95,43 +96,45 @@ const ResourceList = (props: Props) => {
 	let displayLoadingCircle =
 		loadingResources || (loadingLocation && sort == SortTypes.DISTANCE);
 	return (
-		<ScrollView style={styles.background}>
-			<ButtonGroup
-				buttons={["Distance", "Alphabetical"]}
-				selectedIndex={sorts.indexOf(sort)}
-				onPress={(index) => {
-					console.log(index);
-					setSort(sorts[index]);
-				}}
-				disabledSelectedStyle={{ backgroundColor: "black" }}
-				selectedButtonStyle={{ backgroundColor: "#605b63" }}
-				containerStyle={{ marginBottom: 20 }}
-			/>
-			{!displayLoadingCircle && (
-				<View style={styles.listingView}>
-					{isLoading && (
-						<React.Fragment>
+		<MilwaukeeBackground1>
+			<ScrollView style={styles.background}>
+				<ButtonGroup
+					buttons={["Distance", "Alphabetical"]}
+					selectedIndex={sorts.indexOf(sort)}
+					onPress={(index) => {
+						console.log(index);
+						setSort(sorts[index]);
+					}}
+					disabledSelectedStyle={{ backgroundColor: "black" }}
+					selectedButtonStyle={{ backgroundColor: "#605b63" }}
+					containerStyle={{ marginBottom: 20 }}
+				/>
+				{!displayLoadingCircle && (
+					<View style={styles.listingView}>
+						{isLoading && (
 							<React.Fragment>
-								{resources.map((resource, i) => {
-									return <ResourceBlock resource={resource} key={i} />;
-								})}
+								<React.Fragment>
+									{resources.map((resource, i) => {
+										return <ResourceBlock resource={resource} key={i} />;
+									})}
+								</React.Fragment>
+								<React.Fragment>
+									{resources.length == 0 && (
+										<Text h3={true}>No Resources Avaliable</Text>
+									)}
+								</React.Fragment>
+								<Text style={{ padding: "50%" }}></Text>
 							</React.Fragment>
-							<React.Fragment>
-								{resources.length == 0 && (
-									<Text h3={true}>No Resources Avaliable</Text>
-								)}
-							</React.Fragment>
-							<Text style={{ padding: "50%" }}></Text>
-						</React.Fragment>
-					)}
-				</View>
-			)}
-			{displayLoadingCircle && (
-				<View>
-					<ActivityIndicator size="large" />
-				</View>
-			)}
-		</ScrollView>
+						)}
+					</View>
+				)}
+				{displayLoadingCircle && (
+					<View>
+						<ActivityIndicator size="large" />
+					</View>
+				)}
+			</ScrollView>
+		</MilwaukeeBackground1>
 	);
 };
 

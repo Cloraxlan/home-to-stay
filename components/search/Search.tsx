@@ -12,6 +12,7 @@ import {
 } from "../../reducers/resourcesSlice";
 import { Input } from "@rneui/base";
 import MiniSearch from "minisearch";
+import MilwaukeeBackground1 from "../MilwaukeeBackground1";
 
 const Search = () => {
 	const navigate = useNavigate();
@@ -118,26 +119,28 @@ const Search = () => {
 
 	return (
 		<NavView>
-			<AppHeader title="Search" />
-			<View style={styles.view}>
-				<Input
-					onChange={(value) => {
-						setSearchBarInput(value.nativeEvent.text);
-					}}
-					leftIcon={{ type: "material", name: "search" }}
-				/>
-				<ScrollView>
-					{validSearchables.map((searchable: Searchable) => {
-						return (
-							<SearchResultView
-								key={searchable.result.header}
-								searchable={searchable}
-							/>
-						);
-					})}
-					<Text style={{ padding: "50%" }}></Text>
-				</ScrollView>
-			</View>
+			<MilwaukeeBackground1>
+				<AppHeader title="Search" />
+				<View style={styles.view}>
+					<Input
+						onChange={(value) => {
+							setSearchBarInput(value.nativeEvent.text);
+						}}
+						leftIcon={{ type: "material", name: "search" }}
+					/>
+					<ScrollView>
+						{validSearchables.map((searchable: Searchable) => {
+							return (
+								<SearchResultView
+									key={searchable.result.header}
+									searchable={searchable}
+								/>
+							);
+						})}
+						<Text style={{ padding: "50%" }}></Text>
+					</ScrollView>
+				</View>
+			</MilwaukeeBackground1>
 		</NavView>
 	);
 };

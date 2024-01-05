@@ -4,6 +4,11 @@ import HomeButton from "../homepage/HomeButton";
 import openMap from "react-native-open-maps";
 import NavView from "../NavView";
 import AppHeader from "../AppHeader";
+import IDSearcher, { IDResults } from "./IDSearcher";
+import { Overlay } from "@rneui/base";
+import { Card } from "@rneui/themed";
+import { CardTitle } from "@rneui/base/dist/Card/Card.Title";
+import IDResult from "./IDResult";
 let zips = [
 	{
 		zip_code: 53001,
@@ -7368,27 +7373,48 @@ async function findAddress(zipCode: string) {
 	return address[1].replace("                   ", "") + address[2];
 }
 const DriversLicence = () => {
-	const [address, setAddress] = useState("");
-	const [input, setInput] = useState("");
-	let search = async () => {
-		setAddress(await findAddress(input));
+	const [results, setResults] = useState<IDResults>({
+		visible: false,
+		icon: "check-circle-outline",
+
+		showButton: false,
+		title: "",
+	});
+
+	let search = async (input: string) => {
+		console.log(input);
+		try {
+			let address = await findAddress(input);
+			setResults({
+				visible: true,
+				icon: "check-circle-outline",
+				showButton: true,
+				title: "Found DMV",
+				address: address,
+				buttonText:"Open in Maps",
+				onClick:()=>{
+					openMapHandle(address);
+				}
+			});
+		} catch {
+			setResults({
+				visible: true,
+				icon: "error",
+				showButton: false,
+				title: "Could Not Find DMV",
+			});
+		}
 	};
-	let openMapHandle = () => {
+
+	let openMapHandle = (address: string) => {
 		openMap({ query: address });
 	};
 	return (
 		<NavView>
 			<AppHeader title="Drivers Licence" />
 
-			<Text>Drivers Licence</Text>
-			<Text>Zip Code: {address}</Text>
-
-			<TextInput
-				onSubmitEditing={search}
-				onChangeText={(newText) => setInput(newText)}
-			></TextInput>
-			<Button title="Get DMV address" onPress={search} />
-			{address != "" && <Button title="Open Map" onPress={openMapHandle} />}
+			<IDSearcher search={search} />
+			<IDResult results={results} />
 		</NavView>
 	);
 };

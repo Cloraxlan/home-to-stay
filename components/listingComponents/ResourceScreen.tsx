@@ -19,7 +19,7 @@ import ContactCard from "./ContactCard";
 
 const ResourceScreen = () => {
 	const resource = useSelector(selectCurrentResource);
-
+	console.log(resource.serialize());
 	const spacing = useMemo(() => {
 		let count = 0;
 		if (resource.link) {
