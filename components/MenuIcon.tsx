@@ -4,6 +4,7 @@ import { Menu } from "./MenuTab";
 import { Tile } from "@rneui/base";
 import { useNavigate } from "react-router";
 import { ThemedButton } from "react-native-really-awesome-button";
+import MenuButton from "./MenuButton";
 
 interface Props {
 	menu: Menu;
@@ -32,17 +33,12 @@ const MenuIcon = (props: Props) => {
 					navigate(props.menu.link);
 				}}
 			/>
-			<ThemedButton
-				style={{ margin: 3 }}
-				backgroundColor="#605b63"
-				name="bruce"
-				type="primary"
+			<MenuButton
 				onPress={() => {
 					navigate(props.link);
 				}}
-			>
-				{props.menu.name}
-			</ThemedButton>
+				value={props.menu.name}
+			/>
 		</React.Fragment>
 	);
 };
