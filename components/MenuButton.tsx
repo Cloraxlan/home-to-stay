@@ -44,5 +44,6 @@ const styles = StyleSheet.create({
 		borderBottomLeftRadius: 15,
 		borderTopRightRadius: 15,
 		margin: 5,
+		opacity: 0.75,
 	},
 });
