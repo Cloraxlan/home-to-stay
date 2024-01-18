@@ -7414,7 +7414,6 @@ const DriversLicence = () => {
 			<AppHeader title="Drivers Licence" />
 
 			<IDSearcher search={search} />
-			<IDResult results={results} />
 		</NavView>
 	);
 };
