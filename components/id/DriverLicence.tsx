@@ -7385,24 +7385,24 @@ const DriversLicence = () => {
 		console.log(input);
 		try {
 			let address = await findAddress(input);
-			setResults({
+			return {
 				visible: true,
 				icon: "check-circle-outline",
 				showButton: true,
 				title: "Found DMV",
 				address: address,
-				buttonText:"Open in Maps",
-				onClick:()=>{
+				buttonText: "Open in Maps",
+				onClick: () => {
 					openMapHandle(address);
-				}
-			});
+				},
+			};
 		} catch {
-			setResults({
+			return {
 				visible: true,
 				icon: "error",
 				showButton: false,
 				title: "Could Not Find DMV",
-			});
+			};
 		}
 	};
 
