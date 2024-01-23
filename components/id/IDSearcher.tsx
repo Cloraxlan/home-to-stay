@@ -45,7 +45,7 @@ const IDSearcher = (props: Props) => {
 				timeout: 5000,
 			}).then(async (loc) => {
 				let fetchZip = await fetch(
-					"https://geocode.maps.co/reverse?lat=" +
+					"https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
 						loc.latitude +
 						"&lon=" +
 						loc.longitude +
