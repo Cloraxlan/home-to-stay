@@ -1,5 +1,12 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+	Dimensions,
+	Image,
+	ScrollView,
+	StyleSheet,
+	Text,
+	View,
+} from "react-native";
 import MenuTab from "../MenuTab";
 import { Button } from "@rneui/base";
 import { reset } from "../../database/loader";
@@ -18,9 +25,11 @@ const icons = {
 	services: require("./homePageIcons/box.png"),
 	search: require("./homePageIcons/search.png"),
 };
+const windowHeight = Dimensions.get("window").height;
+
 const Homepage = () => {
 	return (
-		<ScrollView>
+		<View>
 			<MilwaukeeBackground1>
 				<View style={styles.bannerPadding} />
 
@@ -57,14 +66,14 @@ const Homepage = () => {
 				</View>
 				<Text style={{ padding: "5%" }}></Text>
 			</MilwaukeeBackground1>
-		</ScrollView>
+		</View>
 	);
 };
 
 export default Homepage;
 
 const styles = StyleSheet.create({
-	banner: { width: "100%" },
+	banner: { width: "100%", height: windowHeight * 0.16 },
 	bannerPadding: { backgroundColor: "white", height: "2%" },
 	menuIcons: {
 		//backgroundColor: "#fe994e",

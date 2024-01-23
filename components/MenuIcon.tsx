@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { Menu } from "./MenuTab";
 import { Tile } from "@rneui/base";
 import { useNavigate } from "react-router";
@@ -13,8 +13,10 @@ interface Props {
 
 const MenuIcon = (props: Props) => {
 	const navigate = useNavigate();
+	const windowHeight = Dimensions.get("window").height;
+
 	return (
-		<React.Fragment>
+		<View style={{ height: windowHeight * 0.18 }}>
 			<Tile
 				imageSrc={{
 					uri: Image.resolveAssetSource(props.menu.icon).uri,
@@ -26,7 +28,7 @@ const MenuIcon = (props: Props) => {
 				imageContainerStyle={{ width: "100%", height: "100%" }}
 				containerStyle={{
 					width: "100%",
-					height: 100,
+					height: windowHeight * 0.1,
 				}}
 				imageProps={{ resizeMode: "contain" }}
 				onPress={() => {
@@ -39,7 +41,7 @@ const MenuIcon = (props: Props) => {
 				}}
 				value={props.menu.name}
 			/>
-		</React.Fragment>
+		</View>
 	);
 };
 

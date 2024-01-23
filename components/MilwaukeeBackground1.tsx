@@ -13,7 +13,7 @@ const MilwaukeeBackground1 = ({ children }: any) => {
 	const [bg, setBg] = useState(bgs[Math.floor(Math.random() * max)]);
 
 	return (
-		<ImageBackground source={bg} resizeMode="cover">
+		<ImageBackground style={{ height: "100%" }} source={bg} resizeMode="cover">
 			{children}
 		</ImageBackground>
 	);
