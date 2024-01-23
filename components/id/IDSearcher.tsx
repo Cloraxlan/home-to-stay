@@ -36,6 +36,7 @@ const IDSearcher = (props: Props) => {
 	};
 	const submit = async () => {
 		setResults(await props.search(input));
+		setInput("");
 	};
 	const apiKey = "65a89d8bf07fe304574448idl97a7ed";
 	const runGps = () => {
@@ -53,7 +54,10 @@ const IDSearcher = (props: Props) => {
 				);
 
 				let fetchResults = await fetchZip.json();
+				console.log(input);
 				setInput(fetchResults.address.postcode);
+				console.log(input);
+
 				submit();
 			});
 		} catch {
