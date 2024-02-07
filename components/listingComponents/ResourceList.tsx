@@ -19,7 +19,7 @@ enum SortTypes {
 const sorts = [SortTypes.DISTANCE, SortTypes.ALPHA];
 //A list of listing that is to be rendered in a verticle row
 const ResourceList = (props: Props) => {
-	const [sort, setSort] = useState<SortTypes>(SortTypes.DISTANCE);
+	const [sort, setSort] = useState<SortTypes>(SortTypes.ALPHA);
 	const [location, setLocation] = useState<any>(null);
 	const [resources, setResources] = useState<Resource[]>(props.resources);
 	const loadingResources = useSelector(selectResourceLoading);
