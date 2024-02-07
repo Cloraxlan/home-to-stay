@@ -191,6 +191,15 @@ export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
 			case "HEALTHCARE":
 				type = ResourceType.HEALTHCARE;
 				break;
+			case "FOOD":
+				type = ResourceType.FOOD;
+				break;
+			case "EDUCATION":
+				type = ResourceType.EDUCATION;
+				break;
+			case "JOB":
+				type = ResourceType.JOB;
+				break;
 			default:
 				type = ResourceType.SERVICE;
 		}

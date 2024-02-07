@@ -7,7 +7,7 @@ let bg4 = require("../backgrounds/bg4.jpg");
 let bg5 = require("../backgrounds/bg5.jpg");
 let bg6 = require("../backgrounds/bg6.jpg");
 const MilwaukeeBackground1 = ({ children }: any) => {
-	let bgs = [bg1, bg2, bg3, bg4, bg5, bg6];
+	let bgs = [bg2, bg3, bg4, bg5, bg6];
 	const max = bgs.length - 1;
 	console.log("BG!", bgs);
 	const [bg, setBg] = useState(bgs[Math.floor(Math.random() * max)]);
