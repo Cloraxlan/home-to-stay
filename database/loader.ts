@@ -1,3 +1,4 @@
+import { escape } from "sqlstring";
 import { Address } from "../model/Clickables/Address";
 import { Email } from "../model/Clickables/Email";
 import { Phone } from "../model/Clickables/Phone";
@@ -6,6 +7,7 @@ import { Location } from "../model/Location";
 const papa = require("papaparse");
 import {
 	Resource,
+	ResourceMap,
 	ResourceType,
 	SerializedResource,
 } from "../model/Resources/Resource";
@@ -83,11 +85,13 @@ export const saveResources = async (
 	db: SQLiteDatabase,
 	resources: SerializedResource[],
 ) => {
-	for (let index = 0; index < resources.length; index++) {
+	/*for (let index = 0; index < resources.length; index++) {
 		const resource = resources[index];
 		let address = (
 			await db.executeSql(
-				`SELECT address FROM ${tableName} WHERE header = \"${resource.header}\"`,
+				`SELECT address FROM ${tableName} WHERE header = '${escape(
+					resource.header,
+				)}'`,
 			)
 		)
 			.pop()
@@ -106,22 +110,24 @@ export const saveResources = async (
 			console.log(address);
 			resources[index].address = JSON.parse(address.address);
 		}
-	}
+	}*/
 
-	const insertQuery =
-		`INSERT OR REPLACE INTO ${tableName}(header, description, type, address, url, phone, email) values` +
-		resources
-			.map(
-				(i) =>
-					`('${i.header}', '${i.description}', ${i.type},  '${JSON.stringify(
-						i.address,
-					)}',  '${JSON.stringify(i.link)}', '${JSON.stringify(
-						i.phone,
-					)}' ,  '${JSON.stringify(i.email)}')`,
-			)
-			.join(",");
-	console.log(insertQuery);
-	return db.executeSql(insertQuery);
+	resources.map((resource) => {
+		db.transaction((t) => {
+			t.executeSql(
+				`INSERT OR REPLACE INTO ${tableName}(header, description, type, address, url, phone, email) values(? , ? , ?, ? , ? , ?, ?)`,
+				[
+					resource.header,
+					resource.description,
+					resource.type,
+					JSON.stringify(resource.address),
+					JSON.stringify(resource.link),
+					JSON.stringify(resource.phone),
+					JSON.stringify(resource.email),
+				],
+			);
+		});
+	});
 };
 
 export const reset = async () => {
@@ -140,10 +146,10 @@ export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
 	return unformattedResources.map((unformattedResource) => {
 		let type: ResourceType;
 		switch (unformattedResource.Category) {
-			case "HOUSING":
+			case 'HOUSING':
 				type = ResourceType.HOUSING;
 				break;
-			case "HEALTHCARE":
+			case 'HEALTHCARE':
 				type = ResourceType.HEALTHCARE;
 				break;
 			default:
@@ -152,15 +158,15 @@ export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
 		let header = unformattedResource.Header;
 		let description = unformattedResource.Description;
 		let address =
-			unformattedResource.Address == ""
+			unformattedResource.Address == ''
 				? undefined
 				: unformattedResource.Address;
 		let email =
-			unformattedResource.Email == "" ? undefined : unformattedResource.Email;
+			unformattedResource.Email == '' ? undefined : unformattedResource.Email;
 		let link =
-			unformattedResource.Link == "" ? undefined : unformattedResource.Link;
+			unformattedResource.Link == '' ? undefined : unformattedResource.Link;
 		let phone =
-			unformattedResource.Phone == "" ? undefined : unformattedResource.Phone;
+			unformattedResource.Phone == '' ? undefined : unformattedResource.Phone;
 		return {
 			header: header,
 			description: description,
@@ -177,48 +183,35 @@ export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
 	let resources: SerializedResource[] = [];
 	for (let i = 1; i < data.length; i++) {
 		let typeText = data[i][0];
-		let header = data[i][1];
-		let description = data[i][2];
+		let header = data[i][2];
+		let description = data[i][6];
 		let address;
 		let link;
 		let phone;
 		let email;
 		let type: ResourceType;
-		switch (typeText) {
-			case "HOUSING":
-				type = ResourceType.HOUSING;
-				break;
-			case "HEALTHCARE":
-				type = ResourceType.HEALTHCARE;
-				break;
-			case "FOOD":
-				type = ResourceType.FOOD;
-				break;
-			case "EDUCATION":
-				type = ResourceType.EDUCATION;
-				break;
-			case "JOB":
-				type = ResourceType.JOB;
-				break;
-			default:
-				type = ResourceType.SERVICE;
+		//@ts-ignore
+		type = ResourceMap[typeText];
+		if (type == undefined) {
+			continue;
 		}
-		if (data[i][3] != "") {
+		/*
+		if (data[i][3] != '') {
 			let coords = await Location.requestCoords(data[i][3]);
 			address = new Address(
 				data[i][3],
 				new Location(coords, data[i][3]),
 			).serialize();
 		}
-		if (data[i][4] != "") {
+		if (data[i][4] != '') {
 			link = new URL(data[i][4]).serialize();
 		}
-		if (data[i][5] != "") {
+		if (data[i][5] != '') {
 			phone = new Phone(data[i][5]).serialize();
 		}
-		if (data[i][6] != "") {
+		if (data[i][6] != '') {
 			email = new Email(data[i][6]).serialize();
-		}
+		}*/
 		resources.push({
 			header: header,
 			address: address,

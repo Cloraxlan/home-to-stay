@@ -6,13 +6,42 @@ import { Email, SerializedEmail } from "../Clickables/Email";
 import { SearchResult } from "../Searchable";
 
 export enum ResourceType {
+	ADVOCACY,
+	CLOTHING,
 	EDUCATION,
+	EMPLOYMENT,
+	FAITH,
+	FAMILY,
+	FINANCE,
 	FOOD,
-	HOUSING,
-	JOB,
-	SERVICE,
 	HEALTHCARE,
+	HOUSING,
+	IDENTIFICATION,
+	LEGAL,
+	LEISURE,
+	SUPERVISION,
+	SUPPORT_GROUP,
+	TRANSPORTATION,
 }
+
+export const ResourceMap = {
+	Advocacy: ResourceType.ADVOCACY,
+	Clothing: ResourceType.CLOTHING,
+	Education: ResourceType.EDUCATION,
+	Employment: ResourceType.EMPLOYMENT,
+	Faith: ResourceType.FAITH,
+	Family: ResourceType.FAMILY,
+	Finance: ResourceType.FINANCE,
+	Food: ResourceType.FOOD,
+	Healthcare: ResourceType.HEALTHCARE,
+	Housing: ResourceType.HOUSING,
+	Identification: ResourceType.IDENTIFICATION,
+	Legal: ResourceType.LEGAL,
+	Leisure: ResourceType.LEISURE,
+	Supervision: ResourceType.SUPERVISION,
+	"Support Group": ResourceType.SUPPORT_GROUP,
+	Transportation: ResourceType.TRANSPORTATION,
+};
 
 export interface SerializedResource {
 	header: string;
@@ -54,8 +83,8 @@ export class Resource {
 		this._type = type;
 	}
 	public static clean(text: string) {
-		text = text.replace('"', "");
-		text = text.replace("'", "");
+		text = text.replace('"', '\\"');
+		text = text.replace("'", "\\'");
 		return text;
 	}
 	public get header(): string {
@@ -107,12 +136,8 @@ export class Resource {
 				defaultIcon = require("./icons/housing.png");
 				break;
 
-			case ResourceType.JOB:
+			case ResourceType.EMPLOYMENT:
 				defaultIcon = require("./icons/jobs.png");
-				break;
-
-			case ResourceType.SERVICE:
-				defaultIcon = require("./icons/service.png");
 				break;
 
 			case ResourceType.HEALTHCARE:

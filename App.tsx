@@ -31,7 +31,7 @@ import { store } from "./store";
 import LoaderComponent from "./database/LoaderComponent";
 import ResourcePage from "./components/listingComponents/ResourcePage";
 import { selectResources } from "./reducers/resourcesSlice";
-import { ResourceType } from "./model/Resources/Resource";
+import { ResourceMap, ResourceType } from "./model/Resources/Resource";
 import ResourceScreen from "./components/listingComponents/ResourceScreen";
 import ResourceSite from "./components/listingComponents/ResourceSite";
 import Search from "./components/search/Search";
@@ -68,6 +68,15 @@ import Search from "./components/search/Search";
 
 const App = () => {
 	const isDarkMode = useColorScheme() === "dark";
+	let menus = [];
+	for (let resource in ResourceMap) {
+		menus.push({
+			name: resource,
+			//@ts-ignore
+			resource: ResourceMap[resource],
+			link: "/" + resource,
+		});
+	}
 	return (
 		<Provider store={store}>
 			<SafeAreaView>
@@ -81,63 +90,20 @@ const App = () => {
 							<Route path="/resourceSite" element={<ResourceSite />} />
 							<Route path="/search" element={<Search />} />
 
-							<Route path="/calendar" element={<Calendar />} />
-							<Route path="/banking" element={<Banking />} />
-							<Route
-								path="/education"
-								element={
-									<ResourcePage
-										name="Education"
-										selector={selectResources(ResourceType.EDUCATION)}
+							{menus.map((resource) => {
+								return (
+									<Route
+										key={resource.name}
+										path={resource.link}
+										element={
+											<ResourcePage
+												name={resource.name}
+												selector={selectResources(resource.resource)}
+											/>
+										}
 									/>
-								}
-							/>
-							<Route
-								path="/food/*"
-								element={
-									<ResourcePage
-										name="Food"
-										selector={selectResources(ResourceType.FOOD)}
-									/>
-								}
-							/>
-							<Route
-								path="/healthcare"
-								element={
-									<ResourcePage
-										name="Healthcare"
-										selector={selectResources(ResourceType.HEALTHCARE)}
-									/>
-								}
-							/>
-							<Route
-								path="/housing"
-								element={
-									<ResourcePage
-										name="Housing"
-										selector={selectResources(ResourceType.HOUSING)}
-									/>
-								}
-							/>
-							<Route path="/id/*" element={<Identification />} />
-							<Route
-								path="/jobs"
-								element={
-									<ResourcePage
-										name="Jobs"
-										selector={selectResources(ResourceType.JOB)}
-									/>
-								}
-							/>
-							<Route
-								path="/services"
-								element={
-									<ResourcePage
-										name="Services"
-										selector={selectResources(ResourceType.SERVICE)}
-									/>
-								}
-							/>
+								);
+							})}
 						</Routes>
 					</View>
 				</NativeRouter>

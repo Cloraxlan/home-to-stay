@@ -13,7 +13,6 @@ import { Link, useNavigate } from "react-router-native";
 import { v4 } from "uuid";
 import MenuIcon from "./MenuIcon";
 export interface Menu {
-	icon: any;
 	name: string;
 	link: string;
 }

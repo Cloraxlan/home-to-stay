@@ -16,25 +16,7 @@ const MenuIcon = (props: Props) => {
 	const windowHeight = Dimensions.get("window").height;
 
 	return (
-		<View style={{ height: windowHeight * 0.18 }}>
-			<Tile
-				imageSrc={{
-					uri: Image.resolveAssetSource(props.menu.icon).uri,
-				}}
-				title={props.menu.name}
-				titleStyle={{ fontSize: 15 }}
-				featured
-				activeOpacity={1}
-				imageContainerStyle={{ width: "100%", height: "100%" }}
-				containerStyle={{
-					width: "100%",
-					height: windowHeight * 0.1,
-				}}
-				imageProps={{ resizeMode: "contain" }}
-				onPress={() => {
-					navigate(props.menu.link);
-				}}
-			/>
+		<View style={{ height: windowHeight * 0.09 }}>
 			<MenuButton
 				onPress={() => {
 					navigate(props.link);

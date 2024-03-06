@@ -11,26 +11,23 @@ import {
 	getDBConnection,
 	getResource,
 	readCSV,
+	reset,
 	saveResources,
 } from "./loader";
 import { Resource, SerializedResource } from "../model/Resources/Resource";
 
 function LoaderComponent() {
 	const srcFile =
-		"https://docs.google.com/spreadsheets/d/14WjrSYWUGwZEL8aMpOygZEhOBt4iDlIhuHvhniwUQ-g/export?format=csv&id=14WjrSYWUGwZEL8aMpOygZEhOBt4iDlIhuHvhniwUQ-g&gid=0";
+		"https://docs.google.com/spreadsheets/d/1RJ1X3nlPs3I2aXsdYQkwizf37KXaSNK5ZAHLI_8pS0s/export?format=csv&id=1RJ1X3nlPs3I2aXsdYQkwizf37KXaSNK5ZAHLI_8pS0s";
 	//Testing
 	const dispatch = useDispatch();
 	let test = async () => {
 		dispatch(changeLoadStateForResource(true));
 		let db = await getDBConnection();
-
 		try {
 			let r = await fetch(srcFile);
 			let data: SerializedResource[] = await readCSV(await r.text());
-			data.map((resource, i) => {
-				data[i].header = Resource.clean(data[i].header);
-				data[i].description = Resource.clean(data[i].description);
-			});
+
 			await createTable(db);
 			await saveResources(db, data);
 		} catch (e) {
