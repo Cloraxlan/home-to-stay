@@ -12,7 +12,7 @@ import {
 } from "../../reducers/resourcesSlice";
 import { Input } from "@rneui/base";
 import MiniSearch from "minisearch";
-import MilwaukeeBackground1 from "../MilwaukeeBackground1";
+import Background from "../Background";
 
 const Search = () => {
 	const navigate = useNavigate();
@@ -119,7 +119,7 @@ const Search = () => {
 
 	return (
 		<NavView>
-			<MilwaukeeBackground1>
+			<Background>
 				<AppHeader title="Search" />
 				<View style={styles.view}>
 					<Input
@@ -140,7 +140,7 @@ const Search = () => {
 						<Text style={{ padding: "50%" }}></Text>
 					</ScrollView>
 				</View>
-			</MilwaukeeBackground1>
+			</Background>
 		</NavView>
 	);
 };

@@ -4,40 +4,44 @@ import { Searchable, SearchResult } from "../../model/Searchable";
 import { Card, Icon } from "@rneui/base";
 
 interface Props {
-	searchable: Searchable;
+	searchable: Searchable | null;
 }
 const SearchResultView = (props: Props) => {
 	return (
-		<View style={styles.listing}>
-			<Card>
-				<Card.Image
-					style={styles.iconStyle}
-					source={props.searchable.result.icon}
-				></Card.Image>
-				<Card.Title>{props.searchable.result.header}</Card.Title>
+		<View>
+			{props.searchable != null && (
+				<View style={styles.listing}>
+					<Card>
+						<Card.Image
+							style={styles.iconStyle}
+							source={props.searchable.result.icon}
+						></Card.Image>
+						<Card.Title>{props.searchable.result.header}</Card.Title>
 
-				<Text style={styles.bodyText} numberOfLines={5}>
-					{props.searchable.result.description}
-				</Text>
-
-				<Card.Divider style={{ paddingTop: 20 }} />
-				<TouchableHighlight
-					onPress={() => {
-						props.searchable.open();
-					}}
-				>
-					<View>
-						<Icon type="material" name="expand-more"></Icon>
-						<Text
-							style={styles.expandText}
-							numberOfLines={1}
-							adjustsFontSizeToFit
-						>
-							Expand
+						<Text style={styles.bodyText} numberOfLines={5}>
+							{props.searchable.result.description}
 						</Text>
-					</View>
-				</TouchableHighlight>
-			</Card>
+
+						<Card.Divider style={{ paddingTop: 20 }} />
+						<TouchableHighlight
+							onPress={() => {
+								props.searchable?.open();
+							}}
+						>
+							<View>
+								<Icon type="material" name="expand-more"></Icon>
+								<Text
+									style={styles.expandText}
+									numberOfLines={1}
+									adjustsFontSizeToFit
+								>
+									Expand
+								</Text>
+							</View>
+						</TouchableHighlight>
+					</Card>
+				</View>
+			)}
 		</View>
 	);
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Dimensions,
 	Image,
@@ -10,8 +10,11 @@ import {
 import MenuTab from "../MenuTab";
 import { Button } from "@rneui/base";
 import OrangeWhiteGradient from "../OrangeWhiteGradient";
-import MilwaukeeBackground1 from "../MilwaukeeBackground1";
 import { ResourceMap } from "../../model/Resources/Resource";
+import Background from "../Background";
+import SearchBarHome from "./SearchBarHome";
+import SearchResultView from "../search/SearchResultView";
+import Search from "../search/Search";
 
 const icons = {
 	calendar: require("./homePageIcons/calendar.png"),
@@ -32,25 +35,34 @@ const Homepage = () => {
 	for (let resource in ResourceMap) {
 		menus.push({ name: resource, link: "/" + resource });
 	}
-
+	const [searching, setSearching] = useState(false);
 	return (
-		<View>
-			<MilwaukeeBackground1>
-				<View style={styles.bannerPadding} />
-
-				<Image
-					style={styles.banner}
-					source={require("./homePageIcons/htsbanner2.png")}
-					resizeMode={"contain"}
-				></Image>
-				<View style={styles.bannerPadding} />
-				<View style={styles.menuIcons}>
-					{/*				<Button onPress={reset}>Reset</Button>*/}
-					<MenuTab menus={menus} />
-				</View>
-				<Text style={{ padding: "5%" }}></Text>
-			</MilwaukeeBackground1>
-		</View>
+		<ScrollView>
+			<Background>
+				{!searching && (
+					<View>
+						<View style={styles.bannerPadding} />
+						<Image
+							style={styles.banner}
+							source={require("./homePageIcons/htsbanner2.png")}
+							resizeMode={"contain"}
+						></Image>
+					</View>
+				)}
+				<SearchBarHome setSearchBool={setSearching} />
+				{!searching && (
+					<View>
+						<View style={styles.bannerPadding} />
+						<View style={styles.menuIcons}>
+							{/*				<Button onPress={reset}>Reset</Button>*/}
+							<MenuTab menus={menus} />
+						</View>
+						<Text style={{ padding: "1%" }}></Text>
+					</View>
+				)}
+				{searching && <Search />}
+			</Background>
+		</ScrollView>
 	);
 };
 

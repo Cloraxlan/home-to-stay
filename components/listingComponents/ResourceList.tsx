@@ -7,7 +7,7 @@ import { Location } from "../../model/Location";
 import { ButtonGroup, Text } from "@rneui/themed";
 import { useSelector } from "react-redux";
 import { selectResourceLoading } from "../../reducers/resourcesSlice";
-import MilwaukeeBackground1 from "../MilwaukeeBackground1";
+import Background from "../Background";
 
 interface Props {
 	resources: Resource[];
@@ -96,7 +96,7 @@ const ResourceList = (props: Props) => {
 	let displayLoadingCircle =
 		loadingResources || (loadingLocation && sort == SortTypes.DISTANCE);
 	return (
-		<MilwaukeeBackground1>
+		<Background>
 			<ScrollView style={styles.background}>
 				<ButtonGroup
 					buttons={["Distance", "Alphabetical"]}
@@ -134,7 +134,7 @@ const ResourceList = (props: Props) => {
 					</View>
 				)}
 			</ScrollView>
-		</MilwaukeeBackground1>
+		</Background>
 	);
 };
 

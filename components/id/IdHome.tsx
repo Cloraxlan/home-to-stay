@@ -4,12 +4,12 @@ import HomeButton from "../homepage/HomeButton";
 import MenuTab from "../MenuTab";
 import NavView from "../NavView";
 import AppHeader from "../AppHeader";
-import MilwaukeeBackground1 from "../MilwaukeeBackground1";
+import Background from "../Background";
 
 const IdHome = () => {
 	return (
 		<NavView>
-			<MilwaukeeBackground1>
+			<Background>
 				<View style={styles.menu}>
 					<AppHeader title="Identification" />
 
@@ -18,7 +18,6 @@ const IdHome = () => {
 							{
 								name: "Social Security",
 								link: "/id/ss",
-								icon: require("./ssn.png"),
 							},
 						]}
 					/>
@@ -27,7 +26,6 @@ const IdHome = () => {
 							{
 								name: "Drivers Licence",
 								link: "/id/license",
-								icon: require("./card.png"),
 							},
 						]}
 					/>
@@ -36,12 +34,11 @@ const IdHome = () => {
 							{
 								name: "Birth Certificate",
 								link: "/id/birth",
-								icon: require("./birth.png"),
 							},
 						]}
 					/>
 				</View>
-			</MilwaukeeBackground1>
+			</Background>
 		</NavView>
 	);
 };
