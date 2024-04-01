@@ -36,6 +36,8 @@ const Homepage = () => {
 		menus.push({ name: resource, link: "/" + resource });
 	}
 	const [searching, setSearching] = useState(false);
+	const [searchBarInput, setSearchBarInput] = useState("");
+
 	return (
 		<ScrollView>
 			<Background>
@@ -49,7 +51,11 @@ const Homepage = () => {
 						></Image>
 					</View>
 				)}
-				<SearchBarHome setSearchBool={setSearching} />
+				<SearchBarHome
+					setSearchBool={setSearching}
+					setSearchBarInput={setSearchBarInput}
+					searchBarInput={searchBarInput}
+				/>
 				{!searching && (
 					<View>
 						<View style={styles.bannerPadding} />
@@ -60,7 +66,7 @@ const Homepage = () => {
 						<Text style={{ padding: "1%" }}></Text>
 					</View>
 				)}
-				{searching && <Search />}
+				{searching && <Search searchBarInput={searchBarInput} />}
 			</Background>
 		</ScrollView>
 	);

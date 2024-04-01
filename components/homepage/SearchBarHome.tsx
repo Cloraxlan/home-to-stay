@@ -5,10 +5,15 @@ import { Searchable } from "../../model/Searchable";
 
 interface Props {
 	setSearchBool: React.Dispatch<React.SetStateAction<boolean>>;
+	setSearchBarInput: React.Dispatch<React.SetStateAction<string>>;
+	searchBarInput: string;
 }
 
 const SearchBarHome = (props: Props) => {
-	const [search, setSearch] = useState("");
+	const reset = () => {
+		props.setSearchBool(false);
+		props.setSearchBarInput("");
+	};
 	return (
 		<View>
 			<SearchBar
@@ -17,14 +22,16 @@ const SearchBarHome = (props: Props) => {
 				containerStyle={styles.bar}
 				placeholder="Search Here..."
 				onChangeText={(change) => {
-					setSearch(change);
-					if (search != "") {
+					props.setSearchBarInput(change);
+					if (change != "") {
 						props.setSearchBool(true);
 					} else {
 						props.setSearchBool(false);
 					}
 				}}
-				value={search}
+				onClear={reset}
+				onCancel={reset}
+				value={props.searchBarInput}
 			/>
 		</View>
 	);

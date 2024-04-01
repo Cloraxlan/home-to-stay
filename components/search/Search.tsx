@@ -13,12 +13,13 @@ import {
 import { Input } from "@rneui/base";
 import MiniSearch from "minisearch";
 import Background from "../Background";
-
-const Search = () => {
+interface Props {
+	searchBarInput: string;
+}
+const Search = (props: Props) => {
 	const navigate = useNavigate();
 	const resources = useSelector(selectAllResources);
 	const dispatch = useDispatch();
-	const [searchBarInput, setSearchBarInput] = useState("");
 	const [validSearchables, setValidSearchables] = useState<Searchable[]>([]);
 	const DEFAULT_SEARCHABLES: Searchable[] = useMemo(() => {
 		let defaultSearchables = [];
@@ -97,14 +98,14 @@ const Search = () => {
 		return results;
 	};
 	useEffect(() => {
-		if (searchBarInput != "") {
+		if (props.searchBarInput != "") {
 			let miniSearch = new MiniSearch({
 				fields: ["header", "description"],
 				storeFields: ["header", "description"],
 			});
 
 			miniSearch.addAll(getSearchDoc());
-			let results = miniSearch.search(searchBarInput);
+			let results = miniSearch.search(props.searchBarInput);
 			let validHeaders = results.map((result) => {
 				return result.header;
 			});
@@ -115,33 +116,22 @@ const Search = () => {
 		} else {
 			setValidSearchables(searchables);
 		}
-	}, [searchBarInput, searchables]);
+	}, [props.searchBarInput, searchables]);
 
 	return (
-		<NavView>
-			<Background>
-				<AppHeader title="Search" />
-				<View style={styles.view}>
-					<Input
-						onChange={(value) => {
-							setSearchBarInput(value.nativeEvent.text);
-						}}
-						leftIcon={{ type: "material", name: "search" }}
-					/>
-					<ScrollView>
-						{validSearchables.map((searchable: Searchable) => {
-							return (
-								<SearchResultView
-									key={searchable.result.header}
-									searchable={searchable}
-								/>
-							);
-						})}
-						<Text style={{ padding: "50%" }}></Text>
-					</ScrollView>
-				</View>
-			</Background>
-		</NavView>
+		<View style={styles.view}>
+			<ScrollView>
+				{validSearchables.map((searchable: Searchable) => {
+					return (
+						<SearchResultView
+							key={searchable.result.header}
+							searchable={searchable}
+						/>
+					);
+				})}
+				<Text style={{ padding: "50%" }}></Text>
+			</ScrollView>
+		</View>
 	);
 };
 
