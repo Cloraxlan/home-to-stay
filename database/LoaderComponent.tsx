@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
 	addResource,
+	addResourceBulk,
 	changeLoadStateForResource,
 	clearResources,
 } from "../reducers/resourcesSlice";
@@ -37,9 +38,7 @@ function LoaderComponent() {
 		console.log(resources);
 		dispatch(clearResources(false));
 
-		resources.map((resource) => {
-			dispatch(addResource(resource));
-		});
+		dispatch(addResourceBulk(resources));
 		dispatch(changeLoadStateForResource(false));
 	};
 	useEffect(() => {

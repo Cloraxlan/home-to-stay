@@ -35,6 +35,12 @@ export const resourceSlice: Slice = createSlice({
 		) => {
 			state.resources.push(action.payload);
 		},
+		addResourceBulk: (
+			state: Draft<ResouceState>,
+			action: PayloadAction<SerializedResource[]>,
+		) => {
+			state.resources = state.resources.concat(action.payload);
+		},
 		clearResources: (state: Draft<ResouceState>) => {
 			state.resources = [];
 		},
@@ -57,6 +63,7 @@ export const { addResource } = resourceSlice.actions;
 export const { changeLoadStateForResource } = resourceSlice.actions;
 export const { setCurrentResource } = resourceSlice.actions;
 export const { clearResources } = resourceSlice.actions;
+export const { addResourceBulk } = resourceSlice.actions;
 
 const unserializeResources = (
 	serializedRes: SerializedResource[],
