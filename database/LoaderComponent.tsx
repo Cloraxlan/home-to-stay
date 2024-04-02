@@ -15,7 +15,11 @@ import {
 	reset,
 	saveResources,
 } from "./loader";
-import { Resource, SerializedResource } from "../model/Resources/Resource";
+import {
+	Resource,
+	ResourceType,
+	SerializedResource,
+} from "../model/Resources/Resource";
 
 function LoaderComponent() {
 	const srcFile =
@@ -28,16 +32,13 @@ function LoaderComponent() {
 		try {
 			let r = await fetch(srcFile);
 			let data: SerializedResource[] = await readCSV(await r.text());
-
 			await createTable(db);
 			await saveResources(db, data);
 		} catch (e) {
 			console.log(e);
 		}
 		let resources = await getResource(db);
-		console.log(resources);
 		dispatch(clearResources(false));
-
 		dispatch(addResourceBulk(resources));
 		dispatch(changeLoadStateForResource(false));
 	};

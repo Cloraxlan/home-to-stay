@@ -19,7 +19,7 @@ const SearchBarHome = (props: Props) => {
 			<SearchBar
 				inputStyle={styles.input}
 				inputContainerStyle={styles.bar}
-				containerStyle={styles.bar}
+				containerStyle={styles.container}
 				placeholder="Search Here..."
 				onChangeText={(change) => {
 					props.setSearchBarInput(change);
@@ -43,6 +43,12 @@ const styles = StyleSheet.create({
 	bar: {
 		width: "100%",
 		backgroundColor: "#D9D9D933",
+		borderTopColor: "white",
+		borderBottomColor: "white",
+	},
+	container: {
+		width: "100%",
+		backgroundColor: "white",
 		borderTopColor: "white",
 		borderBottomColor: "white",
 	},

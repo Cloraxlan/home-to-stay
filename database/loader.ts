@@ -28,13 +28,14 @@ export const createTable = async (db: SQLiteDatabase) => {
 	// create table if not exists
 	const query = `
 	CREATE TABLE IF NOT EXISTS ${tableName}(
-		  header TEXT primary key,
+		  header TEXT,
 		  description TEXT,
 		  type int NOT NULL,
 		  address TEXT,
 		  url TEXT,
 		  phone TEXT,
-		  email TEXT
+		  email TEXT,
+		  PRIMARY KEY (header, type)
 	  );`;
 	await db.executeSql(query);
 };
@@ -113,6 +114,9 @@ export const saveResources = async (
 	}*/
 
 	resources.map((resource) => {
+		if (resource.type == ResourceType.FAMILY) {
+			console.log("oif", resource.type);
+		}
 		db.transaction((t) => {
 			t.executeSql(
 				`INSERT OR REPLACE INTO ${tableName}(header, description, type, address, url, phone, email) values(? , ? , ?, ? , ? , ?, ?)`,
@@ -195,6 +199,7 @@ export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
 		if (type == undefined) {
 			continue;
 		}
+
 		/*
 		if (data[i][3] != '') {
 			let coords = await Location.requestCoords(data[i][3]);

@@ -88,7 +88,6 @@ const App = () => {
 							<Route path="/" element={<Homepage />} />
 							<Route path="/resourceScreen" element={<ResourceScreen />} />
 							<Route path="/resourceSite" element={<ResourceSite />} />
-							<Route path="/search" element={<Search />} />
 
 							{menus.map((resource) => {
 								return (
