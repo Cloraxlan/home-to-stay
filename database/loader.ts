@@ -114,9 +114,6 @@ export const saveResources = async (
 	}*/
 
 	resources.map((resource) => {
-		if (resource.type == ResourceType.FAMILY) {
-			console.log("oif", resource.type);
-		}
 		db.transaction((t) => {
 			t.executeSql(
 				`INSERT OR REPLACE INTO ${tableName}(header, description, type, address, url, phone, email) values(? , ? , ?, ? , ? , ?, ?)`,
@@ -189,6 +186,9 @@ export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
 		let typeText = data[i][0];
 		let header = data[i][2];
 		let description = data[i][6];
+		if (data[i][8]) {
+			description += "\nFee: " + data[i][8];
+		}
 		let address;
 		let link;
 		let phone;
@@ -200,23 +200,31 @@ export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
 			continue;
 		}
 
-		/*
-		if (data[i][3] != '') {
-			let coords = await Location.requestCoords(data[i][3]);
+		if (data[i][4] != "") {
+			//let coords = await Location.requestCoords(data[i][3]);
 			address = new Address(
-				data[i][3],
-				new Location(coords, data[i][3]),
+				data[i][4],
+				new Location((address = data[i][4])),
 			).serialize();
 		}
-		if (data[i][4] != '') {
-			link = new URL(data[i][4]).serialize();
+		if (data[i][3] != "") {
+			link = new URL(data[i][3]).serialize();
 		}
-		if (data[i][5] != '') {
-			phone = new Phone(data[i][5]).serialize();
+		if (data[i][5] != "") {
+			const phoneRe =
+				/(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/;
+			const emailRe =
+				/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+			let emailString = emailRe.exec(data[i][5]);
+			if (emailString && emailString[0]) {
+				email = new Email(emailString[0]).serialize();
+			}
+			let phoneString = phoneRe.exec(data[i][5]);
+			if (phoneString && phoneString[0]) {
+				phone = new Phone(phoneString[0]).serialize();
+			}
 		}
-		if (data[i][6] != '') {
-			email = new Email(data[i][6]).serialize();
-		}*/
+
 		resources.push({
 			header: header,
 			address: address,
