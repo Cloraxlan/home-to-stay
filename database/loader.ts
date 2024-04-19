@@ -187,7 +187,7 @@ export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
 		let header = data[i][2];
 		let description = data[i][6];
 		if (data[i][8]) {
-			description += "\nFee: " + data[i][8];
+			description += "\n\nFee or Requirement: " + data[i][8];
 		}
 		let address;
 		let link;
