@@ -23,7 +23,7 @@ import {
 
 function LoaderComponent() {
 	const srcFile =
-		"https://docs.google.com/spreadsheets/d/1RJ1X3nlPs3I2aXsdYQkwizf37KXaSNK5ZAHLI_8pS0s/export?format=csv&id=1RJ1X3nlPs3I2aXsdYQkwizf37KXaSNK5ZAHLI_8pS0s";
+		"https://docs.google.com/spreadsheets/d/1-k8NWi3iwUm-7rm13GPhTzwDHOd-xhCon1i2ty9dy64/export?format=csv&id=1-k8NWi3iwUm-7rm13GPhTzwDHOd-xhCon1i2ty9dy64";
 	//Testing
 	const dispatch = useDispatch();
 	let test = async () => {

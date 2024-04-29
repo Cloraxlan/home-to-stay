@@ -3,7 +3,7 @@ import { Address } from "../model/Clickables/Address";
 import { Email } from "../model/Clickables/Email";
 import { Phone } from "../model/Clickables/Phone";
 import { URL } from "../model/Clickables/URL";
-import { Location } from "../model/Location";
+import { Location, defaultCoords } from "../model/Location";
 const papa = require("papaparse");
 import {
 	Resource,
@@ -204,7 +204,7 @@ export const readCSV: (csv: string) => Promise<SerializedResource[]> = async (
 			//let coords = await Location.requestCoords(data[i][3]);
 			address = new Address(
 				data[i][4],
-				new Location((address = data[i][4])),
+				new Location(defaultCoords, data[i][4]),
 			).serialize();
 		}
 		if (data[i][3] != "") {

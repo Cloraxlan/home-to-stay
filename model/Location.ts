@@ -12,7 +12,10 @@ let sleep = (ms: number) => {
 		setTimeout(resolve, ms);
 	});
 };
-
+export const defaultCoords: Coordinates = {
+	latitude: 43.0389,
+	longitude: -87.9065,
+};
 export class Location {
 	private _latitude: number;
 	private _longitude: number;
