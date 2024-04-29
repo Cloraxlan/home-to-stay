@@ -34,7 +34,7 @@ const ResourceScreen = () => {
 		if (resource.email) {
 			count++;
 		}
-		return (0.8 / count) * 100;
+		return (1 / count) * 100;
 	}, [resource]);
 	const [visible, setVisible] = useState(false);
 
@@ -88,6 +88,18 @@ const ResourceScreen = () => {
 										Press for Contact Info
 									</Button>
 								</Card.FeaturedSubtitle>
+								{resource.address && (
+									<View>
+										<Card.Divider />
+
+										<View>
+											<Text style={{ textAlign: "center" }}>Location: </Text>
+											<Text style={{ textAlign: "center" }}>
+												{resource.address?.display()}
+											</Text>
+										</View>
+									</View>
+								)}
 							</Card>
 						</ScrollView>
 					</View>
@@ -140,7 +152,7 @@ export default ResourceScreen;
 const styles = StyleSheet.create({
 	menus: {
 		display: "flex",
-		flex: 0.2,
+		flex: 0.25,
 		flexDirection: "row",
 		backgroundColor: "#fe994e",
 	},

@@ -95,10 +95,8 @@ const ResourceList = (props: Props) => {
 		(sort == SortTypes.DISTANCE && location) || sort != SortTypes.DISTANCE;
 	let displayLoadingCircle =
 		loadingResources || (loadingLocation && sort == SortTypes.DISTANCE);
-	return (
-		<Background>
-			<ScrollView style={styles.background}>
-				<ButtonGroup
+	/*
+	<ButtonGroup
 					buttons={["Distance", "Alphabetical"]}
 					selectedIndex={sorts.indexOf(sort)}
 					onPress={(index) => {
@@ -109,6 +107,10 @@ const ResourceList = (props: Props) => {
 					selectedButtonStyle={{ backgroundColor: "#605b63" }}
 					containerStyle={{ marginBottom: 20 }}
 				/>
+	*/
+	return (
+		<Background>
+			<ScrollView style={styles.background}>
 				{!displayLoadingCircle && (
 					<View style={styles.listingView}>
 						{isLoading && (

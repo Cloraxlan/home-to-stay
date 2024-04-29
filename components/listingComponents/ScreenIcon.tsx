@@ -51,8 +51,6 @@ const styles = StyleSheet.create({
 		width: "20%",
 		justifyContent: "center",
 		alignItems: "center",
-		marginLeft: "2.5%",
-		marginRight: "2.5%",
 	},
 	iconText: {
 		textAlign: "center",
