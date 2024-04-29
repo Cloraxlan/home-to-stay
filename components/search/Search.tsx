@@ -121,10 +121,10 @@ const Search = (props: Props) => {
 	return (
 		<View style={styles.view}>
 			<ScrollView>
-				{validSearchables.map((searchable: Searchable) => {
+				{validSearchables.map((searchable: Searchable, i) => {
 					return (
 						<SearchResultView
-							key={searchable.result.header}
+							key={searchable.result.header + " " + i}
 							searchable={searchable}
 						/>
 					);
